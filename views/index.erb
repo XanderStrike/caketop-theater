@@ -1,0 +1,41 @@
+<h1>Library</h1>
+
+<p><%= library.count %> movies (for now)</p>
+
+<a href="http://caketop/files/nasdrive/movies/12.Angry.Men.1957.720p.BRrip.x264.YIFY.mp4">wat</a>
+
+<% library.each do |movie| %>
+  <div class="row" style="padding-top:20px;">
+    <div class="col-md-3">
+      <img src="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie[7] %>" style="width:100%"></img>
+    </div>
+    <div class="col-md-9">
+      <legend><%= movie[13] %> <span class="sublegend"><%= movie[16] %></span></legend>
+
+      <div class="row">
+        <div class="col-md-6">
+          <p><%= movie[5] %></p>
+        </div>
+        <div class="col-md-6">
+          <table>
+            <tr>
+              <th>Release Date: </th>
+              <td><%= movie[8] %></td>
+            </tr>
+            <tr>
+              <th>TMDB Rating: </th>
+              <td><%= movie[14] %> (<%= movie[15] %> votes)</td>
+            </tr>
+            <tr>
+              <th>Runtime: </th>
+              <td><%= movie[10] %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <a href="http://caketop/files/nasdrive/movies/<%= movie[16] %>">Direct Link</a>
+
+    </div>
+  </div>
+<% end %>
