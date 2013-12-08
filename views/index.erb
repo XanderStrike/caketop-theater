@@ -2,6 +2,22 @@
 
 <span class="pull-right"><input class="form-control" id="search" name="search" placeholder="filter" type="search"></span>
 
+<span class="pull-right" style="padding-right:10px">
+  <div class="dropdown">
+    <a id="dropdown-button" class="btn btn-default" data-toggle="dropdown" href="#">Sort</a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-button">
+      <li><a href="?sort=title">Title</a></li>
+      <li><a href="?sort=title%20desc">Title (desc)</a></li>
+      <li><a href="?sort=runtime">Runtime</a></li>
+      <li><a href="?sort=runtime%20desc">Runtime (desc)</a></li>
+      <li><a href="?sort=release_date">Release Date</a></li>
+      <li><a href="?sort=release_date%20desc">Release Date (desc)</a></li>
+      <li><a href="?sort=vote_average">Rating</a></li>
+      <li><a href="?sort=vote_average%20desc">Rating (desc)</a></li>
+    </ul>
+  </div>
+</span>
+
 <p><%= library.count %> movies (for now)</p>
 
 <% library.each do |movie| %>
