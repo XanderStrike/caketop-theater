@@ -10,7 +10,7 @@ get '/' do
   puts params
 
   order = params["sort"]
-  order = "title" if order.nil?
+  order = "random()" if order.nil?
 
   library = db.execute("select * from movies order by #{order}")
   erb :index, :locals => {:library => library}
