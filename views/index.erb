@@ -57,6 +57,7 @@
 <% end %>
 
 <script>
+  // search function
   $('#search').keyup(function() {
     var regex = new RegExp($('#search').val(), "i");
     var movies = $('.movie');
@@ -67,11 +68,19 @@
         $(this).hide();
       }
     });
+    load_img()
   });
 
+  // creates an invisible scrolling event to trigger the lazy loading when
+  //  divs are shown/hidden
+  function load_img() {
+    $('body,html').scrollTop($(window).scrollTop() + 1)
+                  .scrollTop($(window).scrollTop() - 1)
+  }
+
+  // activate lazyload
   $('img.lazy').lazyload({
     effect : "fadeIn"
   });
-
 </script>
 
