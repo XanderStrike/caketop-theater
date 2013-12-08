@@ -7,7 +7,7 @@ Tmdb::Api.key("a230f1c8a13699563ac819f74fb16230")
 
 # methods
 def clean_title(title)
-  title = title.split(/[\s\.]/)
+  title = title.split("/").last.split(/[\s\.]/)
   title.size.times do |x|
     next if x == 0
     results = Tmdb::Movie.find(title[0...(title.length - x)].join(" "))
@@ -61,7 +61,8 @@ end
 
 # get list of files, run queries
 puts "Scanning library for new files..."
-files = `find /media/nasdrive/movies -maxdepth 1 -type f -printf '%f\n'`.split("\n")
+files = `find /media/nasdrive/movies -type f`.split("\n").map {|f| f.gsub("/media/nasdrive/movies/", "")}
+print files
 populate_db(files)
 
 puts "\nRemoving missing files..."
