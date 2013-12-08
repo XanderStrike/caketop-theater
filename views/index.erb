@@ -23,7 +23,7 @@
 <% library.each do |movie| %>
   <div class="row movie" style="padding-top:20px;">
     <div class="col-md-3">
-      <img src="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie[7] %>" style="width:100%"></img>
+      <img data-original="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie[7] %>" style="width:100%" class="lazy"></img>
     </div>
     <div class="col-md-9">
       <legend id="title"><%= movie[13] %> <span class="sublegend"><%= movie[16] %></span></legend>
@@ -68,5 +68,10 @@
       }
     });
   });
+
+  $('img.lazy').lazyload({
+    effect : "fadeIn"
+  });
+
 </script>
 
