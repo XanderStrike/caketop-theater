@@ -7,7 +7,12 @@ db = SQLite3::Database.new("data.db")
 
 # routes
 get '/' do
-  library = db.execute("select * from movies order by title")
+  puts params
+
+  order = params["sort"]
+  order = "title" if order.nil?
+
+  library = db.execute("select * from movies order by #{order}")
   erb :index, :locals => {:library => library}
 end
 
