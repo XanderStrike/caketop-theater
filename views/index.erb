@@ -1,14 +1,16 @@
 <h1>Library</h1>
 
+<span class="pull-right"><input class="form-control" id="search" name="search" placeholder="filter" type="search"></span>
+
 <p><%= library.count %> movies (for now)</p>
 
 <% library.each do |movie| %>
-  <div class="row" style="padding-top:20px;">
+  <div class="row movie" style="padding-top:20px;">
     <div class="col-md-3">
       <img src="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie[7] %>" style="width:100%"></img>
     </div>
     <div class="col-md-9">
-      <legend><%= movie[13] %> <span class="sublegend"><%= movie[16] %></span></legend>
+      <legend id="title"><%= movie[13] %> <span class="sublegend"><%= movie[16] %></span></legend>
 
       <div class="row">
         <div class="col-md-6">
@@ -37,3 +39,18 @@
     </div>
   </div>
 <% end %>
+
+<script>
+  $('#search').keyup(function() {
+    var regex = new RegExp($('#search').val(), "i");
+    var movies = $('.movie');
+    movies.each(function (index) {
+      if ($(this).html().search(regex) != -1) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+</script>
+
