@@ -4,7 +4,7 @@ require 'themoviedb'
 
 # config
 Tmdb::Api.key("a230f1c8a13699563ac819f74fb16230")
-directory = "/media/nasdrive/movies"
+directory = File.expand_path(File.dirname(__FILE__), "public/library") 
 
 # I'm keeping these separate because I might want to use a
 #   different API or use multiple or something
@@ -78,7 +78,7 @@ def remove_missing(files)
 end
 
 # get list of files, run queries
-files = `find #{directory} -type f`.split("\n").map {|f| f.gsub("#{directory}/", "")}
+files = `find #{directory}/ -type f`.split("\n").map {|f| f.gsub("#{directory}/", "")}
 populate_db(files)
 remove_missing(files)
 puts "Scan complete. Check the web interface to ensure correctness of titles."
