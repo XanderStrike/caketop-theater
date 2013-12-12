@@ -19,5 +19,8 @@ usage
   * `ln -s /media/movies library`
 * Configure Apache
   * God help you.
+* Set up your database
+  * `sqlite3 data.db`
+  * `CREATE TABLE movies(backdrop_path text, budget integer, id integer, imdb_id text, original_title text, overview text, popularity text, poster_path text, release_date text, revenue integer, runtime integer, status text, tagline text, title text, vote_average text, vote_count text, filename text);`
 * Run `ruby create_db.rb` to recursively scan your library folder and gather data on all your movies
 * You should be good to go
