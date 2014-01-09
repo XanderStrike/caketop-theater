@@ -1,4 +1,4 @@
-<h1>Library</h1>
+<movieh1>Library</h1>
 
 <span class="pull-right"><input class="form-control" id="search" name="search" placeholder="filter" type="search"></span>
 
@@ -19,7 +19,13 @@
   </div>
 </span>
 
-<p><%= library.count %> movies (for now)</p>
+<p><%= library.count %> Movies (for now) | <%= recent.count %> Movies Watched </p>
+<div class="row">
+  <% recent.each do |movie| %>
+  <img data-original="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie[7] %>" style="width:10%" class="lazy"></img>
+
+  <% end %>
+</div>
 
 <% library.each do |movie| %>
   <div class="row movie" style="padding-top:20px;">
@@ -58,7 +64,7 @@
           </table>
         </div>
       </div>
-
+      <%= link_to "Watch", "/watch/#{ movie[16] }" %> |
       <%= link_to "Direct Link", "/library/#{ movie[16] }" %>
 
     </div>
