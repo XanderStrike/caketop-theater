@@ -21,7 +21,9 @@ get '/' do
   order = params["sort"]
   order = "random()" if order.nil?
 
-  recently_watched = db.execute("select * from movies where filename in (select filename from recent)")
+  # recently_watched = db.execute("select * from movies where filename in (select filename from recent order by watched_id desc) limit 7")
+
+  recently_watched = db.execute("select * from (recent inner join movies on recent.filename=movies.filename) order by watched_id desc")
 
   library = db.execute("select * from movies order by #{order}")
   puts library[0]
@@ -35,6 +37,6 @@ get '/watch/*' do
   movie = movie[0]
   recent_index += 1
   db.execute("insert into recent(filename, watched_id) VALUES('#{movie[16]}', #{ recent_index } )")
-  redirect ("/library/#{movie[16]}")
+  redirect link_to("asdf", "/library/#{movie[16]}").split('"')[1] 
 end
 

@@ -20,11 +20,18 @@
 </span>
 
 <p><%= library.count %> Movies (for now) | <%= recent.count %> Movies Watched </p>
-<div class="row">
-  <% recent.each do |movie| %>
-  <img data-original="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie[7] %>" style="width:10%" class="lazy"></img>
 
+<div id="recent">
+<div class="row hidden-xs hidden-sm">
+  <div class="col-md-12">
+    <legend>Recently Watched</legend>
+  </div>
+  <% recent[0..5].each do |movie| %>
+    <div class="col-md-2">
+      <%= link_to "<img src='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[9]}' style='width:100%'></img>", "/watch/#{ movie[16] }" %>
+    </div>
   <% end %>
+</div>
 </div>
 
 <% library.each do |movie| %>
@@ -76,6 +83,10 @@
   $('#search').keyup(function() {
     var regex = new RegExp($('#search').val(), "i");
     var movies = $('.movie');
+
+    if ($('#search').val() == "") {$('#recent').show(); }
+    else {$('#recent').hide();}
+
     movies.each(function (index) {
       if ($(this).html().search(regex) != -1) {
         $(this).show();
