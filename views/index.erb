@@ -89,7 +89,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Make a Request</h4>
       </div>
-      <form action="request" method="post">
+      <form action="<%= link_to("asdf", "/request").split('"')[1] %>" method="post">
         <div class="modal-body">
           <input type="text" name="name" placeholder="Your Name" class="form-control" required='true'><br>
           <textarea name="request" class="form-control" placeholder="Movie and any relevant information (year, director, etc.)" required="true"></textarea>
