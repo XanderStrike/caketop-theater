@@ -31,7 +31,7 @@ get '/watch/*' do
   movie = db.execute("select * from movies where filename = '#{title}' limit 1")
   movie = movie[0]
   recent_index += 1
-  db.execute("insert into recent(filename, watched_id) VALUES('#{movie[16]}', #{ recent_index } )")
+  db.execute("insert into recent(filename, watched_id, time, ip) VALUES('#{movie[16]}', #{ recent_index }, #{ Time.now.to_i }, '#{request.ip}' )")
   redirect link_to("asdf", "/library/#{movie[16]}").split('"')[1] 
 end
 
