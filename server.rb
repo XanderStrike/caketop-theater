@@ -36,6 +36,12 @@ get '/watch/*' do
 end
 
 post '/request' do
-  db.execute("insert into requests(name, request) values('#{params[:name]}', '#{params[:request]}')")
+  db.execute("insert into requests(name, request, status) values('#{params[:name]}', '#{params[:request]}', 'New')")
   erb :request, :locals => {:name => params[:name]}
 end
+
+get '/requests' do
+  requests = db.execute("select * from requests")
+  erb :view_requests, locals => {:requests => requests}
+end
+
