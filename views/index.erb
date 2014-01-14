@@ -19,7 +19,11 @@
   </div>
 </span>
 
-<p><%= library.count %> Movies (for now) | <%= recent.count %> Movies Watched </p>
+<p>
+ <%= library.count %> Movies (for now) |
+ <%= recent.count %> Movies Watched |
+ <a href="#" data-toggle="modal" data-target="#request-modal">Now Taking Requests</a>
+</p>
 
 <div id="recent">
 <div class="row hidden-xs hidden-sm">
@@ -77,6 +81,27 @@
     </div>
   </div>
 <% end %>
+
+<div class="modal fade" id="request-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Make a Request</h4>
+      </div>
+      <form action="request" method="post">
+        <div class="modal-body">
+          <input type="text" name="name" placeholder="Your Name" class="form-control" required='true'><br>
+          <textarea name="request" class="form-control" placeholder="Movie and any relevant information (year, director, etc.)" required="true"></textarea>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-info">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <script>
   // search function

@@ -16,15 +16,12 @@ end
 
 # routes
 get '/' do
-  puts params
-
   order = params["sort"]
   order = "random()" if order.nil?
 
   recently_watched = db.execute("select * from (recent inner join movies on recent.filename=movies.filename) order by watched_id desc")
 
   library = db.execute("select * from movies order by #{order}")
-  puts library[0]
   erb :index, :locals => {:library => library, :recent => recently_watched}
 end
 
@@ -38,3 +35,7 @@ get '/watch/*' do
   redirect link_to("asdf", "/library/#{movie[16]}").split('"')[1] 
 end
 
+post '/request' do
+  db.execute("insert into requests(name, request) values('#{params[:name]}', '#{params[:request]}')")
+  erb :request, :locals => {:name => params[:name]}
+end
