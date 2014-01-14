@@ -32,7 +32,7 @@
   </div>
   <% recent[0..5].each do |movie| %>
     <div class="col-md-2">
-      <%= link_to "<img src='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[9]}' style='width:100%'></img>", "/watch/#{ movie[18] }" %>
+      <%= link_to "<img src='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[11]}' style='width:100%'></img>", "/watch/#{ movie[20] }" %>
     </div>
   <% end %>
 </div>
@@ -75,8 +75,7 @@
           </table>
         </div>
       </div>
-      <%= link_to "Watch", "/watch/#{ movie[16] }" %> |
-      <%= link_to "Direct Link", "/library/#{ movie[16] }" %>
+      <%= link_to "Watch", "/watch/#{ movie[16] }" %>
 
     </div>
   </div>
