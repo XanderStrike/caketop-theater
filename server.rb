@@ -21,8 +21,6 @@ get '/' do
   order = params["sort"]
   order = "random()" if order.nil?
 
-  # recently_watched = db.execute("select * from movies where filename in (select filename from recent order by watched_id desc) limit 7")
-
   recently_watched = db.execute("select * from (recent inner join movies on recent.filename=movies.filename) order by watched_id desc")
 
   library = db.execute("select * from movies order by #{order}")
