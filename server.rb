@@ -5,7 +5,7 @@ require 'sqlite3'
 # config
 register Sinatra::StaticAssets
 set :bind, '0.0.0.0'
-db = SQLite3::Database.new("data.db")
+db = SQLite3::Database.new("db/data.db")
 
 
 recent_index = db.execute("select max(watched_id) from recent")
