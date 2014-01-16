@@ -1,0 +1,8 @@
+<h2>Search Results</h2>
+
+<p><%= results.count %> results for <%= query %></p>
+
+<% results.each do |movie| %>
+  <%= erb :movie_detail, locals: {movie: movie} %>
+<% end %>
+

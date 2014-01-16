@@ -1,137 +1,29 @@
-<h1>Caketop Theater</h1>
+<h2>Caketop Theater</h2>
 
-<span class="pull-right"><input class="form-control" id="search" name="search" placeholder="filter" type="search"></span>
-
-<span class="pull-right" style="padding-right:10px">
-  <div class="dropdown">
-    <a id="dropdown-button" class="btn btn-default" data-toggle="dropdown" href="#">Sort</a>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-button">
-      <li><a href="?sort=title">Title</a></li>
-      <li><a href="?sort=title%20desc">Title (desc)</a></li>
-      <li><a href="?sort=runtime">Runtime</a></li>
-      <li><a href="?sort=runtime%20desc">Runtime (desc)</a></li>
-      <li><a href="?sort=release_date">Release Date</a></li>
-      <li><a href="?sort=release_date%20desc">Release Date (desc)</a></li>
-      <li><a href="?sort=vote_average">Rating</a></li>
-      <li><a href="?sort=vote_average%20desc">Rating (desc)</a></li>
-      <li><a href="?sort=random()">Random</a></li>
-    </ul>
+<div class="row">
+  <div class="col-md-12">
+    <legend>New Additions</legend>
+    <% movies.each_slice(6) do |slice| %>
+      <div class="row" style="padding-bottom:30px">
+        <% slice.each do |movie| %>
+        <div class="col-md-2 movie-cell" >
+          <%= link_to "<img src='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[7]}' class='movie-thumb'></img>", "/watch/#{ movie[16] }" %>
+          <%= link_to movie[4], "/view/#{movie[2]}" %>
+        </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
-</span>
+</div>
 
-<p>
- <%= library.count %> Movies (for now) |
- <%= recent.count %> Movies Watched |
- <a href="#" data-toggle="modal" data-target="#request-modal">Now Taking Requests</a>
-</p>
-
-<div id="recent">
 <div class="row hidden-xs hidden-sm">
   <div class="col-md-12">
-    <legend>Recently Watched</legend>
+    <legend>Enjoyed by Others</legend>
   </div>
   <% recent[0..5].each do |movie| %>
-    <div class="col-md-2">
-      <%= link_to "<img src='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[11]}' style='width:100%'></img>", "/watch/#{ movie[20] }" %>
+    <div class="col-md-2 movie-cell">
+      <%= link_to "<img src='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[11]}' class='movie-thumb'></img>", "/watch/#{ movie[20] }" %>
+      <%= link_to movie[8], "/view/#{movie[6]}" %>
     </div>
   <% end %>
 </div>
-</div>
-
-<% library.each do |movie| %>
-  <div class="row movie" style="padding-top:20px;">
-    <div class="col-md-3">
-      <img data-original="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie[7] %>" style="width:100%" class="lazy"></img>
-    </div>
-    <div class="col-md-9">
-      <legend id="title"><%= movie[13] %> <span class="sublegend"><%= movie[16] %></span></legend>
-
-      <div class="row">
-        <div class="col-md-6">
-          <p><%= movie[5] %></p>
-        </div>
-        <div class="col-md-6">
-          <table>
-            <tr>
-              <th>Release Date: </th>
-              <td><%= movie[8] %></td>
-            </tr>
-            <tr>
-              <th>TMDB Rating: </th>
-              <td><%= movie[14] %> (<%= movie[15] %> votes)</td>
-            </tr>
-            <tr>
-              <th>Runtime: </th>
-              <td><%= movie[10] %></td>
-            </tr>
-            <tr>
-              <td>
-                <a href="http://www.imdb.com/title/<%= movie[3] %>/"><%= image_tag "/img/button-imdb.png" %></a>
-              </td>
-              <td>
-                <a href="https://www.themoviedb.org/movie/<%= movie[2] %>"><%= image_tag "/img/button-tmdb.png" %></a>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <%= link_to "Watch", "/watch/#{ movie[16] }" %>
-
-    </div>
-  </div>
-<% end %>
-
-<div class="modal fade" id="request-modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Make a Request</h4>
-      </div>
-      <form action="<%= link_to("asdf", "/request").split('"')[1] %>" method="post">
-        <div class="modal-body">
-          <input type="text" name="name" placeholder="Your Name" class="form-control" required='true'><br>
-          <textarea name="request" class="form-control" placeholder="Movie and any relevant information (year, director, etc.)" required="true"></textarea>
-        </div>
-        <div class="modal-footer">
-          <input type="submit" class="btn btn-info">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-<script>
-  // search function
-  $('#search').keyup(function() {
-    var regex = new RegExp($('#search').val(), "i");
-    var movies = $('.movie');
-
-    if ($('#search').val() == "") {$('#recent').show(); }
-    else {$('#recent').hide();}
-
-    movies.each(function (index) {
-      if ($(this).html().search(regex) != -1) {
-        $(this).show();
-      } else {
-        $(this).hide();
-      }
-    });
-    load_img()
-  });
-
-  // creates an invisible scrolling event to trigger the lazy loading when
-  //  divs are shown/hidden
-  function load_img() {
-    $('body,html').scrollTop($(window).scrollTop() + 1)
-                  .scrollTop($(window).scrollTop() - 1)
-  }
-
-  // activate lazyload
-  $('.container').height($(window).height() - 25);
-  $('img.lazy').lazyload({
-    effect : "fadeIn"
-  });
-</script>
-

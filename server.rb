@@ -16,20 +16,18 @@ end
 
 # routes
 get '/' do
-  order = params["sort"]
-  order = "random()" if order.nil?
-
-  recently_watched = db.execute("select * from (recent inner join movies on recent.filename=movies.filename) order by watched_id desc")
-
-  library = db.execute("select * from movies order by #{order}")
-  erb :index, :locals => {:library => library, :recent => recently_watched}
-end
-
-get '/new' do
   movies = db.execute("select * from movies order by added desc limit 12")
   recently_watched = db.execute("select * from (recent inner join movies on recent.filename=movies.filename) order by watched_id desc")
-  erb :new, :locals => {:movies => movies, :recent => recently_watched}
+  erb :index, :locals => {:movies => movies, :recent => recently_watched}
 end
+
+get '/browse' do
+  order = params["sort"]
+  order = "random()" if order.nil?
+  library = db.execute("select * from movies order by #{order}")
+  erb :browse, :locals => {:library => library}
+end
+
 
 # add movie to recently watched, then watch it.
 get '/watch/*' do
@@ -48,4 +46,20 @@ end
 get '/requests' do
   requests = db.execute('select * from requests')
   erb :view_requests, :locals => {:requests => requests}
+end
+
+post '/search' do
+  q = params['search']
+  results = db.execute("select * from movies where title like '%#{q}%' or overview like '%#{q}%' or filename like '%#{q}%'")
+  erb :search, :locals => {:results => results, :query => q}
+end
+
+get '/view/:id' do
+  movie = db.execute("select * from movies where id=#{params[:id]}").first
+  erb :show_movie, :locals => {:movie => movie}
+end
+
+get '/random' do
+  movie = db.execute("select * from movies order by random() limit 1").first
+  erb :show_movie, :locals => {:movie => movie}
 end
