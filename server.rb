@@ -25,6 +25,12 @@ get '/' do
   erb :index, :locals => {:library => library, :recent => recently_watched}
 end
 
+get '/new' do
+  movies = db.execute("select * from movies order by added desc limit 12")
+  recently_watched = db.execute("select * from (recent inner join movies on recent.filename=movies.filename) order by watched_id desc")
+  erb :new, :locals => {:movies => movies, :recent => recently_watched}
+end
+
 # add movie to recently watched, then watch it.
 get '/watch/*' do
   title = params[:splat][0]
