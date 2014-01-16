@@ -18,7 +18,8 @@ end
 get '/' do
   movies = db.execute("select * from movies order by added desc limit 12")
   recently_watched = db.execute("select * from (recent inner join movies on recent.filename=movies.filename) order by watched_id desc")
-  erb :index, :locals => {:movies => movies, :recent => recently_watched}
+  random = db.execute("select * from movies order by random() limit 6")
+  erb :index, :locals => {:movies => movies, :recent => recently_watched, :random => random}
 end
 
 get '/browse' do

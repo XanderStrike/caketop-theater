@@ -4,10 +4,11 @@
   <div class="col-md-12">
     <legend>New Additions</legend>
     <% movies.each_slice(6) do |slice| %>
-      <div class="row" style="padding-bottom:30px">
+      <div class="row genre-row">
         <% slice.each do |movie| %>
-        <div class="col-md-2 movie-cell" >
+        <div class="col-md-2 col-xs-4 movie-cell" >
           <%= link_to "<img src='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[7]}' class='movie-thumb'></img>", "/watch/#{ movie[16] }" %>
+          <span class="play"></span>
           <%= link_to movie[4], "/view/#{movie[2]}" %>
         </div>
         <% end %>
@@ -16,7 +17,7 @@
   </div>
 </div>
 
-<div class="row hidden-xs hidden-sm">
+<div class="row hidden-xs hidden-sm genre-row">
   <div class="col-md-12">
     <legend>Enjoyed by Others</legend>
   </div>
@@ -24,6 +25,18 @@
     <div class="col-md-2 movie-cell">
       <%= link_to "<img src='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[11]}' class='movie-thumb'></img>", "/watch/#{ movie[20] }" %>
       <%= link_to movie[8], "/view/#{movie[6]}" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row hidden-xs hidden-sm genre-row">
+  <div class="col-md-12">
+    <legend>Every day I'm shufflin'</legend>
+  </div>
+  <% random.each do |movie| %>
+    <div class="col-md-2 movie-cell">
+      <%= link_to "<img src='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[7]}' class='movie-thumb'></img>", "/watch/#{ movie[16] }" %>
+      <%= link_to movie[4], "/view/#{movie[2]}" %>
     </div>
   <% end %>
 </div>
