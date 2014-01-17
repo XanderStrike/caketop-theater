@@ -41,7 +41,8 @@ def populate_db(files)
         puts "Error: Title for '#{file}' not found, skipping."
         next
       end
-      
+
+      # main movies table population
       puts "Adding #{ file }\n  as #{ movie.title }."
       info = get_info(movie.id)
       db.execute("insert into movies values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
@@ -63,6 +64,12 @@ def populate_db(files)
                     info.vote_count,
                     file,
                     Time.now.to_s)
+
+      # genre table population
+      info.genres.each do |g|
+        db.execute("insert into genre values (?, ?, ?)", info.id, g['name'], g['id'])
+      end
+
     end
   end
   

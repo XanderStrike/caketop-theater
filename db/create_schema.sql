@@ -3,3 +3,5 @@ CREATE TABLE movies(backdrop_path text, budget integer, id integer, imdb_id text
 CREATE TABLE recent(filename text, watched_id integer, time integer, ip text);
 
 CREATE TABLE requests(name text, request text, status text);
+
+CREATE TABLE genre(movie_id integer, genre text, genre_id integer);
