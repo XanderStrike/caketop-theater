@@ -1,0 +1,6 @@
+<h2><%= title %></h2>
+
+<% movies.each do |movie| %>
+  <%= erb :movie_detail, locals: {movie: movie} %>
+<% end %>
+

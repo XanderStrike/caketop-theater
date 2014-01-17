@@ -57,10 +57,18 @@ end
 
 get '/view/:id' do
   movie = db.execute("select * from movies where id=#{params[:id]}").first
-  erb :show_movie, :locals => {:movie => movie}
+  genres = db.execute("select * from genre where movie_id=?", movie[2])
+  erb :show_movie, :locals => {:movie => movie, :genres => genres}
 end
 
 get '/random' do
   movie = db.execute("select * from movies order by random() limit 1").first
-  erb :show_movie, :locals => {:movie => movie}
+  genres = db.execute("select * from genre where movie_id=?", movie[2])
+  erb :show_movie, :locals => {:movie => movie, :genres => genres}
+end
+
+get '/genre/:id' do
+  genre = db.execute("select genre from genre where genre_id=#{params[:id]}").first.first
+  movies = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{params[:id]})")
+  erb :detail_movie_list, :locals => {:movies => movies, :title => genre}
 end
