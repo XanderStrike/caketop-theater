@@ -46,6 +46,8 @@
       </div>
       <form action="<%= link_to("asdf", "/request").split('"')[1] %>" method="post">
         <div class="modal-body">
+          <p>Here you can put in requests and stuff. Please include both the title and any extra identifying information about the movie that may be relevant (i.e. The Italian Job (2003) is different from The Italian Job (1969)). Films that are still in theaters are generally unavailable until they have a general Blu-Ray release. Also, if your request is stupid (i.e. Bio-Dome) it will not be filled.</p>
+          <p>TV support is coming soon. The shows I have are available at caketop/tv at the moment, but it's not pretty.</p>
           <input type="text" name="name" placeholder="Your Name" class="form-control" required='true'><br>
           <textarea name="request" class="form-control" placeholder="Movie and any relevant information (year, director, etc.)" required="true"></textarea>
         </div>

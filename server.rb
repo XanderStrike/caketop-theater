@@ -70,5 +70,5 @@ end
 get '/genre/:id' do
   genre = db.execute("select genre from genre where genre_id=#{params[:id]}").first.first
   movies = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{params[:id]})")
-  erb :detail_movie_list, :locals => {:movies => movies, :title => genre}
+  erb :movie_list, :locals => {:movies => movies, :title => genre}
 end
