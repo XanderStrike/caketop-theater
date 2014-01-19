@@ -25,8 +25,8 @@ end
 get '/browse' do
   order = params["sort"]
   order = "random()" if order.nil?
-  library = db.execute("select * from movies order by #{order}")
-  erb :browse, :locals => {:library => library}
+  movies = db.execute("select * from movies order by #{order}")
+  erb :detail_movie_list, :locals => {:movies => movies, :title => "Browse All", :subtitle => "#{movies.count} movies (so far)", :show_sort => true}
 end
 
 
@@ -51,8 +51,8 @@ end
 
 post '/search' do
   q = params['search']
-  results = db.execute("select * from movies where title like '%#{q}%' or overview like '%#{q}%' or filename like '%#{q}%'")
-  erb :search, :locals => {:results => results, :query => q}
+  movies = db.execute("select * from movies where title like '%#{q}%' or overview like '%#{q}%' or filename like '%#{q}%'")
+  erb :detail_movie_list, :locals => {:movies => movies, :title => "Search Results", :subtitle => "#{movies.count} results for #{q}"}
 end
 
 get '/view/:id' do

@@ -1,6 +1,67 @@
 <h2><%= title %></h2>
 
+<table>
+  <tr>
+    <td><%= subtitle unless defined?(subtitle).nil? %></td>
+    <td style="padding-left:20px">
+      <% if !defined?(show_sort).nil? && show_sort == true %>
+      <div class="dropdown">
+        <a id="dropdown-button" class="" data-toggle="dropdown" href="#">Sort</a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-button">
+          <li><a href="?sort=title">Title</a></li>
+          <li><a href="?sort=title%20desc">Title (desc)</a></li>
+          <li><a href="?sort=runtime">Runtime</a></li>
+          <li><a href="?sort=runtime%20desc">Runtime (desc)</a></li>
+          <li><a href="?sort=release_date">Release Date</a></li>
+          <li><a href="?sort=release_date%20desc">Release Date (desc)</a></li>
+          <li><a href="?sort=vote_average">Rating</a></li>
+          <li><a href="?sort=vote_average%20desc">Rating (desc)</a></li>
+          <li><a href="?sort=random()">Random</a></li>
+        </ul>
+      </div>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
 <% movies.each do |movie| %>
-  <%= erb :movie_detail, locals: {movie: movie} %>
+  <div class="row movie" style="padding-top:20px;">
+    <div class="col-md-3">
+      <img data-original="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie[7] %>" style="width:100%" class="lazy"></img>
+    </div>
+    <div class="col-md-9">
+      <legend id="title"><%= movie[13] %> <span class="sublegend"><%= movie[16] %></span></legend>
+      <div class="row">
+        <div class="col-md-6">
+          <p><%= movie[5] %></p>
+        </div>
+        <div class="col-md-6">
+          <table>
+            <tr>
+              <th>Release Date: </th>
+              <td><%= movie[8] %></td>
+            </tr>
+            <tr>
+              <th>TMDB Rating: </th>
+              <td><%= movie[14] %> (<%= movie[15] %> votes)</td>
+            </tr>
+            <tr>
+              <th>Runtime: </th>
+              <td><%= movie[10] %></td>
+            </tr>
+            <tr>
+              <td>
+                <a href="http://www.imdb.com/title/<%= movie[3] %>/"><%= image_tag "/img/button-imdb.png" %></a>
+              </td>
+              <td>
+                <a href="https://www.themoviedb.org/movie/<%= movie[2] %>"><%= image_tag "/img/button-tmdb.png" %></a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <%= link_to "Watch", "/watch/#{ movie[16] }" %>
+    </div>
+  </div>
 <% end %>
 
