@@ -14,6 +14,10 @@ if recent_index == nil
   recent_index = 0
 end
 
+def get_link(link)
+  link_to("a", link).split('"')[1]
+end
+
 # routes
 get '/' do
   movies = db.execute("select * from movies order by added desc limit 12")
@@ -37,7 +41,7 @@ get '/watch/*' do
   movie = movie[0]
   recent_index += 1
   db.execute("insert into recent(filename, watched_id, time, ip) VALUES('#{movie[16]}', #{ recent_index }, #{ Time.now.to_i }, '#{request.ip}' )")
-  redirect link_to("asdf", "/library/#{movie[16]}").split('"')[1] 
+  redirect get_link("/library/#{movie[16]}")
 end
 
 post '/request' do
@@ -63,12 +67,19 @@ end
 
 get '/random' do
   movie = db.execute("select * from movies order by random() limit 1").first
-  genres = db.execute("select * from genre where movie_id=?", movie[2])
-  erb :show_movie, :locals => {:movie => movie, :genres => genres}
+  redirect get_link("/view/#{movie[2]}")
 end
 
-get '/genre/:id' do
-  genre = db.execute("select genre from genre where genre_id=#{params[:id]}").first.first
-  movies = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{params[:id]})")
+get '/genre' do
+  genres = db.execute("select distinct genre,genre_id from genre order by genre")
+  movie_hash = {}
+  genres.each do |g|
+    movie_hash[g[1]] = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{g[1]}) order by random() limit 6")
+  end
+  erb :genre, :locals => {:movie_array => movie_hash, :genres => genres}
+end
+get '/genre/:g1' do
+  genre = db.execute("select genre from genre where genre_id=#{params[:g1]}").first.first
+  movies = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{params[:g1]})")
   erb :movie_list, :locals => {:movies => movies, :title => genre}
 end
