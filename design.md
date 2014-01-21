@@ -15,13 +15,13 @@ Two classes:
 
 **Users:** Regular users of the site, consumers.
 
-* [*] Users can visit the site in any web browser
-* [*] Users can view a list of recently added movies
+* [X] Users can visit the site in any web browser
+* [X] Users can view a list of recently added movies
 * [ ] Users can sort the list of movies on metadata (release date, rating, title)
 * [ ] Users can filter the list of movies on metadata (director, actors, studio)
-* [*] Users can view a detail page for each movie
-* [*] Users can click movie art to view the movie in their browser
-* [*] Users can submit requests for movies
+* [X] Users can view a detail page for each movie
+* [X] Users can click movie art to view the movie in their browser
+* [X] Users can submit requests for movies
 * [ ] Users can submit feedback
 
 *Optional*
