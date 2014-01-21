@@ -9,6 +9,7 @@
     <%= javascript_script_tag "/js/jquery.lazyload.js" %>
   </head>
   <body>
+  <div id="wrap">
     <div class="container">
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <%= link_to "CAKETOP THEATER", '/', class: "navbar-brand" %>
@@ -37,6 +38,14 @@
 </nav>
       <%= yield %>
     </div>
+    <div id="push"></div>
+  </div>
+
+  <div id="footer">
+    <div class="container" style="height:30px;">
+      <p style="padding-top:5px">Not affiliated with Westmont College. Check out the code on <a href="https://github.com/XanderStrike/movie-browser/">Github</a>, or send <a href="#">feedback</a>.</p>
+    </div>
+  </div>
 
 <div class="modal fade" id="request-modal">
   <div class="modal-dialog">
