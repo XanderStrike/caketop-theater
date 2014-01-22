@@ -78,8 +78,18 @@ get '/genre' do
   end
   erb :genre, :locals => {:movie_array => movie_hash, :genres => genres}
 end
+get '/genre/:g1/all' do
+  genre = db.execute("select genre from genre where genre_id=#{params[:g1]}").first.first
+  movies = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{params[:g1]})")
+  erb :movie_list, :locals => {:movies => movies, :title => genre}
+end
 get '/genre/:g1' do
   genre = db.execute("select genre from genre where genre_id=#{params[:g1]}").first.first
   movies = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{params[:g1]})")
+  erb :movie_list, :locals => {:movies => movies, :title => genre}
+end
+get '/genre/:g1/:g2' do
+  genre = db.execute("select distinct genre from genre where genre_id=#{params[:g1]} or genre_id=#{params[:g2]}").map(&:first).join(" & ")
+  movies = db.execute("select * from movies where id in (select distinct a.movie_id from ((select * from genre where genre_id = #{params[:g1]}) as a inner join (select * from genre where genre_id = #{params[:g2]}) as b on a.movie_id = b.movie_id))")
   erb :movie_list, :locals => {:movies => movies, :title => genre}
 end
