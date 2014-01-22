@@ -44,6 +44,7 @@ get '/watch/*' do
   redirect get_link("/library/#{movie[16]}")
 end
 
+# handle requests
 post '/request' do
   db.execute("insert into requests(name, request, status) values('#{params[:name]}', '#{params[:request]}', 'New')")
   erb :request, :locals => {:name => params[:name]}
@@ -53,12 +54,14 @@ get '/requests' do
   erb :view_requests, :locals => {:requests => requests}
 end
 
+# deal with search; TODO improve search somehow (keyword? some gem? idk)
 post '/search' do
   q = params['search']
   movies = db.execute("select * from movies where title like '%#{q}%' or overview like '%#{q}%' or filename like '%#{q}%'")
   erb :detail_movie_list, :locals => {:movies => movies, :title => "Search Results", :subtitle => "#{movies.count} results for #{q}"}
 end
 
+# show a specific movie; TODO add cast and similar movies
 get '/view/:id' do
   movie = db.execute("select * from movies where id=#{params[:id]}").first
   genres = db.execute("select * from genre where movie_id=?", movie[2])
@@ -70,6 +73,7 @@ get '/random' do
   redirect get_link("/view/#{movie[2]}")
 end
 
+# handle genre shit
 get '/genre' do
   genres = db.execute("select distinct genre,genre_id from genre order by genre")
   movie_hash = {}
@@ -78,16 +82,27 @@ get '/genre' do
   end
   erb :genre, :locals => {:movie_array => movie_hash, :genres => genres}
 end
+
+get '/genre/:g1' do
+  genre = db.execute("select genre, genre_id from genre where genre_id=#{params[:g1]}").first
+  random_movies = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{params[:g1]}) order by random() limit 12")
+
+  matched_genres = db.execute("select distinct genre, genre_id from genre where movie_id in (select movie_id from genre where genre_id=#{params[:g1]}) and genre_id != #{params[:g1]}")
+
+  movie_hash = {}
+  matched_genres.each do |g|
+    movie_hash[g[1]] = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{g[1]} and movie_id in (select movie_id from genre where genre_id = #{params[:g1]})) order by random() limit 6")
+  end
+
+  erb :genre_view, :locals => {:random_movies => random_movies, :genre => genre, :genres => matched_genres, :movie_hash => movie_hash}
+end
+
 get '/genre/:g1/all' do
   genre = db.execute("select genre from genre where genre_id=#{params[:g1]}").first.first
   movies = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{params[:g1]})")
   erb :movie_list, :locals => {:movies => movies, :title => genre}
 end
-get '/genre/:g1' do
-  genre = db.execute("select genre from genre where genre_id=#{params[:g1]}").first.first
-  movies = db.execute("select * from movies where id in (select movie_id from genre where genre_id=#{params[:g1]})")
-  erb :movie_list, :locals => {:movies => movies, :title => genre}
-end
+
 get '/genre/:g1/:g2' do
   genre = db.execute("select distinct genre from genre where genre_id=#{params[:g1]} or genre_id=#{params[:g2]}").map(&:first).join(" & ")
   movies = db.execute("select * from movies where id in (select distinct a.movie_id from ((select * from genre where genre_id = #{params[:g1]}) as a inner join (select * from genre where genre_id = #{params[:g2]}) as b on a.movie_id = b.movie_id))")
