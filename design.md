@@ -76,7 +76,7 @@ Schemas
 
 *person* - People in the industry (actors, directors, producers)
 
-    CREATE TABLE people(id integer, name text, bio text, birthday text, hometown text)
+    CREATE TABLE people(id integer, name text, bio text, birthday text, hometown text, image text)
 
 *cast* - Relation between movies and people.
 
