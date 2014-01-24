@@ -17,6 +17,8 @@ Two classes:
 
 * [X] Users can visit the site in any web browser
 * [X] Users can view a list of recently added movies
+* [X] Users can browse movies by genre
+  * [X] Users can filter movies on two or more genres
 * [ ] Users can sort the list of movies on metadata (release date, rating, title)
 * [ ] Users can filter the list of movies on metadata (director, actors, studio)
 * [X] Users can view a detail page for each movie
