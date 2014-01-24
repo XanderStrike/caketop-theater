@@ -1,10 +1,8 @@
+caketop theater
+===============
+
 About
 -----
-
-Caketop Theater is a web interface for serving video libraries.
-
-Description
------------
 
 Caketop Theater is be a one stop web portal for serving rich media libraries hosted on linux servers. It will accomplish this in two parts, a web interface: a Sinatra application served through Apache/Passenger, and a scanning process. The scanning process is ether an always-on agent or a script called periodically, that scans a given directory (the media library) looking for media files (.avi, .mp4, .mkv, etc), parsing the titles of those media files, hitting an api to gather metadata on the files (release date, cover art, runtime, genres, cast, studio, etc), and populating a database with that information. The web application provides a clean and attractive interface for viewing the data in that database. It allows the user to filter, sort, and search on all metadata available, including browsing by genre, director, and cast. It will also provide administrator functionality, allowing admins to update titles and manually trigger scans.
 
