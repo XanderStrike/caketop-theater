@@ -79,6 +79,10 @@ Schemas
 *cast* - Relation between movies and people.
 
     CREATE TABLE cast(person_id integer, movie_id integer, role text)
+    
+*feedback* - Feedback
+
+    CREATE TABLE feedback(ip text, page_location text, name text, message text)
 
 Routes
 ------
