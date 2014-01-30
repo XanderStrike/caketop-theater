@@ -1,12 +1,9 @@
-require 'sinatra'
-require 'sinatra/static_assets'
-require 'sqlite3'
+require './lib/config'
 
 # config
 register Sinatra::StaticAssets
 set :bind, '0.0.0.0'
 db = SQLite3::Database.new("db/data.db")
-
 
 recent_index = db.execute("select max(watched_id) from recent")
 recent_index = recent_index[0][0]
@@ -22,7 +19,7 @@ end
 get '/' do
   movies = db.execute("select * from movies order by added desc limit 12")
   recently_watched = db.execute("select * from (recent inner join movies on recent.filename=movies.filename) order by watched_id desc")
-  random = db.execute("select * from movies order by random() limit 6")
+  random = Movies.order('random()').limit(6)
   erb :index, :locals => {:movies => movies, :recent => recently_watched, :random => random}
 end
 
@@ -73,7 +70,7 @@ get '/random' do
   redirect get_link("/view/#{movie[2]}")
 end
 
-# handle genre shit
+# handle genre stuff 
 get '/genre' do
   genres = db.execute("select distinct genre,genre_id from genre order by genre")
   movie_hash = {}
