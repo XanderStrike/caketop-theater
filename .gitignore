@@ -1,3 +1,5 @@
 *.db
 public/library
 tmp
+*~
+#*#
