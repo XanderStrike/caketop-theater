@@ -18,6 +18,9 @@
     <li>
       <a href="#" data-toggle="modal" data-target="#request-modal">Request</a>
     </li>
+    <li>
+      <a href="#" data-toggle="modal" data-target="#feedback-modal">Feedback</a>
+    </li>
     <li><%= link_to "Random", "/random" %></li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse <b class="caret"></b></a>
@@ -27,7 +30,7 @@
       </ul>
     </li>
     <li>
-      <form class="navbar-form" role="search" action="<%= link_to("asdf", "/search").split('"')[1] %>" method="post">
+      <form class="navbar-form" role="search" action="<%= link_to('asdf', '/search').split('"')[1] %>" method="post">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" name="search">
         </div>
@@ -68,6 +71,29 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="feedback-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Give Us Your Feedback</h4>
+      </div>
+      <form action="<%= link_to("asdf", "/feedback").split('"')[1] %>" method="post">
+        <div class="modal-body">
+          <p>Here you can put in feedback and stuff. </p>
+          <p>TV support is coming soon. The shows I have are available at caketop/tv at the moment, but it's not pretty.</p>
+          <input type="text" name="name" placeholder="Your Name" class="form-control" required='true'><br>
+          <textarea name="request" class="form-control" placeholder="Let us know what you think..." required="true"></textarea>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-info">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <script>
   $('img.lazy').lazyload({

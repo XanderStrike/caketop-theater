@@ -51,6 +51,18 @@ get '/requests' do
   erb :view_requests, :locals => {:requests => requests}
 end
 
+# handle feedback
+post '/feedback' do
+  db.execute("insert into feedback(name, feedback, status) values('#{params[:name]}', '#{params[:request]}', 'New')")
+  erb :request, :locals => {:name => params[:name]}
+end
+get '/feedback' do
+  feedback = db.execute('select * from feedback')
+  erb :feedback, :locals => {:feedback => feedback}
+end
+
+
+
 # deal with search; TODO improve search somehow (keyword? some gem? idk)
 post '/search' do
   q = params['search']
