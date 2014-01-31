@@ -1,15 +1,19 @@
-require './lib/config'
+require 'sinatra'
+require 'sinatra/static_assets'
+require 'sqlite3'
+require 'active_record'
+
+require './lib/models'
+
+# db stuff
+ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => 'db/data.db')
+
 
 # config
 register Sinatra::StaticAssets
 set :bind, '0.0.0.0'
 db = SQLite3::Database.new("db/data.db")
 
-recent_index = db.execute("select max(watched_id) from recent")
-recent_index = recent_index[0][0]
-if recent_index == nil
-  recent_index = 0
-end
 
 def get_link(link)
   link_to("a", link).split('"')[1]
@@ -18,7 +22,7 @@ end
 # routes
 get '/' do
   movies = db.execute("select * from movies order by added desc limit 12")
-  recently_watched = db.execute("select * from (recent inner join movies on recent.filename=movies.filename) order by watched_id desc")
+  recently_watched = Movies.where(id: Watches.order('watched_id desc').map(&:id)).limit(6)
   random = Movies.order('random()').limit(6)
   erb :index, :locals => {:movies => movies, :recent => recently_watched, :random => random}
 end
@@ -32,13 +36,10 @@ end
 
 
 # add movie to recently watched, then watch it.
-get '/watch/*' do
-  title = params[:splat][0]
-  movie = db.execute("select * from movies where filename = '#{title}' limit 1")
-  movie = movie[0]
-  recent_index += 1
-  db.execute("insert into recent(filename, watched_id, time, ip) VALUES('#{movie[16]}', #{ recent_index }, #{ Time.now.to_i }, '#{request.ip}' )")
-  redirect get_link("/library/#{movie[16]}")
+get '/watch/:id' do
+  movie = Movies.where(id: params[:id]).first
+  Watches.new(watched_id: Watches.count + 1, id: movie.id, time: Time.now.to_i, ip: request.ip).save
+  redirect get_link("/library/#{movie.filename}")
 end
 
 # handle requests

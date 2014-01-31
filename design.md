@@ -60,29 +60,29 @@ Schemas
 
     CREATE TABLE movies(backdrop_path text, budget integer, id integer, imdb_id text, original_title text, overview text, popularity text, poster_path text, release_date text, revenue integer, runtime integer, status text, tagline text, title text, vote_average text, vote_count text, filename text, added text);
 
-*recent* - Keeps track of recently watched movies.
+*watches* - Keeps track of recently watched movies.
 
-    CREATE TABLE recent(filename text, watched_id integer, time integer, ip text);
+    CREATE TABLE watches(filename text, watched_id integer, time integer, ip text);
 
 *requests* - Requests for films made by users
 
     CREATE TABLE requests(name text, request text, status text);
 
-*genre* - Expresses a relation between a movie and a genre
+*genres* - Expresses a relation between a movie and a genre
 
-    CREATE TABLE genre(movie_id integer, genre text, genre_id integer);
+    CREATE TABLE genres(movie_id integer, genre text, genre_id integer);
 
-*person* - People in the industry (actors, directors, producers)
+*persons* - People in the industry (actors, directors, producers)
 
-    CREATE TABLE people(id integer, name text, bio text, birthday text, hometown text, image text)
+    CREATE TABLE persons(id integer, name text, bio text, birthday text, hometown text, image text)
 
-*cast* - Relation between movies and people.
+*casts* - Relation between movies and people.
 
-    CREATE TABLE cast(person_id integer, movie_id integer, role text)
+    CREATE TABLE casts(person_id integer, movie_id integer, role text)
     
-*feedback* - Feedback
+*feedbacks* - Feedback
 
-    CREATE TABLE feedback(ip text, page_location text, name text, message text)
+    CREATE TABLE feedbacks(ip text, page_location text, name text, message text)
 
 Routes
 ------

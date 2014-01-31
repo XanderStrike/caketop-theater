@@ -1,11 +1,11 @@
 class Movies < ActiveRecord::Base
 end
 
-class Recent < ActiveRecord::Base
+class Watches < ActiveRecord::Base
 end
 
 class Requests < ActiveRecord::Base
 end
 
-class Genre < ActiveRecord::Base
+class Genres < ActiveRecord::Base
 end

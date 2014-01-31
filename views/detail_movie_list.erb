@@ -34,7 +34,7 @@
 <% movies.each do |movie| %>
   <div class="row movie" style="padding-top:20px;">
     <div class="col-md-2">
-      <%= link_to "<img data-original='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ movie[7]}' style='width:100%' class='lazy'></img>", "/watch/#{ movie[16] }" %>
+      <%= link_to "<img data-original='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ movie[7]}' style='width:100%' class='lazy'></img>", "/watch/#{ movie[2] }" %>
     </div>
     <div class="col-md-10">
       <legend id="title"><%= movie[13] %> <span class="sublegend"><%= movie[16] %></span></legend>
