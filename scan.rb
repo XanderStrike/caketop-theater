@@ -67,7 +67,7 @@ def populate_db(files)
 
       # genre table population
       info.genres.each do |g|
-        db.execute("insert into genre values (?, ?, ?)", info.id, g['name'], g['id'])
+        db.execute("insert into genres values (?, ?, ?)", info.id, g['name'], g['id'])
       end
 
     end
