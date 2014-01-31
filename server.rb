@@ -31,7 +31,7 @@ end
 get '/browse' do
   order = params["sort"]
   order = "random()" if order.nil?
-  movies = db.execute("select * from movies order by #{order}")
+  movies = Movies.order(order)
   erb :detail_movie_list, :locals => {:movies => movies, :title => "Browse All", :subtitle => "#{movies.count} movies (so far)", :show_sort => true}
 end
 
@@ -65,10 +65,15 @@ end
 
 
 
-# deal with search; TODO improve search somehow (keyword? some gem? idk)
+# deal with search
+# TODO improve search somehow (keyword? some gem? idk)
 post '/search' do
   q = params['search']
-  movies = db.execute("select * from movies where title like '%#{q}%' or overview like '%#{q}%' or filename like '%#{q}%'")
+  movies = Movies.where("title like ?", "%#{q}%")
+  movies += Movies.where("original_title like ?", "%#{q}%")
+  movies += Movies.where("filename like ?", "%#{q}%")
+  movies += Movies.where("overview like ?", "%#{q}%")
+  movies = movies.uniq
   erb :detail_movie_list, :locals => {:movies => movies, :title => "Search Results", :subtitle => "#{movies.count} results for #{q}"}
 end
 

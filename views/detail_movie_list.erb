@@ -34,25 +34,25 @@
 <% movies.each do |movie| %>
   <div class="row movie" style="padding-top:20px;">
     <div class="col-md-2">
-      <%= link_to "<img data-original='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ movie[7]}' style='width:100%' class='lazy'></img>", "/watch/#{ movie[2] }" %>
+      <%= link_to "<img data-original='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ movie.poster_path }' style='width:100%' class='lazy'></img>", "/watch/#{ movie.id }" %>
     </div>
     <div class="col-md-10">
-      <legend id="title"><%= movie[13] %> <span class="sublegend"><%= movie[16] %></span></legend>
+      <legend id="title"><%= movie.title %> <span class="sublegend"><%= movie.filename %></span></legend>
       <div class="row">
         <div class="col-md-8">
-          <p><%= movie[5] %></p>
-          <%= link_to "More Info", "/view/#{movie[2]}" %>
+          <p><%= movie.overview %></p>
+          <%= link_to "More Info", "/view/#{ movie.id }" %>
         </div>
         <div class="col-md-4">
           <table width='100%'>
             <tr>
-              <th>Released: </th><td><%= movie[8] %></td>
+              <th>Released: </th><td><%= movie.release_date %></td>
             </tr>
             <tr>
-              <th>Rating: </th><td><%= "#{movie[14]} (#{movie[15]} votes)" %></td>
+              <th>Rating: </th><td><%= "#{ movie.vote_average } (#{ movie.vote_count } votes)" %></td>
             </tr>
             <tr>
-              <th>Runtime: </th><td><%= movie[10] %></td>
+              <th>Runtime: </th><td><%= movie.runtime %></td>
             </tr>
           </table>
         </div>
