@@ -21,8 +21,9 @@ end
 
 # routes
 get '/' do
-  movies = db.execute("select * from movies order by added desc limit 12")
-  recently_watched = Movies.where(id: Watches.order('watched_id desc').map(&:id)).limit(6)
+  movies = Movies.order('added desc').limit(12)
+  recent_ids = Watches.order('watched_id desc').map(&:id)
+  recently_watched = Movies.where(id: recent_ids).limit(6).sort! {|a, b| recent_ids.index(a.id) <=> recent_ids.index(b.id)}
   random = Movies.order('random()').limit(6)
   erb :index, :locals => {:movies => movies, :recent => recently_watched, :random => random}
 end
