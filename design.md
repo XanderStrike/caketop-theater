@@ -66,7 +66,7 @@ Schemas
 
 *requests* - Requests for films made by users
 
-    CREATE TABLE requests(name text, request text, status text);
+    CREATE TABLE requests(name text, request text, status text, ip text);
 
 *genres* - Expresses a relation between a movie and a genre
 

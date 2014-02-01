@@ -11,9 +11,9 @@
   <tbody>
     <% requests.each do |r| %>
       <tr>
-        <td><%= r[0] %></td>
-        <td><%= r[1] %></td>
-        <td><%= r[2] %></td>
+        <td><%= r.name %></td>
+        <td><%= r.request %></td>
+        <td><%= r.status %></td>
       </tr>
     <% end %>
   </tbody>

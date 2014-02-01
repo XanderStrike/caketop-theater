@@ -45,11 +45,11 @@ end
 
 # handle requests
 post '/request' do
-  db.execute("insert into requests(name, request, status) values('#{params[:name]}', '#{params[:request]}', 'New')")
+  Requests.new(name: params[:name], request: params[:request], status: "New").save
   erb :request, :locals => {:name => params[:name]}
 end
 get '/requests' do
-  requests = db.execute('select * from requests')
+  requests = Requests.all # db.execute('select * from requests')
   erb :view_requests, :locals => {:requests => requests}
 end
 
