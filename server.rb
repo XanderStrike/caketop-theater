@@ -49,7 +49,7 @@ post '/request' do
   erb :request, :locals => {:name => params[:name]}
 end
 get '/requests' do
-  requests = Requests.all # db.execute('select * from requests')
+  requests = Requests.all
   erb :view_requests, :locals => {:requests => requests}
 end
 
