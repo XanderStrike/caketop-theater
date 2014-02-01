@@ -85,8 +85,7 @@ get '/view/:id' do
 end
 
 get '/random' do
-  movie = db.execute("select * from movies order by random() limit 1").first
-  redirect get_link("/view/#{movie[2]}")
+  redirect get_link("/view/#{ Movies.first(offset: rand(Movies.count)).id }")
 end
 
 # handle genre stuff 
