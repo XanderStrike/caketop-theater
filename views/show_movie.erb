@@ -1,44 +1,44 @@
   <div class="row movie" style="padding-top:20px;">
     <div class="col-md-3">
-      <img data-original="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie[7] %>" style="width:100%" class="lazy"></img>
+      <img data-original="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie.poster_path %>" style="width:100%" class="lazy"></img>
     </div>
     <div class="col-md-9">
-      <legend id="title"><%= movie[13] %> <span class="sublegend"><%= movie[16] %></span></legend>
+      <legend id="title"><%= movie.title %> <span class="sublegend"><%= movie.filename %></span></legend>
       <div class="row">
         <div class="col-md-6">
-          <p><%= movie[5] %></p>
+          <p><%= movie.overview %></p>
         </div>
         <div class="col-md-6">
           <table>
             <tr>
               <th>Release Date: </th>
-              <td><%= movie[8] %></td>
+              <td><%= movie.release_date %></td>
             </tr>
             <tr>
               <th>TMDB Rating: </th>
-              <td><%= movie[14] %> (<%= movie[15] %> votes)</td>
+              <td><%= movie.vote_average %> (<%= movie.vote_count %> votes)</td>
             </tr>
             <tr>
               <th>Runtime: </th>
-              <td><%= movie[10] %></td>
+              <td><%= movie.runtime %></td>
             </tr>
             <tr>
               <th>Genre: </th>
               <td>
-                <%= genres.map {|g| link_to(g[1], "/genre/#{g[2]}")}.join(', ') %>
+                <%= genres.map {|g| link_to(g.genre, "/genre/#{g.genre_id}")}.join(', ') %>
               </td>
             </tr>
             <tr>
               <td>
-                <a href="http://www.imdb.com/title/<%= movie[3] %>/"><%= image_tag "/img/button-imdb.png" %></a>
+                <a href="http://www.imdb.com/title/<%= movie.imdb_id %>/"><%= image_tag "/img/button-imdb.png" %></a>
               </td>
               <td>
-                <a href="https://www.themoviedb.org/movie/<%= movie[2] %>"><%= image_tag "/img/button-tmdb.png" %></a>
+                <a href="https://www.themoviedb.org/movie/<%= movie.id %>"><%= image_tag "/img/button-tmdb.png" %></a>
               </td>
             </tr>
           </table>
         </div>
       </div>
-      <%= link_to "Watch", "/watch/#{ movie[2] }" %>
+      <%= link_to "Watch", "/watch/#{ movie.id }" %>
     </div>
   </div>

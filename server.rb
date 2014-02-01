@@ -79,8 +79,8 @@ end
 
 # show a specific movie; TODO add cast and similar movies
 get '/view/:id' do
-  movie = db.execute("select * from movies where id=#{params[:id]}").first
-  genres = db.execute("select * from genres where movie_id=?", movie[2])
+  movie = Movies.where(id: params[:id]).first
+  genres = Genres.where(movie_id: movie.id)
   erb :show_movie, :locals => {:movie => movie, :genres => genres}
 end
 
