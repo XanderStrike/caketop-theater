@@ -80,8 +80,7 @@ end
 # show a specific movie; TODO add cast and similar movies
 get '/view/:id' do
   movie = Movies.where(id: params[:id]).first
-  genres = Genres.where(movie_id: movie.id)
-  erb :show_movie, :locals => {:movie => movie, :genres => genres}
+  erb :show_movie, :locals => {:movie => movie, :genres => movie.genres}
 end
 
 get '/random' do
