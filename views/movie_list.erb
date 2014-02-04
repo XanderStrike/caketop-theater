@@ -4,7 +4,7 @@
   <div class="row genre-row">
     <% slice.each do |movie| %>
       <div class="col-md-2 col-xs-4 movie-cell">
-        <%= link_to "<img data-original='https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{movie[7]}' class='movie-thumb lazy'></img>", "/watch/#{ movie[2] }" %>
+        <%= link_to image_tag("/img/posters/#{ movie[2] }.jpg", class: 'movie-thumb'), "/watch/#{ movie[2] }" %>
         <%= link_to movie[4], "/view/#{movie[2]}" %>
       </div>
     <% end %>

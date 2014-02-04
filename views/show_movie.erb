@@ -1,6 +1,6 @@
   <div class="row movie" style="padding-top:20px;">
     <div class="col-md-3">
-      <img data-original="https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/<%= movie.poster_path %>" style="width:100%" class="lazy"></img>
+      <%= image_tag "/img/posters/#{ movie.id }.jpg", style: "width:100%" %>
     </div>
     <div class="col-md-9">
       <legend id="title"><%= movie.title %> <span class="sublegend"><%= movie.filename %></span></legend>
