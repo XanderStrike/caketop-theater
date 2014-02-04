@@ -3,3 +3,6 @@ public/library
 tmp
 *~
 #*#
+public/img/posters/*.jpg
+public/img/posters/*.png
+
