@@ -70,6 +70,9 @@ def populate_db(files)
         db.execute("insert into genres values (?, ?, ?)", info.id, g['name'], g['id'])
       end
 
+      # download poster
+      down = `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/img/posters/#{info.id}.jpg -b -q`
+
     end
   end
   
