@@ -13,4 +13,8 @@ class Requests < ActiveRecord::Base
 end
 
 class Genres < ActiveRecord::Base
+
+  def movies
+    Movies.where(id: Genres.where(genre_id: self.genre_id).map(&:movie_id))
+  end
 end
