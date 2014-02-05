@@ -71,8 +71,10 @@ def populate_db(files)
       end
 
       # download poster
-      down = `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/img/posters/#{info.id}.jpg -b -q`
+      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/img/posters/#{info.id}.jpg -b -q`
 
+      # download backdrop
+      `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/img/backdrops/#{info.id}.jpg -b -q`
     end
   end
   

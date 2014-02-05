@@ -6,3 +6,5 @@ tmp
 public/img/posters/*.jpg
 public/img/posters/*.png
 
+public/img/backdrops/*.jpg
+public/img/backdrops/*.png

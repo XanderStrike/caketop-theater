@@ -1,5 +1,5 @@
 
-<div class="vid-container" style="background: url(http://image.tmdb.org/t/p/w1000/<%= movie.backdrop_path %>);background-size:cover;">
+<div class="vid-container" style="background: url(<%= get_link "/img/backdrops/#{movie.id}.jpg" %>);background-size:cover;">
   <video id="player" poster="<%= get_link("/img/transparent.png") %>" controls>
   <source src="<%= get_link("/library/#{movie.filename}") %>">
   </video>
