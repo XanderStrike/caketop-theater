@@ -1,44 +1,58 @@
-  <div class="row movie" style="padding-top:20px;">
-    <div class="col-md-3">
-      <%= image_tag "/img/posters/#{ movie.id }.jpg", style: "width:100%" %>
-    </div>
-    <div class="col-md-9">
-      <legend id="title"><%= movie.title %> <span class="sublegend"><%= movie.filename %></span></legend>
-      <div class="row">
-        <div class="col-md-6">
-          <p><%= movie.overview %></p>
-        </div>
-        <div class="col-md-6">
-          <table>
-            <tr>
-              <th>Release Date: </th>
-              <td><%= movie.release_date %></td>
-            </tr>
-            <tr>
-              <th>TMDB Rating: </th>
-              <td><%= movie.vote_average %> (<%= movie.vote_count %> votes)</td>
-            </tr>
-            <tr>
-              <th>Runtime: </th>
-              <td><%= movie.runtime %></td>
-            </tr>
-            <tr>
-              <th>Genre: </th>
-              <td>
-                <%= genres.map {|g| link_to(g.genre, "/genre/#{g.genre_id}")}.join(', ') %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a href="http://www.imdb.com/title/<%= movie.imdb_id %>/"><%= image_tag "/img/button-imdb.png" %></a>
-              </td>
-              <td>
-                <a href="https://www.themoviedb.org/movie/<%= movie.id %>"><%= image_tag "/img/button-tmdb.png" %></a>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <%= link_to "Watch", "/watch/#{ movie.id }" %>
-    </div>
+
+<div class="vid-container" style="background: url(http://image.tmdb.org/t/p/w1000/<%= movie.backdrop_path %>);background-size:cover;">
+  <video id="player" poster="<%= get_link("/img/transparent.png") %>" controls>
+  <source src="<%= get_link("/library/#{movie.filename}") %>">
+  </video>
+</div>
+
+<% if movie.filename =~ /ac3/i %>
+<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <strong>FYI!</strong> The audio track of this video is not compatible with HTML5. If you can't unmute the audio in the player above, you'll have to click the "watch" link down below.
+</div>
+<% end %>
+
+<div class="row movie" style="padding-top:20px;">
+  <div class="col-md-3">
+    <%= image_tag "/img/posters/#{ movie.id }.jpg", style: "width:100%" %>
   </div>
+  <div class="col-md-9">
+    <legend id="title"><%= movie.title %> <span class="sublegend"><%= movie.filename %></span></legend>
+    <div class="row">
+      <div class="col-md-6">
+        <p><%= movie.overview %></p>
+      </div>
+      <div class="col-md-6">
+        <table>
+          <tr>
+            <th>Release Date: </th>
+            <td><%= movie.release_date %></td>
+          </tr>
+          <tr>
+            <th>TMDB Rating: </th>
+            <td><%= movie.vote_average %> (<%= movie.vote_count %> votes)</td>
+          </tr>
+          <tr>
+            <th>Runtime: </th>
+            <td><%= movie.runtime %></td>
+          </tr>
+          <tr>
+            <th>Genre: </th>
+            <td>
+              <%= genres.map {|g| link_to(g.genre, "/genre/#{g.genre_id}")}.join(', ') %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="http://www.imdb.com/title/<%= movie.imdb_id %>/"><%= image_tag "/img/button-imdb.png" %></a>
+            </td>
+            <td>
+              <a href="https://www.themoviedb.org/movie/<%= movie.id %>"><%= image_tag "/img/button-tmdb.png" %></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <%= link_to "Watch", "/watch/#{ movie.id }" %>
+  </div>
+</div>
