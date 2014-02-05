@@ -84,7 +84,12 @@ def remove_missing(files)
   db = SQLite3::Database.new('db/data.db')
   dbfiles = db.execute("select filename from movies")
   missing = dbfiles.map(&:first) - files
-  missing.each {|f| puts "#{f}"; db.execute("delete from movies where filename = ?", f)}
+  missing.each do |f|
+    puts "#{f}"
+    id = db.execute("select id from movies where filename = ?", f).first
+    db.execute("delete from genres where movie_id = ?", id)
+    db.execute("delete from movies where filename = ?", f)
+  end
   puts 'Done.'
 end
 

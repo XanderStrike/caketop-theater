@@ -24,6 +24,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
     json (1.8.1)
+    mediainfo (0.7.2)
     minitest (4.7.5)
     multi_json (1.7.7)
     multi_xml (0.5.5)
@@ -49,6 +50,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  mediainfo
   sinatra
   sinatra-static-assets
   sqlite3

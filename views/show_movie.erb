@@ -39,7 +39,7 @@
           <tr>
             <th>Genre: </th>
             <td>
-              <%= genres.map {|g| link_to(g.genre, "/genre/#{g.genre_id}")}.join(', ') %>
+              <%= movie.genres.map {|g| link_to(g.genre, "/genre/#{g.genre_id}")}.join(', ') %>
             </td>
           </tr>
           <tr>
