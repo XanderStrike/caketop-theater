@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/static_assets'
 require 'sqlite3'
 require 'active_record'
+require 'mediainfo'
 
 require './lib/models'
 
@@ -80,7 +81,8 @@ end
 # show a specific movie; TODO add cast and similar movies
 get '/view/:id' do
   movie = Movies.where(id: params[:id]).first
-  erb :show_movie, :locals => {:movie => movie}
+  info = Mediainfo.new "public/library/#{ movie.filename }"
+  erb :show_movie, :locals => {:movie => movie, :info => info}
 end
 
 get '/random' do

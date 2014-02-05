@@ -5,7 +5,7 @@
   </video>
 </div>
 
-<% if movie.filename =~ /ac3/i %>
+<% if info.audio[0].format == "AC-3" %>
 <div class="alert alert-warning alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <strong>FYI!</strong> The audio track of this video is not compatible with HTML5. If you can't unmute the audio in the player above, you'll have to click the "watch" link down below.
@@ -23,7 +23,7 @@
         <p><%= movie.overview %></p>
       </div>
       <div class="col-md-6">
-        <table>
+        <table class='table'>
           <tr>
             <th>Release Date: </th>
             <td><%= movie.release_date %></td>
@@ -54,5 +54,42 @@
       </div>
     </div>
     <%= link_to "Watch", "/watch/#{ movie.id }" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>File Information</h3>
+    <h4>General</h3>
+    <table class='table'>
+      <tr><th>Container:</th><td><%= info.general.format %></td></tr>
+      <tr><th>File Size:</th><td><%= (info.size / 1073741824.0).round(2) %> GB</td></tr>
+      <tr><th>Duration:</th><td><%= info.general.duration_before_type_cast %></td></tr>
+      <tr><th>Rip Date:</th><td><%= info.encoded_date %></td></tr>
+    </table>
+
+    <h4>Video</h4>
+    <table class='table'>
+      <tr><th>Format:</th><td><%= "#{info.video.format_info} (#{info.video.format})" %></td></tr>
+      <tr><th>Format Profile:</th><td><%= info.video.format_profile %></td></tr>
+      <tr><th>Codec:</th><td><%= info.video.codec_id %></td></tr>
+      <tr><th>Resolution:</th><td><%= "#{info.video.width} x #{info.video.height}" %></td></tr>
+      <tr><th>Aspect Ratio:</th><td><%= info.video.display_aspect_ratio %></td></tr>
+      <tr><th>Bitrate:</th><td><%= info.video.bit_rate %></td></tr>
+      <tr><th>Framerate:</th><td><%= info.video.frame_rate %></td></tr>
+      <tr><th>Stream Size:</th><td><%= info.video.stream_size %></td></tr>
+    </table>
+
+    <h4>Audio</h4>
+    <table class='table'>
+      <tr><th>Format:</th><td><%= info.audio[0].format_info %> (<%= info.audio[0].format %>)</td></tr>
+      <tr><th>Bitrate:</th><td><%= info.audio[0].bit_rate %> (<%= info.audio[0].bit_rate_mode %>)</td></tr>
+      <tr><th>Stream Size:</th><td><%= info.audio[0].stream_size %></td></tr>
+    </table>
+
+  </div>
+  <div class="col-md-6">
+    <h3>Cast List</h3>
+    <p>Coming Soon!</p>
   </div>
 </div>
