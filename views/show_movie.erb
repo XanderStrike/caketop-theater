@@ -1,3 +1,4 @@
+<legend id="title"><%= movie.title %> <span class="sublegend"><%= movie.filename %></span></legend>
 
 <div class="vid-container" style="background: url(<%= get_link "/img/backdrops/#{movie.id}.jpg" %>);background-size:cover;">
   <video id="player" poster="<%= get_link("/img/transparent.png") %>" controls>
@@ -17,7 +18,6 @@
     <%= image_tag "/img/posters/#{ movie.id }.jpg", style: "width:100%" %>
   </div>
   <div class="col-md-9">
-    <legend id="title"><%= movie.title %> <span class="sublegend"><%= movie.filename %></span></legend>
     <div class="row">
       <div class="col-md-6">
         <p><%= movie.overview %></p>
