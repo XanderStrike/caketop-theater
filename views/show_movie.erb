@@ -9,15 +9,17 @@
 <% if info.audio[0].format == "AC-3" %>
 <div class="alert alert-warning alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <strong>FYI!</strong> The audio track of this video is not compatible with HTML5. If you can't unmute the audio in the player above, you'll have to click the "watch" link down below.
+  <strong>FYI!</strong> The audio track of this video is not compatible with HTML5. If you can't unmute the audio in the player above, you'll have to click the direct link down below.
 </div>
 <% end %>
+
 
 <div class="row movie" style="padding-top:20px;">
   <div class="col-md-3">
     <%= image_tag "/img/posters/#{ movie.id }.jpg", style: "width:100%" %>
   </div>
   <div class="col-md-9">
+<legend>About</legend>
     <div class="row">
       <div class="col-md-6">
         <p><%= movie.overview %></p>
@@ -53,7 +55,7 @@
         </table>
       </div>
     </div>
-    <%= link_to "Watch", "/watch/#{ movie.id }" %>
+    <%= link_to "Direct Link", "/watch/#{ movie.id }" %>
   </div>
 </div>
 
