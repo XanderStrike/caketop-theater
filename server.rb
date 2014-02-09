@@ -41,7 +41,7 @@ end
 get '/watch/:id' do
   movie = Movies.where(id: params[:id]).first
   Watches.new(watched_id: Watches.count + 1, id: movie.id, time: Time.now.to_i, ip: request.ip).save
-  redirect get_link("/library/#{movie.filename}")
+  redirect get_link("/movies/#{movie.filename}")
 end
 
 # handle requests
@@ -81,9 +81,20 @@ end
 # show a specific movie; TODO add cast and similar movies
 get '/view/:id' do
   movie = Movies.where(id: params[:id]).first
-  info = Mediainfo.new "public/library/#{ movie.filename }"
+  info = Mediainfo.new "public/movies/#{ movie.filename }"
   erb :show_movie, :locals => {:movie => movie, :info => info}
 end
+
+# television shows
+get '/tv' do
+  shows = Shows.all 
+  erb :show_list, :locals => {:shows => shows, :title => "TV Shows"}
+end
+get '/view_tv/:id' do
+  show = Shows.where(id: params[:id]).first
+  erb :show_tv, :locals => {:show => show}
+end
+
 
 get '/random' do
   redirect get_link("/view/#{ Movies.first(offset: rand(Movies.count)).id }")

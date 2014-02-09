@@ -1,5 +1,6 @@
 *.db
-public/library
+public/movies
+public/tv
 tmp
 *~
 #*#

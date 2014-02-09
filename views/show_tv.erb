@@ -1,0 +1,37 @@
+
+<div class="row movie" style="padding-top:20px;">
+  <div class="col-md-3">
+    <%= image_tag "/img/posters/#{ show.id }.jpg", style: "width:100%" %>
+  </div>
+  <div class="col-md-9">
+    <legend id="title"><%= show.title %> <span class="sublegend"><%= show.filename %></span></legend>
+    <div class="row">
+      <div class="col-md-6">
+        <p><%= show.overview %></p>
+      </div>
+      <div class="col-md-6">
+        <table class='table'>
+          <tr>
+            <th>First Air Date: </th>
+            <td><%= show.first_air_date %></td>
+          </tr>
+          <tr>
+            <th>TMDB Rating: </th>
+            <td><%= show.vote_average %> (<%= show.vote_count %> votes)</td>
+          </tr>
+          <tr>
+            <th>Genre: </th>
+            <td>
+              <%= show.genres.map {|g| link_to(g.genre, "/genre/#{g.genre_id}")}.join(', ') %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://www.themoviedb.org/tv/<%= show.id %>"><%= image_tag "/img/button-tmdb.png" %></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

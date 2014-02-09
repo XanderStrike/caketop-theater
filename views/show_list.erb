@@ -1,0 +1,13 @@
+<h2><%= title %></h2>
+<hr>
+
+<% shows.each_slice(6) do |slice| %>
+  <div class="row genre-row">
+    <% slice.each do |show| %>
+      <div class="col-md-2 col-xs-4 movie-cell">
+        <%= link_to image_tag("/img/posters/#{ show.id }.jpg", class: 'movie-thumb'), "/view_tv/#{ show.id }" %>
+        <%= link_to show.name, "/view_tv/#{ show.id }" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

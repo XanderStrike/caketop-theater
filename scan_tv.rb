@@ -4,7 +4,7 @@ require 'themoviedb'
 
 # config
 Tmdb::Api.key("a230f1c8a13699563ac819f74fb16230")
-directory = File.expand_path(File.dirname(__FILE__), "/media/nasdrive/tv/") 
+directory = File.expand_path(File.dirname(__FILE__), "/media/nasdrive/tv") 
 
 # I'm keeping these separate because I might want to use a
 #   different API or use multiple or something

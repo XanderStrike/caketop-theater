@@ -18,3 +18,14 @@ class Genres < ActiveRecord::Base
     Movies.where(id: Genres.where(genre_id: self.genre_id).map(&:movie_id))
   end
 end
+
+class Shows < ActiveRecord::Base
+
+  def title
+    self.name
+  end
+  
+  def genres
+    Genres.where(movie_id: self.id)
+  end
+end
