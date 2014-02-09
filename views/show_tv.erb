@@ -78,6 +78,7 @@
 <script>
   function set_player (link) {
     document.querySelector("#player > source").src = link;
+    $('#player').attr('autoplay', true);
     document.getElementById('direct-link').href = link;
     $('#p-filename').html(link);
     $('#p-link').show();
