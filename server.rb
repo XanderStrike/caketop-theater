@@ -92,6 +92,11 @@ get '/tv' do
 end
 get '/view_tv/:id' do
   show = Shows.where(id: params[:id]).first
+  @seasons = {}
+  @files = `ls "public/tv/#{ show.filename }"`.split("\n")
+  @files.each do |f|
+    @seasons[f] = `find "public/tv/#{ show.filename }/#{ f }" -type f`.split("\n").map {|ep| ep.gsub("public", "")}
+  end
   erb :show_tv, :locals => {:show => show}
 end
 
