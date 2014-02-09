@@ -6,4 +6,4 @@ CREATE TABLE requests(name text, request text, status text);
 
 CREATE TABLE genres(movie_id integer, genre text, genre_id integer);
 
-CREATE TABLE feedbacks(name text, feedback text, status text);
+CREATE TABLE feedbacks(ip text, page_location text, name text, message text);

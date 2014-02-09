@@ -12,6 +12,9 @@ end
 class Requests < ActiveRecord::Base
 end
 
+class Feedbacks < ActiveRecord::Base
+end
+
 class Genres < ActiveRecord::Base
 
   def movies
