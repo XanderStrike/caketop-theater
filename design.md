@@ -84,6 +84,11 @@ Schemas
 
     CREATE TABLE feedbacks(ip text, page_location text, name text, message text)
 
+*shows* - Television Shows
+
+    CREATE TABLE shows(backdrop_path text, id integer, original_name text, first_air_date text, poster_path text, popularity real, name text, vote_average text, vote_count text, overview text, filename text, added text);
+
+
 Routes
 ------
 
