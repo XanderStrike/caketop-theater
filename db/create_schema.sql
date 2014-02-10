@@ -6,4 +6,6 @@ CREATE TABLE requests(name text, request text, status text);
 
 CREATE TABLE genres(movie_id integer, genre text, genre_id integer);
 
-CREATE TABLE feedbacks(name text, feedback text, status text);
+CREATE TABLE feedbacks(name text, feedback text, status text)
+
+CREATE TABLE shows(backdrop_path text, id integer, original_name text, first_air_date text, poster_path text, popularity real, name text, vote_average text, vote_count text, overview text, filename text, added text);
