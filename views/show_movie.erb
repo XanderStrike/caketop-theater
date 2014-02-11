@@ -5,14 +5,7 @@
   <source src="<%= get_link("/movies/#{movie.filename}") %>">
   </video>
 </div>
-
-<% if ["AC-3", "DTS"].include?(info.audio[0].format) %>
-<div class="alert alert-warning alert-dismissable">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <strong>FYI!</strong> The audio track of this video is not compatible with HTML5. If you can't unmute the audio in the player above, you'll have to click the direct link down below.
-</div>
-<% end %>
-
+<p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "/watch/#{ movie.id }" %>.</p>
 
 <div class="row movie" style="padding-top:20px;">
   <div class="col-md-3">
@@ -95,3 +88,9 @@
     <p>Coming Soon!</p>
   </div>
 </div>
+
+<script>
+  function switch_local_player() {
+    $('.vid-container').html("<embed src='<%= get_link "/movies/#{ movie.filename }" %>' autoplay=true width='100%' height='100%'></embed>");
+  }
+</script>
