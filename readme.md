@@ -11,7 +11,6 @@ usage
   * `https://github.com/XanderStrike/mintyrails.git`
 * Install Ruby 
   * [Shameless self promotion](https://github.com/XanderStrike/mintyrails), you can say no to everything but base ruby
-  * alternatively a gem file is provided
 * Install Apache/Passenger 
   * This step is HIGHLY RECOMMENDED. The app itself will run fine without it, but it depends on being able to serve your HD movies through HTTP, which will utterly destroy WEBrick and Thin.
   * [Here's a good guide](http://recipes.sinatrarb.com/p/deployment/apache_with_passenger)
@@ -21,6 +20,6 @@ usage
 * Configure Apache
   * God help you.
 * Set up your database
-  * sqlite3 -init create_schema.sql data.db
+  * `sqlite3 -init create_schema.sql data.db`
 * Run `ruby create_db.rb` to recursively scan your library folder and gather data on all your movies
 * You should be good to go
