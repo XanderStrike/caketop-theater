@@ -87,7 +87,7 @@ end
 
 # television shows
 get '/tv' do
-  shows = Shows.all 
+  shows = Shows.all.order("name asc")
   erb :show_list, :locals => {:shows => shows, :title => "TV Shows"}
 end
 get '/view_tv/:id' do
