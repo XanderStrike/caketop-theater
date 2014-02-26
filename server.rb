@@ -81,9 +81,9 @@ end
 
 # show a specific movie; TODO add cast and similar movies
 get '/view/:id' do
-  movie = Movies.where(id: params[:id]).first
-  info = Mediainfo.new "public/movies/#{ movie.filename }"
-  erb :show_movie, :locals => {:movie => movie, :info => info}
+  @movie = Movies.where(id: params[:id]).first
+  @info = Mediainfo.new "public/movies/#{ @movie.filename }"
+  erb :show_movie
 end
 
 # television shows

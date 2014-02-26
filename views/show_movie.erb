@@ -1,54 +1,54 @@
-<legend id="title"><%= movie.title %> <span class="sublegend"><%= movie.filename %></span></legend>
+<legend id="title"><%= @movie.title %> <span class="sublegend"><%= @movie.filename %></span></legend>
 
-<div class="vid-container" style="background: url(<%= get_link "/img/backdrops/#{movie.id}.jpg" %>);background-size:cover;">
+<div class="vid-container" style="background: url(<%= get_link "/img/backdrops/#{@movie.id}.jpg" %>);background-size:cover;">
   <video id="player" poster="<%= get_link("/img/transparent.png") %>" controls>
-  <source src="<%= get_link("/movies/#{movie.filename}") %>">
+  <source src="<%= get_link("/movies/#{@movie.filename}") %>">
   </video>
 </div>
-<p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "/watch/#{ movie.id }" %>.</p>
+<p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "/watch/#{ @movie.id }" %>.</p>
 
 <div class="row movie" style="padding-top:20px;">
   <div class="col-md-3">
-    <%= image_tag "/img/posters/#{ movie.id }.jpg", style: "width:100%" %>
+    <%= image_tag "/img/posters/#{ @movie.id }.jpg", style: "width:100%" %>
   </div>
   <div class="col-md-9">
 <legend>About</legend>
     <div class="row">
       <div class="col-md-6">
-        <p><%= movie.overview %></p>
+        <p><%= @movie.overview %></p>
       </div>
       <div class="col-md-6">
         <table class='table'>
           <tr>
             <th>Release Date: </th>
-            <td><%= movie.release_date %></td>
+            <td><%= @movie.release_date %></td>
           </tr>
           <tr>
             <th>TMDB Rating: </th>
-            <td><%= movie.vote_average %> (<%= movie.vote_count %> votes)</td>
+            <td><%= @movie.vote_average %> (<%= @movie.vote_count %> votes)</td>
           </tr>
           <tr>
             <th>Runtime: </th>
-            <td><%= movie.runtime %></td>
+            <td><%= @movie.runtime %></td>
           </tr>
           <tr>
             <th>Genre: </th>
             <td>
-              <%= movie.genres.map {|g| link_to(g.genre, "/genre/#{g.genre_id}")}.join(', ') %>
+              <%= @movie.genres.map {|g| link_to(g.genre, "/genre/#{g.genre_id}")}.join(', ') %>
             </td>
           </tr>
           <tr>
             <td>
-              <a href="http://www.imdb.com/title/<%= movie.imdb_id %>/"><%= image_tag "/img/button-imdb.png" %></a>
+              <a href="http://www.imdb.com/title/<%= @movie.imdb_id %>/"><%= image_tag "/img/button-imdb.png" %></a>
             </td>
             <td>
-              <a href="https://www.themoviedb.org/movie/<%= movie.id %>"><%= image_tag "/img/button-tmdb.png" %></a>
+              <a href="https://www.themoviedb.org/movie/<%= @movie.id %>"><%= image_tag "/img/button-tmdb.png" %></a>
             </td>
           </tr>
         </table>
       </div>
     </div>
-    <%= link_to "Direct Link", "/watch/#{ movie.id }" %>
+    <%= link_to "Direct Link", "/watch/#{ @movie.id }" %>
   </div>
 </div>
 
@@ -57,29 +57,29 @@
     <h3>File Information</h3>
     <h4>General</h3>
     <table class='table'>
-      <tr><th>Container:</th><td><%= info.general.format %></td></tr>
-      <tr><th>File Size:</th><td><%= (info.size / 1073741824.0).round(2) %> GB</td></tr>
-      <tr><th>Duration:</th><td><%= info.general.duration_before_type_cast %></td></tr>
-      <tr><th>Rip Date:</th><td><%= info.encoded_date %></td></tr>
+      <tr><th>Container:</th><td><%= @info.general.format %></td></tr>
+      <tr><th>File Size:</th><td><%= (@info.size / 1073741824.0).round(2) %> GB</td></tr>
+      <tr><th>Duration:</th><td><%= @info.general.duration_before_type_cast %></td></tr>
+      <tr><th>Rip Date:</th><td><%= @info.encoded_date %></td></tr>
     </table>
 
     <h4>Video</h4>
     <table class='table'>
-      <tr><th>Format:</th><td><%= "#{info.video.format_info} (#{info.video.format})" %></td></tr>
-      <tr><th>Format Profile:</th><td><%= info.video.format_profile %></td></tr>
-      <tr><th>Codec:</th><td><%= info.video.codec_id %></td></tr>
-      <tr><th>Resolution:</th><td><%= "#{info.video.width} x #{info.video.height}" %></td></tr>
-      <tr><th>Aspect Ratio:</th><td><%= info.video.display_aspect_ratio %></td></tr>
-      <tr><th>Bitrate:</th><td><%= info.video.bit_rate %></td></tr>
-      <tr><th>Framerate:</th><td><%= info.video.frame_rate %></td></tr>
-      <tr><th>Stream Size:</th><td><%= info.video.stream_size %></td></tr>
+      <tr><th>Format:</th><td><%= "#{@info.video.format_info} (#{@info.video.format})" %></td></tr>
+      <tr><th>Format Profile:</th><td><%= @info.video.format_profile %></td></tr>
+      <tr><th>Codec:</th><td><%= @info.video.codec_id %></td></tr>
+      <tr><th>Resolution:</th><td><%= "#{@info.video.width} x #{@info.video.height}" %></td></tr>
+      <tr><th>Aspect Ratio:</th><td><%= @info.video.display_aspect_ratio %></td></tr>
+      <tr><th>Bitrate:</th><td><%= @info.video.bit_rate %></td></tr>
+      <tr><th>Framerate:</th><td><%= @info.video.frame_rate %></td></tr>
+      <tr><th>Stream Size:</th><td><%= @info.video.stream_size %></td></tr>
     </table>
 
     <h4>Audio</h4>
     <table class='table'>
-      <tr><th>Format:</th><td><%= info.audio[0].format_info %> (<%= info.audio[0].format %>)</td></tr>
-      <tr><th>Bitrate:</th><td><%= info.audio[0].bit_rate %> (<%= info.audio[0].bit_rate_mode %>)</td></tr>
-      <tr><th>Stream Size:</th><td><%= info.audio[0].stream_size %></td></tr>
+      <tr><th>Format:</th><td><%= @info.audio[0].format_info %> (<%= @info.audio[0].format %>)</td></tr>
+      <tr><th>Bitrate:</th><td><%= @info.audio[0].bit_rate %> (<%= @info.audio[0].bit_rate_mode %>)</td></tr>
+      <tr><th>Stream Size:</th><td><%= @info.audio[0].stream_size %></td></tr>
     </table>
 
   </div>
@@ -91,6 +91,6 @@
 
 <script>
   function switch_local_player() {
-    $('.vid-container').html("<embed src='<%= get_link "/movies/#{ movie.filename }" %>' autoplay=true width='100%' height='100%'></embed>");
+    $('.vid-container').html("<embed src='<%= get_link "/movies/#{ @movie.filename }" %>' autoplay=true width='100%' height='100%'></embed>");
   }
 </script>
