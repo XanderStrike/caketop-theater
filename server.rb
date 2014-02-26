@@ -140,3 +140,16 @@ get '/genre/:g1/:g2' do
   movies = db.execute("select * from movies where id in (select distinct a.movie_id from ((select * from genres where genre_id = #{params[:g1]}) as a inner join (select * from genres where genre_id = #{params[:g2]}) as b on a.movie_id = b.movie_id))")
   erb :movie_list, :locals => {:movies => movies, :title => genre}
 end
+
+# uploads
+get '/upload' do
+  erb :upload
+end
+post "/upload" do
+  File.open('uploads/' + params['myfile'][:filename], "w") do |f|
+    f.write(params['myfile'][:tempfile].read)
+  end
+  @uploaded = true
+  @filename = params['myfile'][:filename]
+  erb :upload 
+end

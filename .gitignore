@@ -9,3 +9,5 @@ public/img/posters/*.png
 
 public/img/backdrops/*.jpg
 public/img/backdrops/*.png
+
+uploads/*
