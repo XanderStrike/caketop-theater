@@ -3,6 +3,8 @@ movie-browser
 
 This is a simple sinatra app I build to allow my media server to make my movie library available over LAN. Eventually, it will behave like Netflix, allowing users to browse the contents of the server by genre/actor/director/studio/year/etc and watch them all through an HTML5 video player.
 
+[Here's what it looks like](http://imgur.com/a/5GFME)
+
 usage
 -----
 
