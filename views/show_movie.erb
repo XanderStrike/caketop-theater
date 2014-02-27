@@ -59,7 +59,7 @@
   <div class="col-md-12">
     <legend>Similar Movies</legend>
   </div>
-  <% @related.each do |movie| %>
+  <% @related[0...6].each do |movie| %>
     <div class="col-md-2 movie-cell">
       <%= link_to image_tag("/img/posters/#{ movie.id }.jpg", class: 'movie-thumb'), "/view/#{ movie.id }" %>
       <%= link_to movie.title, "/view/#{ movie.id }" %>
