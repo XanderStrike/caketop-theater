@@ -3,7 +3,7 @@ movie-browser
 
 This is a simple sinatra app I build to allow my media server to make my movie library available over LAN. Eventually, it will behave like Netflix, allowing users to browse the contents of the server by genre/actor/director/studio/year/etc and watch them all through an HTML5 video player.
 
-[Here's what it looks like](http://imgur.com/a/5GFME)
+[Here is what it looks like.](http://imgur.com/a/5GFME)
 
 usage
 -----
@@ -25,3 +25,10 @@ usage
   * `sqlite3 -init create_schema.sql data.db`
 * Run `ruby create_db.rb` to recursively scan your library folder and gather data on all your movies
 * You should be good to go
+
+license and attribution
+-----------------------
+
+MIT License
+
+This product uses the TMDb API but is not endorsed or certified by [TMDb](http://www.themoviedb.org).
