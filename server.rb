@@ -3,6 +3,7 @@ require 'sinatra/static_assets'
 require 'sqlite3'
 require 'active_record'
 require 'mediainfo'
+require 'themoviedb'
 
 require './lib/models'
 
@@ -14,6 +15,7 @@ ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => 'db/
 register Sinatra::StaticAssets
 set :bind, '0.0.0.0'
 db = SQLite3::Database.new("db/data.db")
+Tmdb::Api.key("a230f1c8a13699563ac819f74fb16230")
 
 
 def get_link(link)
@@ -83,6 +85,8 @@ end
 get '/view/:id' do
   @movie = Movies.where(id: params[:id]).first
   @info = Mediainfo.new "public/movies/#{ @movie.filename }"
+  related_ids = Tmdb::Movie.similar_movies(@movie.id).map {|m| m['id']}
+  @related = Movies.find_all_by_id(related_ids)
   erb :show_movie
 end
 
