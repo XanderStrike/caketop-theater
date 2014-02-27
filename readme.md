@@ -16,9 +16,9 @@ usage
 * Install Apache/Passenger 
   * This step is HIGHLY RECOMMENDED. The app itself will run fine without it, but it depends on being able to serve your HD movies through HTTP, which will utterly destroy WEBrick and Thin.
   * [Here's a good guide](http://recipes.sinatrarb.com/p/deployment/apache_with_passenger)
-* Create a symbolic link called "library" that points to your movie library in the `/public` directory of the app
-  * The scanner script expects there to be nothing but movies in this directory, expect future updates 
+* Create symbolic links called "movies" and "tv" that point to your movie and tv library in the `/public` directory of the app
   * `ln -s /media/movies public/library`
+  * `ln -s /media/tv public/tv`
 * Configure Apache
   * God help you.
 * Set up your database
