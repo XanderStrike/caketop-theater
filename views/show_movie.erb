@@ -79,14 +79,14 @@
 
     <h4>Video</h4>
     <table class='table'>
-      <tr><th>Format:</th><td><%= "#{@info.video.format_info} (#{@info.video.format})" %></td></tr>
-      <tr><th>Format Profile:</th><td><%= @info.video.format_profile %></td></tr>
-      <tr><th>Codec:</th><td><%= @info.video.codec_id %></td></tr>
-      <tr><th>Resolution:</th><td><%= "#{@info.video.width} x #{@info.video.height}" %></td></tr>
-      <tr><th>Aspect Ratio:</th><td><%= @info.video.display_aspect_ratio %></td></tr>
-      <tr><th>Bitrate:</th><td><%= @info.video.bit_rate %></td></tr>
-      <tr><th>Framerate:</th><td><%= @info.video.frame_rate %></td></tr>
-      <tr><th>Stream Size:</th><td><%= @info.video.stream_size %></td></tr>
+      <tr><th>Format:</th><td><%= "#{@info.video[0].format_info} (#{@info.video[0].format})" %></td></tr>
+      <tr><th>Format Profile:</th><td><%= @info.video[0].format_profile %></td></tr>
+      <tr><th>Codec:</th><td><%= @info.video[0].codec_id %></td></tr>
+      <tr><th>Resolution:</th><td><%= "#{@info.video[0].width} x #{@info.video[0].height}" %></td></tr>
+      <tr><th>Aspect Ratio:</th><td><%= @info.video[0].display_aspect_ratio %></td></tr>
+      <tr><th>Bitrate:</th><td><%= @info.video[0].bit_rate %></td></tr>
+      <tr><th>Framerate:</th><td><%= @info.video[0].frame_rate %></td></tr>
+      <tr><th>Stream Size:</th><td><%= @info.video[0].stream_size %></td></tr>
     </table>
 
     <h4>Audio</h4>
