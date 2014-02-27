@@ -85,12 +85,15 @@ get '/view/:id' do
   @movie = Movies.where(id: params[:id]).first
   @info = Mediainfo.new "public/movies/#{ @movie.filename }"
 
-  related_ids = []
-  5.times do |page|
-    related_ids += Tmdb::Search.new("/movie/#{ @movie.id }/similar_movies?page=#{ page + 1 }").fetch_response['results'] #Tmdb::Search.new("/movie/#{ @movie.id }/similar_movies?page=#{ page }").fetch_response['results']
-  end
+#  related_ids = []
+#  5.times do |page|
+#    related_ids += Tmdb::Search.new("/movie/#{ @movie.id }/similar_movies?page=#{ page + 1 }").fetch_response['results'] #Tmdb::Search.new("/movie/#{ @movie.id }/similar_movies?page=#{ page }").fetch_response['results']
+#  end
 
-  @related = Movies.find_all_by_id(related_ids.map {|m| m['id']})
+#  @related = Movies.find_all_by_id(related_ids.map {|m| m['id']})
+
+  @related = @movie.similar
+
   erb :show_movie
 end
 

@@ -4,6 +4,11 @@ class Movies < ActiveRecord::Base
     Genres.where(movie_id: self.id)
   end
 
+  def similar
+    similar_ids = Similars.where(movie: self.id).map(&:related_movie)
+    Movies.where(id: similar_ids)
+  end
+
 end
 
 class Watches < ActiveRecord::Base
@@ -28,4 +33,8 @@ class Shows < ActiveRecord::Base
   def genres
     Genres.where(movie_id: self.id)
   end
+end
+
+class Similars < ActiveRecord::Base
+
 end
