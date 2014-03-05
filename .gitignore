@@ -11,3 +11,5 @@ public/img/backdrops/*.jpg
 public/img/backdrops/*.png
 
 uploads/*
+
+*.sqlite3

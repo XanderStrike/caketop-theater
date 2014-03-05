@@ -9,3 +9,91 @@ Started GET "/rails/info/properties" for 10.21.70.149 at 2014-03-05 13:24:19 -08
 Processing by Rails::InfoController#properties as */*
   Rendered inline template (12.1ms)
 Completed 200 OK in 61ms (Views: 59.1ms | ActiveRecord: 0.0ms)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+
+
+Started GET "/movies" for 10.21.70.149 at 2014-03-05 13:34:33 -0800
+Processing by MoviesController#index as HTML
+Completed 500 Internal Server Error in 97ms
+
+ActiveRecord::StatementInvalid (Could not find table 'movies'):
+  app/controllers/movies_controller.rb:5:in `index'
+
+
+  Rendered /home/xander/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_trace.erb (6.1ms)
+  Rendered /home/xander/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.7ms)
+  Rendered /home/xander/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-3.2.13/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (41.5ms)
+Connecting to database specified by database.yml
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (256.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (208.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.3ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateMovies (20140305213327)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.9ms)[0m  CREATE TABLE "movies" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "backdrop_path" varchar(255), "budget" varchar(255), "imdb_id" varchar(255), "original_title" varchar(255), "overview" varchar(255), "popularity" varchar(255), "poster_path" varchar(255), "release_date" varchar(255), "revenue" varchar(255), "runtime" varchar(255), "status" varchar(255), "tagline" varchar(255), "title" varchar(255), "vote_average" varchar(255), "vote_count" varchar(255), "filename" varchar(255), "added" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20140305213327')[0m
+  [1m[35m (212.4ms)[0m  commit transaction
+  [1m[36m (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+
+
+Started GET "/movies" for 10.21.70.149 at 2014-03-05 13:35:05 -0800
+Processing by MoviesController#index as HTML
+  [1m[36mMovie Load (1.1ms)[0m  [1mSELECT "movies".* FROM "movies" [0m
+  Rendered movies/index.html.erb within layouts/application (6.9ms)
+Compiled movies.css  (40ms)  (pid 12261)
+Compiled scaffolds.css  (50ms)  (pid 12261)
+Compiled application.css  (113ms)  (pid 12261)
+Compiled jquery.js  (12ms)  (pid 12261)
+Compiled jquery_ujs.js  (1ms)  (pid 12261)
+Compiled movies.js  (1000ms)  (pid 12261)
+Compiled application.js  (1125ms)  (pid 12261)
+Completed 200 OK in 1415ms (Views: 1360.7ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 10.21.70.149 at 2014-03-05 13:35:11 -0800
+Served asset /application.css - 200 OK (17ms)
+
+
+Started GET "/assets/movies.css?body=1" for 10.21.70.149 at 2014-03-05 13:35:16 -0800
+Served asset /movies.css - 200 OK (5ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 10.21.70.149 at 2014-03-05 13:35:16 -0800
+Served asset /scaffolds.css - 200 OK (18ms)
+
+
+Started GET "/assets/movies.js?body=1" for 10.21.70.149 at 2014-03-05 13:35:17 -0800
+Served asset /movies.js - 200 OK (5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 10.21.70.149 at 2014-03-05 13:35:17 -0800
+Served asset /jquery.js - 200 OK (9ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.21.70.149 at 2014-03-05 13:35:17 -0800
+Served asset /jquery_ujs.js - 200 OK (8ms)
+
+
+Started GET "/assets/application.js?body=1" for 10.21.70.149 at 2014-03-05 13:35:17 -0800
+Served asset /application.js - 200 OK (82ms)
+
+
+Started GET "/movies/new" for 10.21.70.149 at 2014-03-05 13:35:32 -0800
+Processing by MoviesController#new as HTML
+  Rendered movies/_form.html.erb (129.5ms)
+  Rendered movies/new.html.erb within layouts/application (151.6ms)
+Completed 200 OK in 294ms (Views: 198.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/movies.css?body=1" for 10.21.70.149 at 2014-03-05 13:35:37 -0800
+Served asset /movies.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/movies.js?body=1" for 10.21.70.149 at 2014-03-05 13:35:37 -0800
+Served asset /movies.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 10.21.70.149 at 2014-03-05 13:35:37 -0800
+Served asset /scaffolds.css - 304 Not Modified (0ms)
