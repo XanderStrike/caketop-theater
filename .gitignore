@@ -13,3 +13,4 @@ public/img/backdrops/*.png
 uploads/*
 
 *.sqlite3
+*.log
