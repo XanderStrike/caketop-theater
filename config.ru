@@ -1,5 +1,4 @@
-require 'rubygems'
-require 'sinatra'
-require File.expand_path '../server.rb', __FILE__
+# This file is used by Rack-based servers to start the application.
 
-run Sinatra::Application
+require ::File.expand_path('../config/environment',  __FILE__)
+run CaketopTheater::Application
