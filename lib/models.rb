@@ -11,6 +11,9 @@ class Movies < ActiveRecord::Base
 
 end
 
+class Music < ActiveRecord::Base
+end
+
 class Watches < ActiveRecord::Base
 end
 

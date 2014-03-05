@@ -1,5 +1,8 @@
 DROP TABLE movies;
-DROP TABLE feedbacks;
 DROP TABLE watches;
-DROP TABLE genres;
 DROP TABLE requests;
+DROP TABLE genres;
+DROP TABLE feedbacks;
+DROP TABLE shows;
+DROP TABLE similars;
+DROP TABLE musics;

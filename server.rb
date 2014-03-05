@@ -114,11 +114,18 @@ get '/view_tv/:id' do
 end
 
 
+# music
+get '/listen' do
+  songs = Music.select(:album, :album_art_path).distinct
+  erb :music_list, :locals => {:songs => songs}
+end
+
+
 get '/random' do
   redirect get_link("/view/#{ Movies.first(offset: rand(Movies.count)).id }")
 end
 
-# handle genre stuff 
+# handle genre stuff
 get '/genre' do
   genres = db.execute("select distinct genre,genre_id from genres order by genre")
   movie_hash = {}

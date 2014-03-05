@@ -1,0 +1,13 @@
+<h2>Music</h2>
+
+<% songs.each_slice(6) do |slice| %>
+  <div class="row genre-row">
+    <% slice.each do |song| %>
+      <div class="col-md-2 col-xs-4 movie-cell">
+        <%= link_to image_tag("/music/#{song.album_art_path}", class: 'movie-thumb'), "#" %>
+        <%= link_to song.album, "#" %>
+
+      </div>
+    <% end %>
+  </div>
+<% end %>
