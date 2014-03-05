@@ -5,11 +5,10 @@ require 'active_record'
 require 'mediainfo'
 require 'themoviedb'
 
-require './lib/models'
 
 # db stuff
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => 'db/data.db')
-
+require './lib/models'
 
 # config
 register Sinatra::StaticAssets
@@ -164,4 +163,36 @@ post "/upload" do
   @uploaded = true
   @filename = params['myfile'][:filename]
   erb :upload 
+end
+
+get '/retag/:old/:new' do
+  info = Tmdb::Movie.detail(params[:new])
+  movie = Movies.where(id: params[:old]).first
+  movie.backdrop_path = info.backdrop_path
+  movie.budget = info.budget
+  movie.id = info.id
+  movie.imdb_id = info.imdb_id
+  movie.original_title = info.original_title
+  movie.overview = info.overview
+  movie.popularity = info.popularity
+  movie.poster_path = info.poster_path
+  movie.release_date = info.release_date
+  movie.revenue = info.revenue
+  movie.runtime = info.runtime
+  movie.status = info.status
+  movie.tagline = info.tagline
+  movie.title = info.title
+  movie.vote_average = info.vote_average
+  movie.vote_count = info.vote_count
+  movie.save
+
+  db.execute("delete from genres where movie_id=#{ params[:old] }")
+  info.genres.each do |g|
+    Genres.create(movie_id: info.id, genre: g['name'], genre_id: g['id'])
+  end
+
+  `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/img/posters/#{info.id}.jpg -b -q`
+  `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/img/backdrops/#{info.id}.jpg -b -q`
+
+  redirect get_link("/view/#{ movie.id }")
 end

@@ -1,5 +1,6 @@
 class Movies < ActiveRecord::Base
-  
+  self.primary_key = :id 
+
   def genres
     Genres.where(movie_id: self.id)
   end
