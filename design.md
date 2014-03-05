@@ -88,6 +88,9 @@ Schemas
 
     CREATE TABLE shows(backdrop_path text, id integer, original_name text, first_air_date text, poster_path text, popularity real, name text, vote_average text, vote_count text, overview text, filename text, added text);
 
+*similars* - Relation between movies.
+
+    CREATE TABLE similar(movie integer, related_movie integer);
 
 Routes
 ------

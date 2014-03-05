@@ -3,6 +3,7 @@ require 'sinatra/static_assets'
 require 'sqlite3'
 require 'active_record'
 require 'mediainfo'
+require 'themoviedb'
 
 require './lib/models'
 
@@ -14,6 +15,7 @@ ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => 'db/
 register Sinatra::StaticAssets
 set :bind, '0.0.0.0'
 db = SQLite3::Database.new("db/data.db")
+Tmdb::Api.key("a230f1c8a13699563ac819f74fb16230")
 
 
 def get_link(link)
@@ -81,14 +83,24 @@ end
 
 # show a specific movie; TODO add cast and similar movies
 get '/view/:id' do
-  movie = Movies.where(id: params[:id]).first
-  info = Mediainfo.new "public/movies/#{ movie.filename }"
-  erb :show_movie, :locals => {:movie => movie, :info => info}
+  @movie = Movies.where(id: params[:id]).first
+  @info = Mediainfo.new "public/movies/#{ @movie.filename }"
+
+#  related_ids = []
+#  5.times do |page|
+#    related_ids += Tmdb::Search.new("/movie/#{ @movie.id }/similar_movies?page=#{ page + 1 }").fetch_response['results'] #Tmdb::Search.new("/movie/#{ @movie.id }/similar_movies?page=#{ page }").fetch_response['results']
+#  end
+
+#  @related = Movies.find_all_by_id(related_ids.map {|m| m['id']})
+
+  @related = @movie.similar
+
+  erb :show_movie
 end
 
 # television shows
 get '/tv' do
-  shows = Shows.all 
+  shows = Shows.all.order("name asc")
   erb :show_list, :locals => {:shows => shows, :title => "TV Shows"}
 end
 get '/view_tv/:id' do
@@ -140,4 +152,17 @@ get '/genre/:g1/:g2' do
   genre = db.execute("select distinct genre from genres where genre_id=#{params[:g1]} or genre_id=#{params[:g2]}").map(&:first).join(" & ")
   movies = db.execute("select * from movies where id in (select distinct a.movie_id from ((select * from genres where genre_id = #{params[:g1]}) as a inner join (select * from genres where genre_id = #{params[:g2]}) as b on a.movie_id = b.movie_id))")
   erb :movie_list, :locals => {:movies => movies, :title => genre}
+end
+
+# uploads
+get '/upload' do
+  erb :upload
+end
+post "/upload" do
+  File.open('uploads/' + params['myfile'][:filename], "w") do |f|
+    f.write(params['myfile'][:tempfile].read)
+  end
+  @uploaded = true
+  @filename = params['myfile'][:filename]
+  erb :upload 
 end

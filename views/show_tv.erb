@@ -1,6 +1,6 @@
 <div class="row movie" style="padding-top:20px;">
   <div class="col-md-3">
-    <%= image_tag "/img/posters/#{ show.id }.jpg", style: "width:100%" %>
+    <%= image_tag "/img/posters/tv_#{ show.id }.jpg", style: "width:100%" %>
   </div>
   <div class="col-md-9">
     <legend id="title"><%= show.title %> <span class="sublegend"><%= show.filename %></span></legend>
@@ -41,12 +41,12 @@
 <div class="row movie" style="padding-top:30px;" id="player-div">
   <div class="col-md-12">
     <legend>Player <span id="p-filename" class="sublegend"></span></legend>
-    <div class="vid-container" style="background: url(<%= get_link "/img/backdrops/#{show.id}.jpg" %>);background-size:cover;">
+    <div class="vid-container" style="background: url(<%= get_link "/img/backdrops/tv_#{show.id}.jpg" %>);background-size:cover;">
       <video id="player" poster="<%= get_link("/img/transparent.png") %>" controls>
       <source src="">
       </video>
     </div>
-    <p id="p-link" style="display:none">Video not playing? Download the file <a id='direct-link' href="">here</a>.</p>
+    <p id="p-link" style="display:none">Video not playing? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <a id='direct-link' href="">here</a>.</p>
     <p id="p-select">Select an episode from below to view.</p>
   </div
 </div>
@@ -59,12 +59,12 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= f %>"><%= f %></a>
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse-<%= f.gsub(/\s|\./, '') %>"><%= f %></a>
             </h4>
           </div>
-          <div id="collapse-<%= f %>" class="panel-collapse collapse">
+          <div id="collapse-<%= f.gsub(/\s|\./, '') %>" class="panel-collapse collapse">
             <div class="panel-body">
-              <% @seasons[f].each do |file| %>
+              <% @seasons[f].map {|file| file unless ['srt', 'txt'].include? file.split('.').last}.compact.sort.each do |file| %>
                 <p><a href="#player-div" onClick="set_player('<%= get_link file %>')"><%= file.split("/").last %></a></p>
               <% end %>
             </div>
@@ -75,15 +75,25 @@
   </div>
 </div>
 
-
 <script>
+  var local_player = false;
+
   function set_player (link) {
-    document.querySelector("#player > source").src = link;
-    $('#player').attr('autoplay', true);
+    if (local_player) {
+      $('.vid-container').html("<embed src='" + link + "' autoplay=true width='100%' height='100%'></embed>");
+    } else {
+      document.querySelector("#player > source").src = link;
+      $('#player').attr('autoplay', true);
+    }
     document.getElementById('direct-link').href = link;
     $('#p-filename').html(link);
     $('#p-link').show();
     $('#p-select').hide();
     document.getElementById('player').load();
+  }
+
+  function switch_local_player() {
+    $('.vid-container').html("<embed src='" + $('#direct-link').attr('href') + "' autoplay=true width='100%' height='100%'></embed>");
+    local_player = true;
   }
 </script>
