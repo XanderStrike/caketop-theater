@@ -61,10 +61,14 @@ namespace :scan do
               vote_count: info.vote_count,
               filename: file,
               added: Time.now.to_s)
+
+      # populate genres table
+
+      # download backdrop and poster
     end
   end
 
-  desc "Sends daily digest email to users with PM (recurring) tickets."
+  desc "Scans for changes in the TV library folder."
   task :tv => :environment do
     p 'lol wow tv scan'
   end
