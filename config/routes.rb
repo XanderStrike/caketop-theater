@@ -1,8 +1,5 @@
 CaketopTheater::Application.routes.draw do
 
-  resources :encodes
-
-
   get '/', to: 'home#index'
   resources :genres
   resources :movies
