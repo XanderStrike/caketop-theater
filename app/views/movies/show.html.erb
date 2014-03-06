@@ -53,6 +53,52 @@
 </div>
 
 
+<div class="panel-group" id="accordion" style="padding-top:25px;">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#encode">
+          Encode Info
+        </a>
+      </h4>
+    </div>
+    <div id="encode" class="panel-collapse collapse">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h3>File Information</h3>
+            <table class="table">
+              <tr><th>Container:</th><td><%= @movie.encode.container %></td></tr>
+              <tr><th>File Size:</th><td><%= @movie.encode.size %></td></tr>
+              <tr><th>Duration:</th><td><%= @movie.encode.duration %></td></tr>
+              <tr><th>Rip Date:</th><td><%= @movie.encode.rip_date %></td></tr>
+            </table>
+            <h3>Audio Track</h3>
+            <table class="table">
+              <tr><th>Format:</th><td><%= @movie.encode.a_format %></td></tr>
+              <tr><th>Bitrate:</th><td><%= @movie.encode.a_bitrate %></td></tr>
+              <tr><th>Stream Size:</th><td><%= @movie.encode.a_stream_size %></td></tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <h3>Video Track</h3>
+            <table class="table">
+              <tr><th>Format:</th><td><%= @movie.encode.v_format %></td></tr>
+              <tr><th>Format Profile:</th><td><%= @movie.encode.v_profile %></td></tr>
+              <tr><th>Codec:</th><td><%= @movie.encode.v_codec %></td></tr>
+              <tr><th>Resolution:</th><td><%= @movie.encode.resolution %></td></tr>
+              <tr><th>Aspect Ratio:</th><td><%= @movie.encode.aspect_ratio %></td></tr>
+              <tr><th>Bitrate:</th><td><%= @movie.encode.v_bitrate %></td></tr>
+              <tr><th>Framerate:</th><td><%= @movie.encode.framerate %></td></tr>
+              <tr><th>Stream Size:</th><td><%= @movie.encode.v_stream_size %></td></tr>
+            </table>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   function switch_local_player() {

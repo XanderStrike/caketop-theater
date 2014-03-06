@@ -39,6 +39,10 @@ namespace :scan do
       # get extended info
       info = get_info(movie.id)
 
+      # download backdrop and poster
+      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./app/assets/images/posters/#{info.id}.jpg -b -q`
+      `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./app/assets/images/backdrops/#{info.id}.jpg -b -q`
+
       # insert into db
       puts "Adding #{ file }\n    as #{ movie.title }"
       Movie.create(
@@ -67,9 +71,26 @@ namespace :scan do
         Genre.create(id: g['id'], name: g['name'], movie_id: info.id)
       end
 
-      # download backdrop and poster
-      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./app/assets/images/posters/#{info.id}.jpg -b -q`
-      `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./app/assets/images/backdrops/#{info.id}.jpg -b -q`
+      # get encode info
+      mediainfo = Mediainfo.new "public/movies/#{file}"
+      Encode.create(
+              movie_id: info.id, 
+              a_bitrate: mediainfo.audio[0].bit_rate, 
+              a_format: mediainfo.audio[0].format_info, 
+              a_stream_size: mediainfo.audio[0].stream_size, 
+              aspect_ratio: mediainfo.video[0].display_aspect_ratio, 
+              container: mediainfo.general.format, 
+              duration: mediainfo.general.duration_before_type_cast, 
+              framerate: mediainfo.video[0].frame_rate, 
+              resolution: mediainfo.video[0].width, 
+              rip_date: mediainfo.encoded_date, 
+              size: mediainfo.size, 
+              v_bitrate: mediainfo.video[0].bit_rate, 
+              v_codec: mediainfo.video[0].codec_id, 
+              v_format: mediainfo.video[0].format, 
+              v_profile: mediainfo.video[0].format_profile, 
+              v_stream_size: mediainfo.video[0].stream_size)
+
     end
   end
 
