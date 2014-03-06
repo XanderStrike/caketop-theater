@@ -1,4 +1,7 @@
 CaketopTheater::Application.routes.draw do
+  resources :genres
+
+
   resources :movies
 
 

@@ -63,8 +63,13 @@ namespace :scan do
               added: Time.now.to_s)
 
       # populate genres table
+      info.genres.each do |g|
+        Genre.create(id: g['id'], name: g['name'], movie_id: info.id)
+      end
 
       # download backdrop and poster
+      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./app/assets/images/posters/#{info.id}.jpg -b -q`
+      `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./app/assets/images/backdrops/#{info.id}.jpg -b -q`
     end
   end
 

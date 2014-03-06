@@ -1,3 +1,32 @@
 .container {
   padding: 50px 0px 50px 0px;
 }
+
+.container {
+  padding-bottom:25px;
+}
+
+.movie-cell {
+  text-align:center;
+}
+
+.movie-thumb {
+  width: 100%;
+  padding-bottom:10px;
+}
+
+.genre-row {
+  padding-bottom:30px;
+}
+
+.vid-container {
+  height: 550px;
+  text-align:center;
+  background-size: cover;
+  background-position:center center;
+}
+
+video {
+  width:100%;
+  height:100%;
+}

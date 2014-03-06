@@ -1,57 +1,18 @@
-<h1>Listing movies</h1>
+<h1>Movies</h1>
 
-<table>
-  <tr>
-    <th>Backdrop path</th>
-    <th>Budget</th>
-    <th>Id</th>
-    <th>Imdb</th>
-    <th>Original title</th>
-    <th>Overview</th>
-    <th>Popularity</th>
-    <th>Poster path</th>
-    <th>Release date</th>
-    <th>Revenue</th>
-    <th>Runtime</th>
-    <th>Status</th>
-    <th>Tagline</th>
-    <th>Title</th>
-    <th>Vote average</th>
-    <th>Vote count</th>
-    <th>Filename</th>
-    <th>Added</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @movies.each do |movie| %>
-  <tr>
-    <td><%= movie.backdrop_path %></td>
-    <td><%= movie.budget %></td>
-    <td><%= movie.id %></td>
-    <td><%= movie.imdb_id %></td>
-    <td><%= movie.original_title %></td>
-    <td><%= movie.overview %></td>
-    <td><%= movie.popularity %></td>
-    <td><%= movie.poster_path %></td>
-    <td><%= movie.release_date %></td>
-    <td><%= movie.revenue %></td>
-    <td><%= movie.runtime %></td>
-    <td><%= movie.status %></td>
-    <td><%= movie.tagline %></td>
-    <td><%= movie.title %></td>
-    <td><%= movie.vote_average %></td>
-    <td><%= movie.vote_count %></td>
-    <td><%= movie.filename %></td>
-    <td><%= movie.added %></td>
-    <td><%= link_to 'Show', movie %></td>
-    <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-    <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Movie', new_movie_path %>
+<div class="row">
+  <div class="col-md-12">
+    <legend>New Additions</legend>
+    <% @movies.each_slice(6) do |slice| %>
+      <div class="row genre-row">
+        <% slice.each do |movie| %>
+        <div class="col-md-2 col-xs-4 movie-cell" >
+        <%= link_to image_tag(movie.poster, class: 'movie-thumb'), movie %>
+          <span class="play"></span>
+          <%= link_to movie.title, movie %>
+        </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140305213327) do
+ActiveRecord::Schema.define(:version => 20140306034627) do
+
+  create_table "genres", :id => false, :force => true do |t|
+    t.string   "id"
+    t.string   "movie_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "movies", :force => true do |t|
     t.string   "backdrop_path"
