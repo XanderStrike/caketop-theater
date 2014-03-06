@@ -3,6 +3,8 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @movies = Movie.all
+    @new = Movie.order('added desc').limit(12)
+    @random = Movie.order('random()').limit(6)
 
     respond_to do |format|
       format.html # index.html.erb

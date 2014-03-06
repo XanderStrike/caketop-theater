@@ -3,7 +3,25 @@
 <div class="row">
   <div class="col-md-12">
     <legend>New Additions</legend>
-    <% @movies.each_slice(6) do |slice| %>
+    <% @new.each_slice(6) do |slice| %>
+      <div class="row genre-row">
+        <% slice.each do |movie| %>
+        <div class="col-md-2 col-xs-4 movie-cell" >
+        <%= link_to image_tag(movie.poster, class: 'movie-thumb'), movie %>
+          <span class="play"></span>
+          <%= link_to movie.title, movie %>
+        </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <legend>Random</legend>
+    <% @random.each_slice(6) do |slice| %>
       <div class="row genre-row">
         <% slice.each do |movie| %>
         <div class="col-md-2 col-xs-4 movie-cell" >
