@@ -75,6 +75,7 @@ namespace :scan do
       mediainfo = Mediainfo.new "public/movies/#{file}"
       Encode.create(
               movie_id: info.id, 
+              filename: file,
               a_bitrate: mediainfo.audio[0].bit_rate, 
               a_format: mediainfo.audio[0].format_info, 
               a_stream_size: mediainfo.audio[0].stream_size, 
