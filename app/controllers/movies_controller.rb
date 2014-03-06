@@ -35,4 +35,8 @@ class MoviesController < ApplicationController
       format.json { render json: @movie }
     end
   end
+
+  def shuffle
+    @random = Movie.order('random()').limit(6)
+  end
 end

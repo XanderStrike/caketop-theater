@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col-md-12">
-    <legend><%= title %></legend>
+    <legend><%= title %> 
+      <span class="pull-right"><%= link unless defined?(link).nil? %></span>
+    </legend>
     <% movies.each_slice(6) do |slice| %>
       <div class="row genre-row">
         <% slice.each do |movie| %>

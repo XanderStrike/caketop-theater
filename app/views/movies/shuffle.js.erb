@@ -1,0 +1,2 @@
+$('#random').height($('#random').height())
+$('#random').html('<%=j render partial: 'movies/grid', locals: {movies: @random, title: 'Random Selection', link: link_to('Shuffle', movies_shuffle_path, remote: true)} %>')

@@ -1,4 +1,7 @@
-<h1>Movies</h1>
+<h1>Films</h1>
 
 <%= render partial: 'movies/grid', locals: {movies: @new, title: 'New Additions'} %>
-<%= render partial: 'movies/grid', locals: {movies: @random, title: 'Random Selection'} %>
+
+<div id="random">
+  <%= render partial: 'movies/grid', locals: {movies: @random, title: 'Random Selection', link: link_to('Shuffle', movies_shuffle_path, remote: true)} %>
+</div>
