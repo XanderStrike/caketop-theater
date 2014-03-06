@@ -10,6 +10,8 @@ app/assets/images/posters/*.png
 app/assets/images/backdrops/*.jpg
 app/assets/images/backdrops/*.png
 
+public/assets/*
+
 uploads/*
 
 *.sqlite3
