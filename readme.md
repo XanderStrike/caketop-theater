@@ -32,3 +32,5 @@ license and attribution
 MIT License
 
 This product uses the TMDb API but is not endorsed or certified by [TMDb](http://www.themoviedb.org).
+
+Icons: [Television](http://thenounproject.com/term/television/416/prev), [Film](http://thenounproject.com/term/reel-to-reel/1895/), [Music](http://thenounproject.com/term/radio/2013/)

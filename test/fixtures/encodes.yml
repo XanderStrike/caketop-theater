@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  container: MyString
+  size: MyString
+  duration: MyString
+  rip_date: MyString
+  v_format: MyString
+  v_profile: MyString
+  v_codec: MyString
+  resolution: MyString
+  aspect_ratio: MyString
+  v_bitrate: MyString
+  framerate: MyString
+  v_stream_size: MyString
+  a_format: MyString
+  a_bitrate: MyString
+  a_stream_size: MyString
+
+two:
+  container: MyString
+  size: MyString
+  duration: MyString
+  rip_date: MyString
+  v_format: MyString
+  v_profile: MyString
+  v_codec: MyString
+  resolution: MyString
+  aspect_ratio: MyString
+  v_bitrate: MyString
+  framerate: MyString
+  v_stream_size: MyString
+  a_format: MyString
+  a_bitrate: MyString
+  a_stream_size: MyString
