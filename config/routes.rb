@@ -4,6 +4,8 @@ CaketopTheater::Application.routes.draw do
   get '/theater', to: 'home#index'
 
   resources :genres
-  resources :movies
   
+  resources :movies
+  post 'movies/search'
+
 end

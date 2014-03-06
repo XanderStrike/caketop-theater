@@ -14,6 +14,13 @@
       <ul class="nav navbar-nav navbar-right" style="padding-right: 10px;">
         <li><%= link_to "Home", '/theater' %></li>
         <li><%= link_to "Movies", movies_path %></li>
+         <li>
+          <%= form_tag('/movies/search', class: 'navbar-form', role: 'search') do %>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search Movies" name="q">
+            </div>
+          <% end %>
+        </li>
       </ul>
     </nav>
 
