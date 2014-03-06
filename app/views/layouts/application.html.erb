@@ -8,7 +8,16 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <%= link_to "CAKETOP THEATER", '/', class: "navbar-brand" %>
+      <ul class="nav navbar-nav navbar-right" style="padding-right: 10px;">
+        <li><%= link_to "Home", "/" %></li>
+      </ul>
+    </nav>
+
+    <%= yield %>
+  </div>
 
 </body>
 </html>
