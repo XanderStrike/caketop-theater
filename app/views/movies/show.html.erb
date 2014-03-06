@@ -1,6 +1,6 @@
 <legend id="title"><%= @movie.title %> <span class="sublegend"><%= @movie.filename %></span></legend>
 
-<div class="vid-container" style="background: url(/assets/<%= @movie.backdrop %>);background-size:cover;">
+<div class="vid-container" style="background: url(<%= asset_path @movie.backdrop %>);background-size:cover;">
   <!-- <video id="player" poster="" controls>
   <source src="">
   </video> -->
