@@ -1,95 +1,53 @@
-<p id="notice"><%= notice %></p>
+<legend id="title"><%= @movie.title %> <span class="sublegend"><%= @movie.filename %></span></legend>
 
-<p>
-  <b>Backdrop path:</b>
-  <%= @movie.backdrop_path %>
-</p>
+<div class="vid-container" style="background: url(/assets/<%= @movie.backdrop %>);background-size:cover;">
+  <!-- <video id="player" poster="" controls>
+  <source src="">
+  </video> -->
+</div>
+<p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "/watch/#{ @movie.id }" %>.</p>
 
-<p>
-  <b>Budget:</b>
-  <%= @movie.budget %>
-</p>
-
-<p>
-  <b>Id:</b>
-  <%= @movie.id %>
-</p>
-
-<p>
-  <b>Imdb:</b>
-  <%= @movie.imdb_id %>
-</p>
-
-<p>
-  <b>Original title:</b>
-  <%= @movie.original_title %>
-</p>
-
-<p>
-  <b>Overview:</b>
-  <%= @movie.overview %>
-</p>
-
-<p>
-  <b>Popularity:</b>
-  <%= @movie.popularity %>
-</p>
-
-<p>
-  <b>Poster path:</b>
-  <%= @movie.poster_path %>
-</p>
-
-<p>
-  <b>Release date:</b>
-  <%= @movie.release_date %>
-</p>
-
-<p>
-  <b>Revenue:</b>
-  <%= @movie.revenue %>
-</p>
-
-<p>
-  <b>Runtime:</b>
-  <%= @movie.runtime %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @movie.status %>
-</p>
-
-<p>
-  <b>Tagline:</b>
-  <%= @movie.tagline %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @movie.title %>
-</p>
-
-<p>
-  <b>Vote average:</b>
-  <%= @movie.vote_average %>
-</p>
-
-<p>
-  <b>Vote count:</b>
-  <%= @movie.vote_count %>
-</p>
-
-<p>
-  <b>Filename:</b>
-  <%= @movie.filename %>
-</p>
-
-<p>
-  <b>Added:</b>
-  <%= @movie.added %>
-</p>
-
-
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<div class="row movie" style="padding-top:20px;">
+  <div class="col-md-3">
+    <%= image_tag @movie.poster, style: "width:100%" %>
+  </div>
+  <div class="col-md-9">
+<legend>About</legend>
+    <div class="row">
+      <div class="col-md-6">
+        <p><%= @movie.overview %></p>
+      </div>
+      <div class="col-md-6">
+        <table class='table'>
+          <tr>
+            <th>Release Date: </th>
+            <td><%= @movie.release_date %></td>
+          </tr>
+          <tr>
+            <th>TMDB Rating: </th>
+            <td><%= @movie.vote_average %> (<%= @movie.vote_count %> votes)</td>
+          </tr>
+          <tr>
+            <th>Runtime: </th>
+            <td><%= @movie.runtime %></td>
+          </tr>
+          <tr>
+            <th>Genre: </th>
+            <td>
+              <%= @movie.genres.map {|g| link_to(g.name, g)}.join(', ').html_safe %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="http://www.imdb.com/title/<%= @movie.imdb_id %>/"><%= image_tag "/img/button-imdb.png" %></a>
+            </td>
+            <td>
+              <a href="https://www.themoviedb.org/movie/<%= @movie.id %>"><%= image_tag "/img/button-tmdb.png" %></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <%= link_to "Direct Link", "/watch/#{ @movie.id }" %>
+  </div>
+</div>
