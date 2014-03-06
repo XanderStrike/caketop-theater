@@ -7,8 +7,8 @@ tmp
 app/assets/images/posters/*.jpg
 app/assets/images/posters/*.png
 
-public/img/backdrops/*.jpg
-public/img/backdrops/*.png
+app/assets/images/backdrops/*.jpg
+app/assets/images/backdrops/*.png
 
 uploads/*
 
