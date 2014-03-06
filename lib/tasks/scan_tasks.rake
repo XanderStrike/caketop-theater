@@ -27,7 +27,7 @@ namespace :scan do
     files.each do |file|
 
       # skip if we're already in the db
-      next unless Movie.where(filename: file).empty?
+      next unless Encode.where(filename: file).empty?
 
       # find title, skip if we can't
       movie = clean_title(file)
@@ -45,30 +45,32 @@ namespace :scan do
 
       # insert into db
       puts "Adding #{ file }\n    as #{ movie.title }"
-      Movie.create(
-              backdrop_path: info.backdrop_path,
-              backdrop_path: info.backdrop_path,
-              budget: info.budget,
-              id: info.id,
-              imdb_id: info.imdb_id,
-              original_title: info.original_title,
-              overview: info.overview,
-              popularity: info.popularity,
-              poster_path: info.poster_path,
-              release_date: info.release_date,
-              revenue: info.revenue,
-              runtime: info.runtime,
-              status: info.status,
-              tagline: info.tagline,
-              title: info.title,
-              vote_average: info.vote_average,
-              vote_count: info.vote_count,
-              filename: file,
-              added: Time.now.to_s)
+      movie = Movie.find_by_id(info.id) || Movie.create(id: info.id)
+      movie.backdrop_path = info.backdrop_path
+      movie.backdrop_path = info.backdrop_path
+      movie.budget = info.budget
+      movie.id = info.id
+      movie.imdb_id = info.imdb_id
+      movie.original_title = info.original_title
+      movie.overview = info.overview
+      movie.popularity = info.popularity
+      movie.poster_path = info.poster_path
+      movie.release_date = info.release_date
+      movie.revenue = info.revenue
+      movie.runtime = info.runtime
+      movie.status = info.status
+      movie.tagline = info.tagline
+      movie.title = info.title
+      movie.vote_average = info.vote_average
+      movie.vote_count = info.vote_count
+      movie.added = Time.now.to_s
+      movie.save
 
-      # populate genres table
-      info.genres.each do |g|
-        Genre.create(id: g['id'], name: g['name'], movie_id: info.id)
+      # populate genres table (unless it already is)
+      unless Genre.where(movie_id: info.id).count > 0
+        info.genres.each do |g|
+          Genre.create(id: g['id'], name: g['name'], movie_id: info.id)
+        end
       end
 
       # get encode info

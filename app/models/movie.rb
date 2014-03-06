@@ -3,7 +3,7 @@ class Movie < ActiveRecord::Base
 
   has_many :genres
 
-  has_one :encode
+  has_many :encodes
 
   def poster
     "posters/#{self.id}.jpg"

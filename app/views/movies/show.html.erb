@@ -1,8 +1,8 @@
-<legend id="title"><%= @movie.title %> <span class="sublegend"><%= @movie.filename %></span></legend>
+<legend id="title"><%= @movie.title %></legend>
 
 <div class="vid-container" style="background: url(<%= asset_path @movie.backdrop %>);background-size:cover;">
   <video id="player" poster="<%= asset_path 'transparent.png' %>" controls>
-  <source src="/theater/movies/<%= @movie.filename %>">
+  <source src="/theater/movies/<%= @movie.encodes.first.filename %>">
   </video>
 </div>
 <p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "/watch/#{ @movie.id }" %>.</p>
@@ -58,42 +58,46 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#encode">
-          Encode Info
+          Encodes (<%= @movie.encodes.count %>)
         </a>
       </h4>
     </div>
     <div id="encode" class="panel-collapse collapse">
       <div class="panel-body">
-        <div class="row">
-          <div class="col-md-6">
-            <h3>File Information</h3>
-            <table class="table">
-              <tr><th>Container:</th><td><%= @movie.encode.container %></td></tr>
-              <tr><th>File Size:</th><td><%= @movie.encode.size %></td></tr>
-              <tr><th>Duration:</th><td><%= @movie.encode.duration %></td></tr>
-              <tr><th>Rip Date:</th><td><%= @movie.encode.rip_date %></td></tr>
-            </table>
-            <h3>Audio Track</h3>
-            <table class="table">
-              <tr><th>Format:</th><td><%= @movie.encode.a_format %></td></tr>
-              <tr><th>Bitrate:</th><td><%= @movie.encode.a_bitrate %></td></tr>
-              <tr><th>Stream Size:</th><td><%= @movie.encode.a_stream_size %></td></tr>
-            </table>
+       
+        <% @movie.encodes.each do |encode| %>
+          <legend><%= encode.filename %></legend>
+          <div class="row">
+            <div class="col-md-6">
+              <h4>File Information</h4>
+              <table class="table">
+                <tr><th>Container:</th><td><%= encode.container %></td></tr>
+                <tr><th>File Size:</th><td><%= encode.size %></td></tr>
+                <tr><th>Duration:</th><td><%= encode.duration %></td></tr>
+                <tr><th>Rip Date:</th><td><%= encode.rip_date %></td></tr>
+              </table>
+              <h4>Audio Track</h4>
+              <table class="table">
+                <tr><th>Format:</th><td><%= encode.a_format %></td></tr>
+                <tr><th>Bitrate:</th><td><%= encode.a_bitrate %></td></tr>
+                <tr><th>Stream Size:</th><td><%= encode.a_stream_size %></td></tr>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <h4>Video Track</h4>
+              <table class="table">
+                <tr><th>Format:</th><td><%= encode.v_format %></td></tr>
+                <tr><th>Format Profile:</th><td><%= encode.v_profile %></td></tr>
+                <tr><th>Codec:</th><td><%= encode.v_codec %></td></tr>
+                <tr><th>Resolution:</th><td><%= encode.resolution %></td></tr>
+                <tr><th>Aspect Ratio:</th><td><%= encode.aspect_ratio %></td></tr>
+                <tr><th>Bitrate:</th><td><%= encode.v_bitrate %></td></tr>
+                <tr><th>Framerate:</th><td><%= encode.framerate %></td></tr>
+                <tr><th>Stream Size:</th><td><%= encode.v_stream_size %></td></tr>
+              </table>
+            </div>
           </div>
-          <div class="col-md-6">
-            <h3>Video Track</h3>
-            <table class="table">
-              <tr><th>Format:</th><td><%= @movie.encode.v_format %></td></tr>
-              <tr><th>Format Profile:</th><td><%= @movie.encode.v_profile %></td></tr>
-              <tr><th>Codec:</th><td><%= @movie.encode.v_codec %></td></tr>
-              <tr><th>Resolution:</th><td><%= @movie.encode.resolution %></td></tr>
-              <tr><th>Aspect Ratio:</th><td><%= @movie.encode.aspect_ratio %></td></tr>
-              <tr><th>Bitrate:</th><td><%= @movie.encode.v_bitrate %></td></tr>
-              <tr><th>Framerate:</th><td><%= @movie.encode.framerate %></td></tr>
-              <tr><th>Stream Size:</th><td><%= @movie.encode.v_stream_size %></td></tr>
-            </table>
-          </div>
-        </div>
+        <% end %>
         
       </div>
     </div>
@@ -102,6 +106,6 @@
 
 <script>
   function switch_local_player() {
-    $('.vid-container').html("<embed src='/theater/movies/<%= @movie.filename %>' autoplay=true width='100%' height='100%'></embed>");
+    $('.vid-container').html("<embed src='/theater/movies/<%= @movie.encodes.first.filename %>' autoplay=true width='100%' height='100%'></embed>");
   }
 </script>
