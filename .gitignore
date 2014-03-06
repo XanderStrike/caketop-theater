@@ -4,8 +4,8 @@ public/tv
 tmp
 *~
 #*#
-public/img/posters/*.jpg
-public/img/posters/*.png
+app/assets/images/posters/*.jpg
+app/assets/images/posters/*.png
 
 public/img/backdrops/*.jpg
 public/img/backdrops/*.png
