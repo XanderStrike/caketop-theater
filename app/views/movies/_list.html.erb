@@ -1,0 +1,28 @@
+<% movies.each do |movie| %>
+  <div class="row movie" style="padding-top:20px;">
+    <div class="col-md-2">
+      <%= link_to image_tag(movie.poster, class: 'movie-thumb'), movie %>
+    </div>
+    <div class="col-md-10">
+      <legend id="title"><%= movie.title %> <span class="sublegend"><%= movie.filename %></span></legend>
+      <div class="row">
+        <div class="col-md-8">
+          <p><%= movie.overview %></p>
+        </div>
+        <div class="col-md-4">
+          <table width='100%'>
+            <tr>
+              <th>Released: </th><td><%= movie.release_date %></td>
+            </tr>
+            <tr>
+              <th>Rating: </th><td><%= "#{ movie.vote_average } (#{ movie.vote_count } votes)" %></td>
+            </tr>
+            <tr>
+              <th>Runtime: </th><td><%= movie.runtime %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

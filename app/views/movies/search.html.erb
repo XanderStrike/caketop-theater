@@ -1,1 +1,5 @@
-<%= render partial: 'movies/grid', locals: {movies: @results, title: "#{@results.count} Results for \"#{params[:q]}\""} %>
+<h1>Search Results</h1>
+
+<p><%= "#{@results.count} results for \"#{params[:q]}" %><p>
+
+<%= render partial: 'movies/list', locals: {movies: @results} %>
