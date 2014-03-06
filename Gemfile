@@ -23,3 +23,5 @@ end
 gem 'jquery-rails'
 
 gem 'themoviedb'
+
+gem 'mediainfo'

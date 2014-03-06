@@ -52,6 +52,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mediainfo (0.7.2)
     mime-types (1.25.1)
     multi_json (1.9.0)
     multi_xml (0.5.5)
@@ -110,6 +111,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
+  mediainfo
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3
