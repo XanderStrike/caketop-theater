@@ -8,4 +8,7 @@ CaketopTheater::Application.routes.draw do
   post 'movies/search'
   get 'movies/shuffle'
   resources :movies
+
+  post 'encodes/find_movie'
+  get 'encodes/retag'
 end

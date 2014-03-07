@@ -1,0 +1,16 @@
+<%= form_tag encodes_find_movie_path, remote: true do %>
+  <div class="form-group">
+    <input type="hidden" name="id" value="<%= encode.id %>">
+    <input type="text" class="form-control" placeholder="<%= encode.filename %>" value="<%= params[:title] %>" name="title">
+  </div>
+<% end %>
+
+<% unless defined?(results).nil? %>
+  <p>Results found! Click the right one to associate this file with it.</p>
+  <table class="table">
+    <tr><th>Match</th><th>Release Date</th></tr>
+    <% results.each do |r| %>
+      <tr><td><%= link_to r.title, encodes_retag_path(id: encode.id, movie_id: r.id) %></td><td><%= r.release_date %></td></tr>
+    <% end %>
+  </table>
+<% end %>

@@ -1,0 +1,28 @@
+<!-- Button trigger modal -->
+<a href="#" class="pull-right" data-toggle="modal" data-target="#retag-<%= encode.id %>">
+  <span class="glyphicon glyphicon-tag"></span>
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="retag-<%= encode.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Retag</h4>
+      </div>
+      <div class="modal-body">
+
+        <p>What is the correct title for <strong><%= encode.filename %></strong>?</p>
+
+        <div id="retag-<%= encode.id %>-form">
+          <%= render partial: 'encodes/form_and_results', locals: {encode: encode} %>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

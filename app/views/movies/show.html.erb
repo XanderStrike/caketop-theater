@@ -65,7 +65,10 @@
       <div class="panel-body">
        
         <% @movie.encodes.each do |encode| %>
-          <legend><%= encode.filename %></legend>
+          <legend><%= encode.filename %>
+          </legend>
+            <%= render partial: 'encodes/retag_modal', locals: {encode: encode} %>
+          
           <div class="row">
             <div class="col-md-6">
               <h4>File Information</h4>
