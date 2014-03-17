@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140306192109) do
+ActiveRecord::Schema.define(:version => 20140317200816) do
 
   create_table "encodes", :force => true do |t|
     t.string   "container"
@@ -61,6 +61,21 @@ ActiveRecord::Schema.define(:version => 20140306192109) do
     t.string   "vote_count"
     t.string   "filename"
     t.string   "added"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "shows", :force => true do |t|
+    t.string   "backdrop_path"
+    t.string   "original_name"
+    t.string   "first_air_date"
+    t.string   "poster_path"
+    t.string   "popularity"
+    t.string   "name"
+    t.string   "vote_average"
+    t.string   "vote_count"
+    t.string   "overview"
+    t.string   "folder"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

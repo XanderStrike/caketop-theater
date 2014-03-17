@@ -1,5 +1,8 @@
 CaketopTheater::Application.routes.draw do
 
+  resources :shows
+
+
   get '/', to: 'home#index'
   get '/theater', to: 'home#index'
 

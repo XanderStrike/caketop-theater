@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  backdrop_path: MyString
+  id: MyString
+  original_name: MyString
+  first_air_date: MyString
+  poster_path: MyString
+  popularity: MyString
+  name: MyString
+  vote_average: MyString
+  vote_count: MyString
+  overview: MyString
+  folder: MyString
+
+two:
+  backdrop_path: MyString
+  id: MyString
+  original_name: MyString
+  first_air_date: MyString
+  poster_path: MyString
+  popularity: MyString
+  name: MyString
+  vote_average: MyString
+  vote_count: MyString
+  overview: MyString
+  folder: MyString
