@@ -5,6 +5,13 @@ def get_info(id)
   Tmdb::Movie.detail(id)
 end
 
+def search_tv_title(title)
+  Tmdb::TV.find(title)
+end
+def get_tv_info(id)
+  Tmdb::TV.detail(id)
+end
+
 def clean_title(title)
   title = title.split("/").last.split(/[\s\.]/)
   title.size.times do |x|
@@ -93,7 +100,17 @@ namespace :scan do
               v_format: mediainfo.video[0].format, 
               v_profile: mediainfo.video[0].format_profile, 
               v_stream_size: mediainfo.video[0].stream_size)
+    end
 
+    # remove missing
+    missing = Encode.all.map(&:filename) - files
+    Encode.where(filename: missing).map(&:destroy)
+    Movie.all.each do |m|
+      m.destroy if m.encodes.count < 1
+    end
+    unless missing.empty?
+      p "Removed missing files:"
+      p missing
     end
   end
 
