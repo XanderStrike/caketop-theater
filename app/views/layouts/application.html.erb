@@ -23,6 +23,16 @@
             <% end %>
           </li>
         <% end %>
+        <li><%= link_to "TV", shows_path %></li>
+        <% if request.original_url.include?('shows') %>
+          <li>
+            <%= form_tag(shows_search_path, class: 'navbar-form', role: 'search') do %>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search TV Shows" name="q">
+              </div>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </nav>
 
