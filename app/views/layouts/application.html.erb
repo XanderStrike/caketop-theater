@@ -11,8 +11,10 @@
   <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <%= link_to "CAKETOP THEATER", '/theater', class: "navbar-brand" %>
-      <ul class="nav navbar-nav navbar-right" style="padding-right: 10px;">
+      <ul class="nav navbar-nav navbar-right" style="padding-right: 25px;">
         <li><%= link_to "Home", '/theater' %></li>
+
+        <li class="divider"></li>
         <li><%= link_to "Films", movies_path %></li>
         <% if request.original_url.include?('movies') %>
           <li>
@@ -23,6 +25,8 @@
             <% end %>
           </li>
         <% end %>
+
+        <li class="divider"></li>
         <li><%= link_to "TV", shows_path %></li>
         <% if request.original_url.include?('shows') %>
           <li>
