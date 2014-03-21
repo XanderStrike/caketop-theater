@@ -7,57 +7,65 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="wrap">
+    <div class="container">
 
-  <div class="container">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CAKETOP THEATER</a>
+          </div>
 
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">CAKETOP THEATER</a>
-        </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Home", '/theater' %></li>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home", '/theater' %></li>
-
-            <li class="divider"></li>
-            <li><%= link_to "Films", movies_path %></li>
-            <% if request.original_url.include?('movies') %>
+              <li class="divider"></li>
+              <li><%= link_to "Films", movies_path %></li>
+              <% if request.original_url.include?('movies') %>
               <li>
                 <%= form_tag(movies_search_path, class: 'navbar-form', role: 'search') do %>
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search Films" name="q">
-                  </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search Films" name="q">
+                </div>
                 <% end %>
               </li>
-            <% end %>
+              <% end %>
 
-            <li class="divider"></li>
-            <li><%= link_to "TV", shows_path %></li>
-            <% if request.original_url.include?('shows') %>
+              <li class="divider"></li>
+              <li><%= link_to "TV", shows_path %></li>
+              <% if request.original_url.include?('shows') %>
               <li>
                 <%= form_tag(shows_search_path, class: 'navbar-form', role: 'search') do %>
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search TV Shows" name="q">
-                  </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search TV Shows" name="q">
+                </div>
                 <% end %>
               </li>
-            <% end %>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+              <% end %>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
+    <div id="push"></div>
   </div>
+
+  <div id="footer">
+    <p style="padding:0px 10px 10px 0px;">Not affiliated with Westmont College. <a href="https://github.com/XanderStrike/movie-browser/">Github</a>. <a href="#" data-toggle="modal" data-target="#request-modal">Request</a>.</p>
+  </div>
+
+  <%= render partial: 'requests/modal' %>
 
 </body>
 </html>

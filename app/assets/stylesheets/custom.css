@@ -41,3 +41,35 @@ video {
 .legend_link {
   margin-top:20px;
 }
+
+
+html,
+body {
+  height:100%
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -20px;
+}
+
+#push,
+#footer {
+  height: 20px;
+}
+#footer {
+  background-color: #eee;
+  text-align: right;
+  color: #a0a0a0;
+}
+
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

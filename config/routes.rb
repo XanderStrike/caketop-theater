@@ -13,4 +13,6 @@ CaketopTheater::Application.routes.draw do
 
   post 'shows/search'
   resources :shows
+
+  resources :requests
 end
