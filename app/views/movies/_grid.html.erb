@@ -4,13 +4,19 @@
       <span class="pull-right"><%= link unless defined?(link).nil? %></span>
     </legend>
     <% movies.each_slice(6) do |slice| %>
-      <div class="row genre-row">
-        <% slice.each do |movie| %>
-        <div class="col-md-2 col-xs-4 movie-cell" >
-        <%= link_to image_tag(movie.poster, class: 'movie-thumb'), movie %>
-          <span class="play"></span>
-          <%= link_to movie.title, movie %>
-        </div>
+      <div class="row">
+        <% slice.each_slice(3) do |three_slice| %>
+          <div class="col-md-6 col-xs-12 movie-cell" >
+            <div class="row genre-row">
+              <% three_slice.each do |movie| %>
+                <div class="col-md-4 col-xs-4 movie-cell" >
+                  <%= link_to image_tag(movie.poster, class: 'movie-thumb'), movie %>
+                  <span class="play"></span>
+                  <%= link_to movie.title, movie %>
+                </div>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       </div>
     <% end %>
