@@ -18,6 +18,8 @@
         <%= f.label "IMDB/TMDB Link" %><br />
         <%= f.text_field :link, class: 'form-control' %>
 
+        <%= f.hidden_field :ip, value: request.remote_ip %>
+
       </div>
       <div class="modal-footer">
         <input type="submit" class="btn btn-info">
