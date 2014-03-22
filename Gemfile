@@ -26,3 +26,5 @@ gem 'jquery-rails'
 gem 'themoviedb'
 
 gem 'mediainfo'
+
+gem 'whenever'
