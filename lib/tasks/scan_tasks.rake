@@ -26,6 +26,7 @@ namespace :scan do
   desc "Scans for changes in the movie library folder."
   task :movies => :environment do
     puts "Movie scan starting..."
+    new = false
 
     # get file list
     files = `find public/movies/ -type f`.split("\n").map {|f| f.gsub('public/movies/', '')}
@@ -42,6 +43,9 @@ namespace :scan do
         puts "Error: Title for '#{file}' not found."
         next
       end
+
+      # we've found a new movie, so we're gonna have to restart the server
+      new = true
 
       # get extended info
       info = get_info(movie.id)
@@ -114,6 +118,8 @@ namespace :scan do
     end
 
     puts "Movie scan complete."
+
+    `touch tmp/restart.txt` if new
   end
 
   desc "Scans for changes in the TV library folder."
@@ -130,6 +136,8 @@ namespace :scan do
         puts "Error: Title for '#{file}' not found, skipping."
         next
       end
+
+      next if Show.where(id: show.id).count > 0
 
       # insert into db
       puts "Adding #{ file }\n    as #{ show.name }"
