@@ -1,11 +1,13 @@
 CaketopTheater::Application.routes.draw do
   get '/', to: 'home#index'
   get '/theater', to: 'home#index'
+  get '/about', to: 'home#about'
 
   resources :genres
 
   post 'movies/search'
   get 'movies/shuffle'
+  get 'movies/browse'
   resources :movies
 
   post 'encodes/find_movie'
