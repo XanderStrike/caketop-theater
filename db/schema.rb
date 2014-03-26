@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140321201439) do
+ActiveRecord::Schema.define(:version => 20140326214647) do
 
   create_table "encodes", :force => true do |t|
     t.string   "container"
@@ -45,24 +45,24 @@ ActiveRecord::Schema.define(:version => 20140321201439) do
 
   create_table "movies", :force => true do |t|
     t.string   "backdrop_path"
-    t.string   "budget"
+    t.integer  "budget",         :limit => 255
     t.string   "imdb_id"
     t.string   "original_title"
     t.string   "overview"
     t.string   "popularity"
     t.string   "poster_path"
     t.string   "release_date"
-    t.string   "revenue"
-    t.string   "runtime"
+    t.integer  "revenue",        :limit => 255
+    t.integer  "runtime",        :limit => 255
     t.string   "status"
     t.string   "tagline"
     t.string   "title"
-    t.string   "vote_average"
-    t.string   "vote_count"
+    t.float    "vote_average",   :limit => 255
+    t.integer  "vote_count",     :limit => 255
     t.string   "filename"
     t.string   "added"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "requests", :force => true do |t|
