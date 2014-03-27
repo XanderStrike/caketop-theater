@@ -1,0 +1,131 @@
+<h1>Browse Movies</h1>
+
+<fieldset>
+  <legend>Filters</legend>
+  <%= form_tag(movies_browse_path, role: 'search', remote: true) do %>
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Title" name="title">
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Description" name="desc">
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Filename" name="filename">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <strong>Runtime (Minutes):</strong>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Minimum" name="runtime_min">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Maximum" name="runtime_max">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <strong>Budget (US$):</strong>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Minimum" name="budget_min">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Maximum" name="budget_max">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <strong>Revenue (US$):</strong>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Minimum" name="revenue_min">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Maximum" name="revenue_max">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <strong>TMDB Rating (1-10):</strong>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Minimum" name="vote_average_min">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Maximum" name="vote_average_max">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Container:</strong><br>
+      <%= select_tag :container, options_for_select(Encode.select(:container).map(&:container).uniq), {prompt: "Any", class: 'form-control'} %>
+    </div>
+
+    <div class="col-md-3">
+      <strong>Audio Format:</strong><br>
+      <%= select_tag :a_format, options_for_select(Encode.select(:a_format).map(&:a_format).uniq), {prompt: "Any", class: 'form-control'} %>
+    </div>
+
+    <div class="col-md-3">
+      <strong>Video Format:</strong><br>
+      <%= select_tag :v_format, options_for_select(Encode.select(:v_format).map(&:v_format).uniq), {prompt: "Any", class: 'form-control'} %>
+    </div>
+
+    <div class="col-md-3">
+      <strong>Resolution:</strong><br>
+      <%= select_tag :resolution, options_for_select(Encode.select(:resolution).map(&:resolution).uniq), {prompt: "Any", class: 'form-control'} %>
+    </div>
+
+  </div>
+  <br>
+  <%= submit_tag "Go!", class: "btn pull-right" %>
+
+  <% end %>
+
+</fieldset>
+
+<div id="movie-list">
+  <%= render partial: 'movies/grid', locals: {movies: @limited_movies, title: "Results"} %>
+</div>
+
+<div id="load-more-link">
+  <%= link_to("Load more", movies_browse_path(append: 1, page: params[:page].to_i + 1), remote: true) if @limited_movies.size < @movies.size %>
+</div>

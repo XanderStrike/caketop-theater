@@ -7,6 +7,7 @@ CaketopTheater::Application.routes.draw do
 
   post 'movies/search'
   get 'movies/shuffle'
+  post 'movies/browse'
   get 'movies/browse'
   resources :movies
 

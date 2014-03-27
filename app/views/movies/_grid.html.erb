@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col-md-12">
+    <% unless !defined?(notitle).nil? && notitle %>
     <legend><%= title %> 
       <span class="pull-right"><%= link unless defined?(link).nil? %></span>
     </legend>
+    <% end %>
     <% movies.each_slice(6) do |slice| %>
       <div class="row">
         <% slice.each_slice(3) do |three_slice| %>

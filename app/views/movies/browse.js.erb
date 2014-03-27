@@ -1,0 +1,7 @@
+<% if params[:append].to_i == 1 %>
+  $('#movie-list').append("<%=j render partial: 'movies/grid', locals: {movies: @limited_movies, title: 'Results', notitle: true} %>")
+  $('#load-more-link').html("<%=j link_to('Load More', movies_browse_path(params.merge({append: 1, page: params[:page].to_i + 1})), remote: true) if (@limited_movies.size + params[:page].to_i * @page_size) < @movies.size %>")
+<% else %>
+  $('#movie-list').html("<%=j render partial: 'movies/grid', locals: {movies: @limited_movies, title: 'Results'} %>")
+  $('#load-more-link').html("<%=j link_to('Load More', movies_browse_path(params.merge({append: 1, page: params[:page].to_i + 1})), remote: true) if (@limited_movies.size + params[:page].to_i * @page_size) < @movies.size %>")
+<% end %>
