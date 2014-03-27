@@ -129,3 +129,13 @@
 <div id="load-more-link">
   <%= link_to("Load more", movies_browse_path(append: 1, page: params[:page].to_i + 1), remote: true) if @limited_movies.size < @movies.size %>
 </div>
+
+
+<script>
+// load more when user hits bottom of page
+$(window).scroll(function () {
+    if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
+        $("#load-more-link a").click();
+    }
+ });
+</script>
