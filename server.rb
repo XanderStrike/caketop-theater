@@ -41,7 +41,7 @@ end
 # add movie to recently watched, then watch it.
 get '/watch/:id' do
   movie = Movies.where(id: params[:id]).first
-  Watches.new(watched_id: Watches.count + 1, id: movie.id, time: Time.now.to_i, ip: request.ip).save
+  Watches.new(watched_id: Watches.count + 1, id: movie.id, time: Time.now.to_i, ip: request.ip).save!
   redirect get_link("/movies/#{movie.filename}")
 end
 
@@ -57,12 +57,13 @@ end
 
 # handle feedback
 post '/feedback' do
-  db.execute("insert into feedback(name, feedback, status) values('#{params[:name]}', '#{params[:request]}', 'New')")
-  erb :request, :locals => {:name => params[:name]}
+  # ip text, page_location text, name text, message text
+  Feedbacks.new(ip: request.ip, page_location: "*", name: params[:name], message: params[:message]).save!
+  erb :feedback, :locals => {:name => params[:name]}
 end
-get '/feedback' do
-  feedback = db.execute('select * from feedback')
-  erb :feedback, :locals => {:feedback => feedback}
+get '/feedbacks' do
+  feedback = Feedbacks.all
+  erb :view_feedbacks, :locals => {:feedback => feedback}
 end
 
 
@@ -112,11 +113,18 @@ get '/view_tv/:id' do
 end
 
 
+# music
+get '/listen' do
+  songs = Music.select(:album, :album_art_path).distinct
+  erb :music_list, :locals => {:songs => songs}
+end
+
+
 get '/random' do
   redirect get_link("/view/#{ Movies.first(offset: rand(Movies.count)).id }")
 end
 
-# handle genre stuff 
+# handle genre stuff
 get '/genre' do
   genres = db.execute("select distinct genre,genre_id from genres order by genre")
   movie_hash = {}

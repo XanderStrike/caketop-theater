@@ -17,6 +17,7 @@
     </li>
     <li><%= link_to "Random", "/random" %></li>
     <li><%= link_to "TV", "/tv" %></li>
+    <li><%= link_to "Music", "/listen" %></li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse <b class="caret"></b></a>
       <ul class="dropdown-menu">
@@ -79,7 +80,7 @@
           <p>Here you can put in feedback and stuff. </p>
           <p>TV support is coming soon. The shows I have are available at caketop/tv at the moment, but it's not pretty.</p>
           <input type="text" name="name" placeholder="Your Name" class="form-control" required='true'><br>
-          <textarea name="request" class="form-control" placeholder="Let us know what you think..." required="true"></textarea>
+          <textarea name="message" class="form-control" placeholder="Let us know what is happening..." required="true"></textarea>
         </div>
         <div class="modal-footer">
           <input type="submit" class="btn btn-info">
@@ -110,4 +111,3 @@
               </script>
   </body>
 </html>
-
