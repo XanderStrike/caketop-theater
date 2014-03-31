@@ -5,6 +5,8 @@ CaketopTheater::Application.routes.draw do
 
   resources :genres
 
+
+
   post 'movies/search'
   get 'movies/shuffle'
   post 'movies/browse'
@@ -18,4 +20,5 @@ CaketopTheater::Application.routes.draw do
   resources :shows
 
   resources :requests
+  # resources :music
 end
