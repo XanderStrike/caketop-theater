@@ -1,0 +1,30 @@
+<h1> Music </h1>
+
+<ul>
+  <% @artists.each do |artist| %>
+    <div class="row">
+      <h3><%= artist.name %></h3>
+      <div class="row">
+      <% artist.albums.each do |album| %>
+        <img src="<%= album.art%>">
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+<ul>
+
+
+<% @artists.each do |artist| %>
+  <li><%= artist.name  %></li>
+  <ul>
+    <% artist.albums.each do |album| %>
+      <li><%= album.name %></li>
+      <ul>
+        <% album.songs.each do |song| %>
+          <li><%= song.title %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </ul>
+<% end %>
+</ul>

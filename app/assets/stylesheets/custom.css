@@ -10,9 +10,20 @@
   text-align:center;
 }
 
+.music-thumb {
+  margin-bottom:10px;
+  padding-bottom:0px;
+  padding-left:0px;
+  padding-right:0px;
+  width: 16%;
+
+}
+
 .movie-thumb {
   margin-bottom:10px;
   padding-bottom:0px;
+  padding-left:0px;
+  padding-right:0px;
   width: 100%;
   box-shadow:0px 0px 10px #666;
 }

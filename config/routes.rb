@@ -8,6 +8,8 @@ CaketopTheater::Application.routes.draw do
 
   resources :genres, only: [:show]
 
+
+
   post 'movies/search'
   get 'movies/shuffle'
   post 'movies/browse'
