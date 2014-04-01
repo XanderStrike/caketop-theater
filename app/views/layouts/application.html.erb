@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Caketop Theater</title>
+  <title><%= Setting.get(:name).content %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -20,13 +20,13 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CAKETOP THEATER</a>
+            <a class="navbar-brand" href="#"><%= Setting.get(:name).content %></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Home", '/theater' %></li>
+              <li><%= link_to "Home", root_path %></li>
 
               <li class="divider"></li>
               <li><%= link_to "Films", movies_path %></li>

@@ -1,0 +1,70 @@
+<h1>Settings</h1>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <legend>Site Name</legend>
+    <div id="name" class="setting">
+      <p>This is the name of the site, duh.</p>
+
+      <%= form_tag settings_path, remote: true do %>
+        <%= hidden_field_tag :setting, :name %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= text_field_tag :name_text, @name.content, class: 'form-control', placeholder: "Caketop Theater" %>
+          </div>
+          <div class="col-md-3">
+            <%= submit_tag "Save", class: 'btn btn-success', remote: true %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="col-md-6">
+
+    <legend>About Page</legend>
+    <div id="about" class="setting">
+      <p>This is the contents of the About page. Who you are, why you're hosting this, etc. <br>HTML is a-okay.</p>
+
+      <%= form_tag settings_path, remote: true do %>
+        <%= hidden_field_tag :setting, :about %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= text_area_tag :about_text, @about.content, class: 'form-control', placeholder: "Caketop Theater is run by muppets." %>
+          </div>
+          <div class="col-md-3">
+            <%= submit_tag "Save", class: 'btn btn-success', remote: true %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+
+<legend>Banner Area</legend>
+<div id="banner" class="setting">
+  <%= form_tag settings_path, remote: true do %>
+    <%= hidden_field_tag :setting, :banner %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= text_area_tag :banner_text, @banner.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
+      </div>
+      <div class="col-md-3">
+        <table class="table">
+          <tr>
+            <td><label><%= radio_button_tag :banner_display, true, @banner.boolean %> Show</label></td>
+            <td><label><%= radio_button_tag :banner_display, false, !@banner.boolean %> Hide</label></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-3">
+        <%= submit_tag "Save", class: 'btn btn-success', remote: true %>
+      </div>
+    </div>
+  <% end %>
+  <p>This text will appear on the <%= link_to 'home page', root_url %> above the title, front and center! It's useful for announcements and general information for your users. HTML is totally acceptable in this field, so go nuts.</p>
+</div>
+
