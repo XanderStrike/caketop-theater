@@ -1,7 +1,4 @@
 CaketopTheater::Application.routes.draw do
-  resources :feedbacks
-
-
   root to: 'home#index'
   get '/theater', to: 'home#index'
   get '/about', to: 'home#about'
@@ -9,19 +6,20 @@ CaketopTheater::Application.routes.draw do
   get '/settings', to: 'home#settings'
   post '/settings', to: 'home#settings'
 
-  resources :genres
+  resources :genres, only: [:show]
 
   post 'movies/search'
   get 'movies/shuffle'
   post 'movies/browse'
   get 'movies/browse'
-  resources :movies
+  resources :movies, only: [:index, :show]
 
   post 'encodes/find_movie'
   get 'encodes/retag'
 
   post 'shows/search'
-  resources :shows
+  resources :shows, only: [:index, :show]
 
-  resources :requests
+  resources :feedbacks, only: [:index, :create, :show, :destroy]
+  resources :requests, only: [:index, :create, :show, :destroy]
 end
