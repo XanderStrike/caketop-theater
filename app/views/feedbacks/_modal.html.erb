@@ -1,0 +1,28 @@
+<div class="modal fade" id="feedback-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Send Feedback</h4>
+      </div>
+      <%= form_for(Feedback.new) do |f| %>
+        <div class="modal-body">
+          <p>Something wrong? Have you tried turning it on and off again?</p>
+
+          <p>If so, let the admin know here. Leave your real name or email if you want a response.</p>
+
+          <%= f.label "Your Name" %><br />
+          <%= f.text_field :name, class: 'form-control' %><br />
+          <%= f.label "Feedback" %><br />
+          <%= f.text_area :content, class: 'form-control', rows: 5 %><br />
+
+          <%= f.hidden_field :path, value: request.fullpath %>
+          <%= f.hidden_field :ip, value: request.remote_ip %>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-info">
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

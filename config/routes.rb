@@ -1,4 +1,7 @@
 CaketopTheater::Application.routes.draw do
+  resources :feedbacks
+
+
   root to: 'home#index'
   get '/theater', to: 'home#index'
   get '/about', to: 'home#about'
