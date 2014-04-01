@@ -14,7 +14,7 @@
             <%= text_field_tag :name_text, @name.content, class: 'form-control', placeholder: "Caketop Theater" %>
           </div>
           <div class="col-md-3">
-            <%= submit_tag "Save", class: 'btn btn-success', remote: true %>
+            <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="name"></span>
           </div>
         </div>
       <% end %>
@@ -34,7 +34,7 @@
             <%= text_area_tag :about_text, @about.content, class: 'form-control', placeholder: "Caketop Theater is run by muppets." %>
           </div>
           <div class="col-md-3">
-            <%= submit_tag "Save", class: 'btn btn-success', remote: true %>
+            <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="about"></span>
           </div>
         </div>
       <% end %>
@@ -61,7 +61,7 @@
         </table>
       </div>
       <div class="col-md-3">
-        <%= submit_tag "Save", class: 'btn btn-success', remote: true %>
+        <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="banner"></span>
       </div>
     </div>
   <% end %>
