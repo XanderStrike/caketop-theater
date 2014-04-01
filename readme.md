@@ -37,6 +37,8 @@ Configure apache/passenger appropriately by modifying `/etc/apache2/sites-enable
       Options -Multiviews
     </Directory> 
 
+Once you've got the app running, visit `/settings` to populate your settings table with defaults, and you should be good to go!    
+
 usage
 -----
 

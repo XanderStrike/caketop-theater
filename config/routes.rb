@@ -1,7 +1,10 @@
 CaketopTheater::Application.routes.draw do
-  get '/', to: 'home#index'
+  root to: 'home#index'
   get '/theater', to: 'home#index'
   get '/about', to: 'home#about'
+
+  get '/settings', to: 'home#settings'
+  post '/settings', to: 'home#settings'
 
   resources :genres
 

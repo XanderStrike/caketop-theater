@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140326214647) do
+ActiveRecord::Schema.define(:version => 20140331233128) do
 
   create_table "encodes", :force => true do |t|
     t.string   "container"
@@ -70,6 +70,15 @@ ActiveRecord::Schema.define(:version => 20140326214647) do
     t.string   "desc"
     t.string   "link"
     t.string   "ip"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "settings", :force => true do |t|
+    t.string   "name"
+    t.string   "content"
+    t.integer  "number"
+    t.boolean  "boolean"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
