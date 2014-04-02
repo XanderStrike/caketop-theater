@@ -1,4 +1,8 @@
 class HomeController < ApplicationController
+  # http_basic_authenticate_with name: "dhh", password: "secret", only: :settings
+  before_filter :authenticate, only: :settings
+
+
   def index
   end
 
@@ -9,6 +13,9 @@ class HomeController < ApplicationController
     @name = Setting.where(name: 'name').first || Setting.create(name: 'name', content: 'Caketop Theater')
     @about = Setting.where(name: 'about').first || Setting.create(name: 'about', content: "<h1>About Caketop</h1>\n\nCaketop Theater will make all your dreams come true!")
     @banner = Setting.where(name: 'banner').first || Setting.create(name: 'banner', content: '', boolean: false)
+
+    @admin = Setting.where(name: 'admin').first || Setting.create(name: 'admin', content: '', boolean: false)
+    @admin_pass = Setting.where(name: 'admin-pass').first || Setting.create(name: 'admin-pass', content: '')
 
     case params[:setting]
     when 'name'
@@ -21,11 +28,29 @@ class HomeController < ApplicationController
       @banner.content = params[:banner_text]
       @banner.boolean = (params[:banner_display] == 'true')
       @banner.save!
+    when 'admin'
+      @admin.content = params[:admin_username]
+      @admin.boolean = (params[:protect] == 'true')
+      @admin_pass.content = params[:admin_pass]
+      @admin.save!
+      @admin_pass.save!
     end
 
     respond_to do |format|
       format.html
       format.js
   	end
+  end
+
+  protected
+  def authenticate
+    setting = Setting.where(name: 'admin').first
+    if (!(setting.nil?) && setting.boolean)
+      authenticate_or_request_with_http_basic do |username, password|
+        return username == "admin" && password == "test"
+      end
+    else
+      return true
+    end
   end
 end
