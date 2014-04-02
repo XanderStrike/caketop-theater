@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  # http_basic_authenticate_with name: "dhh", password: "secret", only: :settings
   before_filter :authenticate, only: :settings
 
 
@@ -47,7 +46,7 @@ class HomeController < ApplicationController
     setting = Setting.where(name: 'admin').first
     if (!(setting.nil?) && setting.boolean)
       authenticate_or_request_with_http_basic do |username, password|
-        return username == "admin" && password == "test"
+        username == setting.content && password == Setting.where(name: 'admin-pass').first.content
       end
     else
       return true
