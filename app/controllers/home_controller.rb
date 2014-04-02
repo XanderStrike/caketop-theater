@@ -30,7 +30,7 @@ class HomeController < ApplicationController
     when 'admin'
       @admin.content = params[:admin_username]
       @admin.boolean = (params[:protect] == 'true')
-      @admin_pass.content = params[:admin_pass]
+      @admin_pass.content = Digest::SHA256.hexdigest(params[:admin_pass])
       @admin.save!
       @admin_pass.save!
     end
@@ -46,7 +46,7 @@ class HomeController < ApplicationController
     setting = Setting.where(name: 'admin').first
     if (!(setting.nil?) && setting.boolean)
       authenticate_or_request_with_http_basic do |username, password|
-        username == setting.content && password == Setting.where(name: 'admin-pass').first.content
+        username == setting.content && Digest::SHA256.hexdigest(password) == Setting.where(name: 'admin-pass').first.content
       end
     else
       return true
