@@ -10,7 +10,7 @@
       <%= form_tag settings_path, remote: true do %>
         <%= hidden_field_tag :setting, :name %>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-9">
             <%= text_field_tag :name_text, @name.content, class: 'form-control', placeholder: "Caketop Theater" %>
           </div>
           <div class="col-md-3">
@@ -30,7 +30,7 @@
       <%= form_tag settings_path, remote: true do %>
         <%= hidden_field_tag :setting, :about %>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-9">
             <%= text_area_tag :about_text, @about.content, class: 'form-control', placeholder: "Caketop Theater is run by muppets." %>
           </div>
           <div class="col-md-3">
@@ -44,27 +44,61 @@
 </div>
 
 
-<legend>Banner Area</legend>
-<div id="banner" class="setting">
-  <%= form_tag settings_path, remote: true do %>
-    <%= hidden_field_tag :setting, :banner %>
-    <div class="row">
-      <div class="col-md-6">
-        <%= text_area_tag :banner_text, @banner.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
-      </div>
-      <div class="col-md-3">
-        <table class="table">
-          <tr>
-            <td><label><%= radio_button_tag :banner_display, true, @banner.boolean %> Show</label></td>
-            <td><label><%= radio_button_tag :banner_display, false, !@banner.boolean %> Hide</label></td>
-          </tr>
-        </table>
-      </div>
-      <div class="col-md-3">
-        <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="banner"></span>
-      </div>
+<div class="row">
+  <div class="col-md-6">
+
+    <legend>Settings Page</legend>
+    <div id="name" class="setting">
+      <p>Password protect this page?</p>
+
+      <%= form_tag settings_path, remote: true do %>
+        <%= hidden_field_tag :setting, :admin %>
+        <div class="row">
+          <div class="col-md-9">
+            <table class="table">
+              <tr>
+                <td><label><%= radio_button_tag :protect, true, @admin.boolean %> Yes</label></td>
+                <td><label><%= radio_button_tag :protect, false, !@admin.boolean %> No</label></td>
+              </tr>
+            </table>
+            <%= text_field_tag :admin_username, @admin.content, class: 'form-control', placeholder: "username" %><br>
+            <%= password_field_tag :admin_pass, @admin_pass.content, class: 'form-control', placeholder: "password" %>
+          </div>
+          <div class="col-md-3">
+            <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="admin"></span>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-  <p>This text will appear on the <%= link_to 'home page', root_url %> above the title, front and center! It's useful for announcements and general information for your users. HTML is totally acceptable in this field, so go nuts.</p>
+
+  </div>
+  <div class="col-md-6">
+
+    <legend>Banner Area</legend>
+    <div id="banner" class="setting">
+      <%= form_tag settings_path, remote: true do %>
+        <%= hidden_field_tag :setting, :banner %>
+        <div class="row">
+          <div class="col-md-9">
+            <%= text_area_tag :banner_text, @banner.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
+            <table class="table">
+              <tr>
+                <td><label><%= radio_button_tag :banner_display, true, @banner.boolean %> Show</label></td>
+                <td><label><%= radio_button_tag :banner_display, false, !@banner.boolean %> Hide</label></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-3">
+            <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="banner"></span>
+          </div>
+        </div>
+      <% end %>
+      <p>This text will appear on the <%= link_to 'home page', root_url %> above the title, front and center! It's useful for announcements and general information for your users. HTML is totally acceptable in this field, so go nuts.</p>
+    </div>
+
+  </div>
 </div>
+
+
+
 
