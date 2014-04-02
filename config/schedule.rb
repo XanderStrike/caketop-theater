@@ -22,3 +22,7 @@
 every 15.minutes do
   rake "scan:movies"
 end
+
+every 1.hour do
+  rake "scan:tv"
+end
