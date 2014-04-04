@@ -47,7 +47,7 @@ class MoviesController < ApplicationController
     @movies = @movies.where(id: Genre.where(id: params[:genre]).map(&:movie_id)) unless params[:genre].blank?
 
     # sort
-    @movies = @movies.order(params[:sort])
+    @movies = @movies.order((params[:sort] || 'title asc'))
 
     @page_size = 24
     @limited_movies = @movies.limit(@page_size).offset(@page_size * params[:page].to_i)

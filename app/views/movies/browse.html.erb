@@ -24,112 +24,122 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-4">
-      <strong>Runtime (Minutes):</strong>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Minimum" name="runtime_min">
+  <div id='extra-filters' style="display:none">
+
+    <div class="row">
+      <div class="col-md-4">
+        <strong>Runtime (Minutes):</strong>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Minimum" name="runtime_min">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Maximum" name="runtime_max">
+            </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Maximum" name="runtime_max">
+      </div>
+
+      <div class="col-md-4">
+        <strong>Budget (US$):</strong>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Minimum" name="budget_min">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Maximum" name="budget_max">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <strong>Revenue (US$):</strong>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Minimum" name="revenue_min">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Maximum" name="revenue_max">
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <strong>Budget (US$):</strong>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Minimum" name="budget_min">
+    <div class="row">
+      <div class="col-md-4">
+        <strong>TMDB Rating (1-10):</strong>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Minimum" name="vote_average_min">
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Maximum" name="budget_max">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <strong>Revenue (US$):</strong>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Minimum" name="revenue_min">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Maximum" name="revenue_max">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Maximum" name="vote_average_max">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-4">
-      <strong>TMDB Rating (1-10):</strong>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Minimum" name="vote_average_min">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Maximum" name="vote_average_max">
-          </div>
-        </div>
+      <div class="col-md-4">
+        <strong>Genre</strong>
+        <%= select_tag :genre, options_for_select(Genre.all.map {|g| [g.name, g.id]}.uniq.sort), {prompt: "Any", class: 'form-control'} %>
       </div>
+
     </div>
 
-    <div class="col-md-4">
-      <strong>Genre</strong>
-      <%= select_tag :genre, options_for_select(Genre.all.map {|g| [g.name, g.id]}.uniq.sort), {prompt: "Any", class: 'form-control'} %>
+    <div class="row">
+      <div class="col-md-3">
+        <strong>Container:</strong><br>
+        <%= select_tag :container, options_for_select(Encode.select(:container).map(&:container).uniq), {prompt: "Any", class: 'form-control'} %>
+      </div>
+
+      <div class="col-md-3">
+        <strong>Audio Format:</strong><br>
+        <%= select_tag :a_format, options_for_select(Encode.select(:a_format).map(&:a_format).uniq), {prompt: "Any", class: 'form-control'} %>
+      </div>
+
+      <div class="col-md-3">
+        <strong>Video Format:</strong><br>
+        <%= select_tag :v_format, options_for_select(Encode.select(:v_format).map(&:v_format).uniq), {prompt: "Any", class: 'form-control'} %>
+      </div>
+
+      <div class="col-md-3">
+        <strong>Resolution:</strong><br>
+        <%= select_tag :resolution, options_for_select(Encode.select(:resolution).map(&:resolution).uniq), {prompt: "Any", class: 'form-control'} %>
+      </div>
+
     </div>
 
-  </div>
+  </div> <!-- extra-filters div -->
 
-  <div class="row">
-    <div class="col-md-3">
-      <strong>Container:</strong><br>
-      <%= select_tag :container, options_for_select(Encode.select(:container).map(&:container).uniq), {prompt: "Any", class: 'form-control'} %>
-    </div>
-
-    <div class="col-md-3">
-      <strong>Audio Format:</strong><br>
-      <%= select_tag :a_format, options_for_select(Encode.select(:a_format).map(&:a_format).uniq), {prompt: "Any", class: 'form-control'} %>
-    </div>
-
-    <div class="col-md-3">
-      <strong>Video Format:</strong><br>
-      <%= select_tag :v_format, options_for_select(Encode.select(:v_format).map(&:v_format).uniq), {prompt: "Any", class: 'form-control'} %>
-    </div>
-
-    <div class="col-md-3">
-      <strong>Resolution:</strong><br>
-      <%= select_tag :resolution, options_for_select(Encode.select(:resolution).map(&:resolution).uniq), {prompt: "Any", class: 'form-control'} %>
-    </div>
-
-  </div>
   <br>
   <%= submit_tag "Go!", class: "btn pull-right" %>
-  <span class='pull-right'><%= select_tag :sort, options_for_select([['Title', 'title asc'], ['Title (desc)', 'title desc'], ['Release Date', 'release_date asc'], ['Release Date (desc)', 'release_date desc']]), {class: 'form-control'} %></span> 
+  <span class='pull-right'>
+    <%= select_tag :sort, options_for_select(Movie.sort_orders), {class: 'form-control'} %>
+  </span> 
+  <span class='pull-right' style="padding-top:8px;">
+    <a href="#" onClick="$('#extra-filters').toggle()">Show Extra Filters</a>&nbsp;&nbsp;
+  </span>
 
   <% end %>
 
 </fieldset>
 
 <div id="movie-list">
-  <%= render partial: 'movies/grid', locals: {movies: @limited_movies, title: "Results"} %>
+  <%= render partial: 'movies/grid', locals: {movies: @limited_movies, title: "Results", sublegend: "#{@movies.size} films"} %>
 </div>
 
 <div id="load-more-link">
