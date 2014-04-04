@@ -24,7 +24,6 @@ class MoviesController < ApplicationController
   end
 
   def browse
-
     # movie filters
     @movies = Movie.where("title like ?", "%#{params[:title]}%")
     @movies = @movies.where("overview like ?", "%#{params[:desc]}%") unless params[:desc].blank?
@@ -44,6 +43,11 @@ class MoviesController < ApplicationController
     @movies = @movies.where('encodes.v_format = ?', "#{params[:v_format]}").includes(:encodes) unless params[:v_format].blank?
     @movies = @movies.where('encodes.resolution = ?', "#{params[:resolution]}").includes(:encodes) unless params[:resolution].blank?
 
+    # genre, includes doesn't work so we do it the hard way
+    @movies = @movies.where(id: Genre.where(id: params[:genre]).map(&:movie_id)) unless params[:genre].blank?
+
+    # sort
+    @movies = @movies.order(params[:sort])
 
     @page_size = 24
     @limited_movies = @movies.limit(@page_size).offset(@page_size * params[:page].to_i)

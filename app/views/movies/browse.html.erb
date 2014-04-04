@@ -91,6 +91,11 @@
       </div>
     </div>
 
+    <div class="col-md-4">
+      <strong>Genre</strong>
+      <%= select_tag :genre, options_for_select(Genre.all.map {|g| [g.name, g.id]}.uniq.sort), {prompt: "Any", class: 'form-control'} %>
+    </div>
+
   </div>
 
   <div class="row">
@@ -117,6 +122,7 @@
   </div>
   <br>
   <%= submit_tag "Go!", class: "btn pull-right" %>
+  <span class='pull-right'><%= select_tag :sort, options_for_select([['Title', 'title asc'], ['Title (desc)', 'title desc'], ['Release Date', 'release_date asc'], ['Release Date (desc)', 'release_date desc']]), {class: 'form-control'} %></span> 
 
   <% end %>
 
