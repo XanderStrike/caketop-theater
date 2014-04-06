@@ -36,5 +36,5 @@ CaketopTheater::Application.configure do
   config.assets.debug = true
 
   # Don't serve JS twice duh
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 end

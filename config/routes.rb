@@ -20,5 +20,6 @@ CaketopTheater::Application.routes.draw do
   resources :shows
 
   resources :requests
-  # resources :music
+  resources :music
+
 end

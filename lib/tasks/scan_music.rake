@@ -6,16 +6,18 @@ music_directory = "public/music"
 def get_music_info(fp)
   unless fp.include?("iTunes")
     songs = []
-    songpaths = `ls #{Shellwords.escape(fp)}`.split("\n").map {|f| f.insert(0, "#{fp}/")}
+    songpaths = `ls public/#{Shellwords.escape(fp)}`.split("\n").map {|f| f.insert(0, "#{fp}/")}
     songpaths.each do |path|
       if File.directory?(path)
         songs.concat(get_music_info(path))
         next
       end
-      TagLib::FileRef.open(path) do |fileref|
+      TagLib::FileRef.open('public'+path) do |fileref|
+        puts path
         unless fileref.null?
           song = fileref.tag
-          songs << { :filepath => URI.encode(path),
+          songs << {
+            :filepath => URI.encode(path),
             :filename => URI.encode(path.split('/')[-1]),
             :title => song.title,
             :artist => song.artist,
@@ -33,12 +35,14 @@ def get_music_info(fp)
 end
 
 def get_album_art(fp)
-  paths = `ls #{Shellwords.escape(fp)}`.split("\n").map {|f| f.insert(0, "#{fp}/")}
+  paths = `ls public/#{Shellwords.escape(fp)}`.split("\n").map {|f| f.insert(0, "#{fp}/")}
   paths.each do |p|
     if p.end_with?(".jpg", ".png")
-      return (p.split('/public/music/').last) # iTunes can mess this up.
+      puts p
+      return (p) # iTunes can mess this up.
     end
   end
+  return nil
 end
 
 
@@ -53,7 +57,7 @@ def populate(root)
                                                                       art: info[:album_art_path],
                                                                       year: info[:year],
                                                                                     genre: info[:genre])
-      album.save
+      album.save!
       song = album.songs.where(filepath: info[:filepath]).first || album.songs.create(title: info[:title],
                                                                          track: info[:track],
                                                                          filename: info[:filename],
@@ -70,7 +74,7 @@ namespace :scan do
   task :music => :environment do
     puts "Scanning for new music:"
     puts "music direcory: #{music_directory}"
-    filepaths = `ls #{music_directory}`.split("\n").map {|f| f.insert(0, "#{music_directory}/")}
+    filepaths = `ls #{music_directory}`.split("\n").map {|f| f.insert(0, "/music/")}
     puts "found: #{filepaths.length} first: #{filepaths.first}"
     populate(filepaths)
   end
