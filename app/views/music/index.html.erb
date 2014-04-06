@@ -6,9 +6,15 @@
       <h3><%= artist.name %></h3>
       <div class="row">
       <% artist.albums.each do |album| %>
-        <img src="<%= album.art%>">
+          <% if !album.art.nil? %>
+            <div class="col-md-3 col-xs-3">
+              <%= link_to image_tag(album.art, class:'music-thumb'), music_path(album.id), remote: true %>
+            </div>
+            <div id="album-<%= album.id %>"></div>
+          <% end %>
       <% end %>
       </div>
+
     </div>
   <% end %>
 <ul>
@@ -21,6 +27,9 @@
       <li><%= album.name %></li>
       <ul>
         <% album.songs.each do |song| %>
+          <audio controls preload="none">
+            <source src="<%=song.filepath%>">
+          </audio>
           <li><%= song.title %></li>
         <% end %>
       </ul>

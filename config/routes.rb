@@ -24,4 +24,5 @@ CaketopTheater::Application.routes.draw do
 
   resources :feedbacks, only: [:index, :create, :show, :destroy]
   resources :requests, only: [:index, :create, :show, :destroy]
+  resources :music
 end

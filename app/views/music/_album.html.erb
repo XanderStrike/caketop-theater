@@ -1,0 +1,7 @@
+<div class="col-md-8 song-cell">
+  <ul id="playlist">
+    <% album.songs.each do |song| %>
+      <li><%= link_to_function song.title, "changeSong(this, '#{song.filepath}')" %></li>
+    <% end %>
+  </ul>
+</div>

@@ -3,6 +3,10 @@ class MusicController < ApplicationController
     @artists = Artist.all
   end
   def show
-    @artist = Artist.find(params[:id])
+    @album = Album.find(params[:id])
+    respond_to do |format|
+      format.js { render layout: false }
+    end
   end
+
 end
