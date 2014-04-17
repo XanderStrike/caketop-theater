@@ -1,81 +1,58 @@
-require 'taglib'
-require 'shellwords'
+class SongInfo
+  attr_accessor :format, :file_size, :duration, :bitrate, :bitrate_mode, :artist, :album, :title, :track, :composer, :genre, :record_date
 
-music_directory = "public/music"
+  def initialize(filepath)
+    m = Mediainfo.new("public/#{filepath}")
 
-def get_music_info(fp)
-  unless fp.include?("iTunes")
-    songs = []
-    songpaths = `ls public/#{Shellwords.escape(fp)}`.split("\n").map {|f| f.insert(0, "#{fp}/")}
-    songpaths.each do |path|
-      if File.directory?(path)
-        songs.concat(get_music_info(path))
-        next
-      end
-      TagLib::FileRef.open('public'+path) do |fileref|
-        puts path
-        unless fileref.null?
-          song = fileref.tag
-          songs << {
-            :filepath => URI.encode(path),
-            :filename => URI.encode(path.split('/')[-1]),
-            :title => song.title,
-            :artist => song.artist,
-            :album => song.album,
-            :track => song.track,
-            :album_art_path => get_album_art(fp),
-            :year => song.year,
-            :genre => song.genre}
-        end
-      end
-    end
-    return songs
+    @format = m.streams.first.parsed_response[:general]["format"]
+    @file_size = m.streams.first.parsed_response[:general]["file_size"]
+    @duration = m.streams.first.parsed_response[:general]["duration"]
+    @bitrate = m.streams.first.parsed_response[:general]["overall_bit_rate"]
+    @bitrate_mode = m.streams.first.parsed_response[:general]["overall_bit_rate_mode"]
+    @artist = m.streams.first.parsed_response[:general]["performer"]
+    @album = m.streams.first.parsed_response[:general]["album"]
+    @title = m.streams.first.parsed_response[:general]["track_name"]
+    @track = m.streams.first.parsed_response[:general]["track_name_position"]
+    @composer = m.streams.first.parsed_response[:general]["composer"]
+    @genre = m.streams.first.parsed_response[:general]["genre"]
+    @record_date = m.streams.first.parsed_response[:general]["recorded_date"]
   end
-  return []
-end
-
-def get_album_art(fp)
-  paths = `ls public/#{Shellwords.escape(fp)}`.split("\n").map {|f| f.insert(0, "#{fp}/")}
-  paths.each do |p|
-    if p.end_with?(".jpg", ".png")
-      puts p
-      return (p) # iTunes can mess this up.
-    end
-  end
-  return nil
-end
-
-
-def populate(root)
-  puts "Scanning for new music:"
-  root.each do |dir|
-    infos = get_music_info(dir)
-    infos.each do |info|
-      artist = Artist.where(name: info[:artist]).first || Artist.create(name: info[:artist])
-      artist.save!
-      album = artist.albums.where(name: info[:album]).first || artist.albums.create(name: info[:album],
-                                                                      art: info[:album_art_path],
-                                                                      year: info[:year],
-                                                                                    genre: info[:genre])
-      album.save!
-      song = album.songs.where(filepath: info[:filepath]).first || album.songs.create(title: info[:title],
-                                                                         track: info[:track],
-                                                                         filename: info[:filename],
-                                                                               filepath: info[:filepath])
-      song.save!
-      artist.save!
-    end
-  end
-  puts "Done."
 end
 
 namespace :scan do
   desc "Scan for new music in library folder."
   task :music => :environment do
     puts "Scanning for new music:"
-    puts "music direcory: #{music_directory}"
-    filepaths = `ls #{music_directory}`.split("\n").map {|f| f.insert(0, "/music/")}
-    puts "found: #{filepaths.length} first: #{filepaths.first}"
-    populate(filepaths)
+
+    files = `find public/music/ -type f | grep \.mp3$`.split("\n").map {|f| f.gsub('public/', '')}
+    db_files = Song.select(:filename).map(&:filename)
+    new_files = files - db_files
+
+    new_files.each do |f|
+      s = SongInfo.new(f)
+      puts "Adding #{s.title} by #{s.artist} from #{s.album}"
+
+      artist = Artist.where(name: s.artist).first || Artist.create(name: s.artist)
+      artist.save!
+
+      # i don't think this works right
+      filepath = f.split('/')[0...f.split('/').size-1].join('/')
+      album_art = `ls #{"public/#{filepath}".shellescape} | grep #{'\.jpg$\|\.png$\|\.jpeg$'.shellescape}`.split("\n").first
+      puts "#{filepath}/#{album_art}"
+
+      album = artist.albums.where(name: s.album).first || artist.albums.create(
+        name: s.album,
+        year: s.record_date,
+        genre: s.genre,
+        art: (album_art.nil? ? nil : "#{filepath}/#{album_art}")
+        )
+      album.save!
+
+      song = album.songs.where(filename: f).first || album.songs.create(
+        title: s.title,
+        track: s.track,
+        filename: f)
+      song.save!
+    end
   end
 end
