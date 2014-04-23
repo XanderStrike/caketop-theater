@@ -1,20 +1,81 @@
-<h1> Music </h1>
+<div class="row">
+  <div class="col-md-3">
+    <h1> <%= link_to "Music", music_index_path, remote: true %> </h1>
+  </div>
+  <div class="col-md-9">
+    <div style="height:20px"></div>
+    <nav class="navbar navbar-default">
+      <ul class="nav navbar-nav">
+        <li><a href="#" id="back"><span class="glyphicon glyphicon-step-backward"></span></a></li>
+        <li><a href="#" id="play-pause" class="pause"><span id="play-pause-span" class="glyphicon glyphicon-pause"></span></a></li>
+        <li><a href="#" id="forward"><span class="glyphicon glyphicon-step-forward"></span></a></li>
+        <li><a id="now-playing">Nothing playing yet...</a></li>
+        <li><audio id="nav-audio-controls">
+          <source src="" id="nav-audio-source">
+          </audio>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" style="padding-right:10px;">
+        <li><a href="#" onClick="$('#playlist-div').toggle()">Playlist</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
 
-<ul>
-  <% @artists.each do |artist| %>
-    <div class="row">
-      <h3><%= artist.name %></h3>
-      <div class="row">
-      <% artist.albums.each do |album| %>
-        <% if !album.art.nil? %>
-          <div class="col-md-3 col-xs-3">
-            <%= link_to image_tag("/#{album.art}", class:'music-thumb'), music_path(album.id), remote: true %>
-          </div>
-          <div id="album-<%= album.id %>"></div>
-        <% end %>
-      <% end %>
-      </div>
+<div id="playlist-div" style="display:none;">
+  <legend>Playlist</legend>
+  <ul id="playlist">
+  </ul>
+</div>
 
-    </div>
-  <% end %>
-<ul>
+<div id="content">
+  <%= render partial: @partial %>
+</div>
+
+<script>
+  init();
+  function init(){
+
+  $('#nav-audio-controls')[0].addEventListener('ended',function(e){
+    next();
+  });
+  $('#back')[0].onclick = function(){
+    prev();
+  }
+  $("#play-pause")[0].onclick = function(){
+    if ($("#play-pause-span").hasClass("glyphicon-play")) {
+      $("#play-pause-span").addClass("glyphicon-pause").removeClass("glyphicon-play");
+      document.getElementById("nav-audio-controls").play();
+    } else {
+      $("#play-pause-span").addClass("glyphicon-play").removeClass("glyphicon-pause");
+      document.getElementById("nav-audio-controls").pause();
+    }
+  }
+  $('#forward')[0].onclick = function(){
+    next();
+  }
+  }
+
+  function next() {
+    $('.active').next().find('a').click();
+  }
+  function prev() {
+    $('.active').prev().find('a').click();
+  }
+
+  function changeSong(elem, fp) {
+    document.getElementById("nav-audio-source").src=fp;
+    var player = document.getElementById("nav-audio-controls");
+    player.load();
+    player.play();
+    $(elem).parent().addClass('active').siblings().removeClass('active');
+  }
+
+
+  // load more when user hits bottom of page
+$(window).scroll(function () {
+    if ($(document).height() <= $(window).scrollTop() + $(window).height() + 200) {
+        $("#more-link").click();
+    }
+ });
+  </script>

@@ -24,5 +24,7 @@ CaketopTheater::Application.routes.draw do
 
   resources :feedbacks, only: [:index, :create, :show, :destroy]
   resources :requests, only: [:index, :create, :show, :destroy]
+
+  get 'music/artist/:id', to: 'music#artist', as: :music_artist
   resources :music
 end

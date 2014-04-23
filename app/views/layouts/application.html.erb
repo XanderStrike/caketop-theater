@@ -27,11 +27,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <% if request.original_url.include?('music') %>
-              <li><a href="#" id="back"><span class="glyphicon glyphicon-step-backward"></span></a></li>
-                <li><a href="#" id="play-pause" class="pause"><span id="play-pause-span" class="glyphicon glyphicon-pause"></span></a></li>
-                <li><a href="#" id="forward"><span class="glyphicon glyphicon-step-forward"></span></a></li>
-              <% end %>
+              
 
               <li><%= link_to "Home", '/theater' %></li>
 
@@ -79,50 +75,6 @@
   <%= render partial: 'feedbacks/modal' %>
 
 
-  <li><audio id="nav-audio-controls">
-      <source src="" id="nav-audio-source">
-  </audio></li>
-
-
-  <script>
-  init();
-  function init(){
-
-  $('#nav-audio-controls')[0].addEventListener('ended',function(e){
-    next();
-  });
-  $('#back')[0].onclick = function(){
-    prev();
-  }
-  $("#play-pause")[0].onclick = function(){
-    if ($("#play-pause-span").hasClass("glyphicon-play")) {
-      $("#play-pause-span").addClass("glyphicon-pause").removeClass("glyphicon-play");
-      document.getElementById("nav-audio-controls").play();
-    } else {
-      $("#play-pause-span").addClass("glyphicon-play").removeClass("glyphicon-pause");
-      document.getElementById("nav-audio-controls").pause();
-    }
-  }
-  $('#forward')[0].onclick = function(){
-    next();
-  }
-  }
-
-  function next() {
-    $('.active').next().find('a').click();
-  }
-  function prev() {
-    $('.active').prev().find('a').click();
-  }
-
-  function changeSong(elem, fp) {
-    document.getElementById("nav-audio-source").src=fp;
-    var player = document.getElementById("nav-audio-controls");
-    player.load();
-    player.play();
-    $(elem).parent().addClass('active').siblings().removeClass('active');
-  }
-  </script>
 
 </body>
 </html>

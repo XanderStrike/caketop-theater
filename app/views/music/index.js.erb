@@ -1,0 +1,7 @@
+<% if params[:more] == 'true' %>
+  $('#more-link').remove();
+  $('#content').append('<%=j render partial: @partial %>')
+<% else %>
+  window.scrollTo(0,0);
+  $('#content').html('<%=j render partial: @partial %>')
+<% end %>

@@ -1,0 +1,15 @@
+<% unless params[:page].to_i > 1 %><legend>Artists</legend><% end %>
+<% @limited_artists.each_slice(4) do |artist_slice| %>
+  <div class="row">
+    <% artist_slice.each do |artist| %>
+      <div class="col-md-3">
+        <div class='artist-image' style='background:url(<%= artist.image %>)' onClick='$(this).parent().find("a").click();'>
+          <%= artist.name %>
+        </div>
+        <span style="display:none"><%= link_to artist.name, music_artist_path(artist.id), remote: true %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to("Load more...", music_index_path(page: params[:page].to_i+1, more: 'true'), remote: true, id: 'more-link', disable_with: "Loading...") %>
