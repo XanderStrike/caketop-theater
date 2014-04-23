@@ -1,0 +1,52 @@
+<div class="row movie" style="padding-top:20px;">
+  <div class="col-md-3">
+    <%= image_tag @artist.image, style: "width:100%" %>
+  </div>
+  <div class="col-md-9">
+    <legend id="title"><%= @artist.name %></span></legend>
+    <div class="row">
+      <div class="col-md-6">
+        <p><%= @artist.bio.html_safe %></p>
+      </div>
+      <div class="col-md-6">
+        <table class='table'>
+          <tr>
+            <th>Year Formed: </th>
+            <td><%= @artist.year %></td>
+          </tr>
+          <tr>
+            <th>Hometown: </th>
+            <td><%= @artist.home %></td>
+          </tr>
+          <tr>
+            <td>
+              <a href="<%= @artist.url %>"><%= image_tag "button-tmdb.png" %></a>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<legend id="albums">Albums</legend>
+<% @artist.albums.each_slice(4) do |album_slice| %>
+  <div class="row">
+    <% album_slice.each do |album| %>
+      <div class="col-md-3">
+        <div class='artist-image' style='<%= "background:url(/#{URI::encode(album.art)})" unless album.art.blank? %>;background-size: 100%;' onClick='$(this).parent().find("#tracks").toggle();'>
+          <%= album.name %>
+        </div>
+        <div id="tracks" style="display:none;">
+          <a href="#albums">Play All</a>
+          <ul>
+            <% album.songs.order('track asc').each do |s| %>
+              <li><a href="#albums"><%= s.track %>: <%= s.title %></a></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
