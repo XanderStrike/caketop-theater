@@ -35,14 +35,14 @@
   <div class="row">
     <% album_slice.each do |album| %>
       <div class="col-md-3">
-        <div class='artist-image' style='<%= "background:url(/#{URI::encode(album.art)})" unless album.art.blank? %>;background-size: 100%;' onClick='$(this).parent().find("#tracks").toggle();'>
+        <div class='album-image' style='<%= "background:url(/#{URI::encode(album.art)})" unless album.art.blank? %>;background-size: 100%;' onClick='$(this).parent().find("#tracks").toggle();'>
           <%= album.name %>
         </div>
         <div id="tracks" style="display:none;">
           <a href="#albums">Play All</a>
           <ul>
             <% album.songs.order('track asc').each do |s| %>
-              <li><a href="#albums"><%= s.track %>: <%= s.title %></a></li>
+              <li><a filename="<%= s.filename %>" artist="<%= s.album.artist.name %>" album="<%= s.album.name %>" title="<%= s.title %>" onClick="add(this)"><%= s.track %>: <%= s.title %></a></li>
             <% end %>
           </ul>
         </div>
