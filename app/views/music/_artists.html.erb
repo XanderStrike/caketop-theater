@@ -1,4 +1,5 @@
-<% unless params[:page].to_i > 1 %><legend>Artists</legend><% end %>
+<% unless params[:page].to_i > 1 %>
+<legend>Artists </legend><% end %>
 <% @limited_artists.each_slice(4) do |artist_slice| %>
   <div class="row">
     <% artist_slice.each do |artist| %>
@@ -12,4 +13,4 @@
   </div>
 <% end %>
 
-<%= link_to("Load more...", music_index_path(page: params[:page].to_i+1, more: 'true'), remote: true, id: 'more-link', disable_with: "Loading...") %>
+<%= link_to("Load more...", music_index_path(page: params[:page].to_i+1, more: 'true', artist: params[:artist]), remote: true, id: 'more-link', disable_with: "Loading...") %>
