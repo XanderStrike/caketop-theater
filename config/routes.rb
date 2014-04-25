@@ -10,6 +10,8 @@ CaketopTheater::Application.routes.draw do
 
 
 
+
+
   post 'movies/search'
   get 'movies/shuffle'
   post 'movies/browse'
@@ -25,6 +27,14 @@ CaketopTheater::Application.routes.draw do
   resources :feedbacks, only: [:index, :create, :show, :destroy]
   resources :requests, only: [:index, :create, :show, :destroy]
 
+<<<<<<< HEAD
   get 'music/artist/:id', to: 'music#artist', as: :music_artist
   resources :music
+=======
+  resources :requests
+
+  get 'music/artist/:id', to: 'music#artist', as: :music_artist
+  resources :music
+
+>>>>>>> 94ab1f4014027554908e6a16b1d1646396290c59
 end
