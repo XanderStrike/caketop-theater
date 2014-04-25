@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= Setting.get(:name).content %></title>
+  <title>Caketop Theater</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
   <div id="wrap">
     <div class="container">
 
@@ -20,13 +21,15 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><%= Setting.get(:name).content %></a>
+            <a class="navbar-brand" href="#">CAKETOP THEATER</a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Home", root_path %></li>
+              
+
+              <li><%= link_to "Home", '/theater' %></li>
 
               <li class="divider"></li>
               <li><%= link_to "Films", movies_path %></li>
@@ -51,6 +54,9 @@
                 <% end %>
               </li>
               <% end %>
+
+              <li class="divider"></li>
+              <li><%= link_to "Music", music_index_path %></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -62,11 +68,12 @@
   </div>
 
   <div id="footer">
-    <p style="padding:0px 10px 10px 0px;">Not affiliated with Westmont College. <a href="https://github.com/XanderStrike/movie-browser/">Github</a>. <a href="#" data-toggle="modal" data-target="#request-modal">Request</a>. <a href="#" data-toggle="modal" data-target="#feedback-modal">Feedback</a>. <%= link_to "About", about_path %>.</p>
+    <p style="padding:0px 10px 10px 0px;">Not affiliated with Westmont College. <a href="https://github.com/XanderStrike/movie-browser/">Github</a>. <a href="#" data-toggle="modal" data-target="#request-modal">Request</a>. <%= link_to "About", about_path %>.</p>
   </div>
 
   <%= render partial: 'requests/modal' %>
-  <%= render partial: 'feedbacks/modal' %>
+
+
 
 </body>
 </html>

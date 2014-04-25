@@ -1,6 +1,7 @@
 *.db
 public/movies
 public/tv
+public/music
 tmp
 *~
 #*#
