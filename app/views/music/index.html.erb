@@ -22,7 +22,7 @@
     </nav>
     <div id="playlist-div" style="display:none;" class="well">
   <legend>Playlist</legend>
-  <ul id="playlist">
+  <ul id="playlist" class='tracklist'>
   </ul>
 <audio autoplay="autoplay" id="nav-audio-controls">  
   <source src="" id="nav-audio-source">
@@ -31,8 +31,6 @@
 </div>
   </div>
 </div>
-
-
 
 <div id="content">
   <%= render partial: @partial %>
@@ -102,9 +100,9 @@
   }
 
   // load more when user hits bottom of page
-$(window).scroll(function () {
-    if ($(document).height() <= $(window).scrollTop() + $(window).height() + 200) {
-        $("#more-link").click();
-    }
- });
+  $(window).scroll(function () {
+      if ($(document).height() <= $(window).scrollTop() + $(window).height() + 200) {
+          $("#more-link").click();
+      }
+   });
   </script>
