@@ -4,7 +4,7 @@
   <div class="row">
     <% artist_slice.each do |artist| %>
       <div class="col-md-3">
-        <div class='artist-image' style='background:url(<%= artist.image %>)' onClick='$(this).parent().find("a").click();'>
+        <div class='artist-image' style='<%= "background:url(#{artist.image})" unless artist.image.blank? %>' onClick='$(this).parent().find("a").click();'>
           <%= artist.name %>
         </div>
         <span style="display:none"><%= link_to artist.name, music_artist_path(artist.id), remote: true %>

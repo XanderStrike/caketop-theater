@@ -16,10 +16,9 @@
       <%= link_to image_tag('icon_1895.svg', width: '100%'), movies_path %>
     </div>
     <div class="col-md-4">
-      <%= image_tag 'icon_2013.svg', width: '100%'  %>
+      <%= link_to image_tag('icon_2013.svg', width: '100%'), music_index_path  %>
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-4">
       <h2>Television</h2>
@@ -29,7 +28,6 @@
       </div>
       <% end %>
     </div>
-
     <div class="col-md-4">
       <h2>Films</h2>
       <%= form_tag(movies_search_path, role: 'search') do %>
