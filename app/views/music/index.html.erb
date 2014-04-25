@@ -1,9 +1,7 @@
 <div class="row">
   <div class="col-md-3">
     <h1> <%= link_to "Music", music_index_path, remote: true %> </h1>
-    <%= form_tag music_index_path, method: :get, remote: true do %>
-      <input type="text" class="form-control" placeholder="Filter Artists" name="artist">
-    <% end %>
+    <p>d(--)b</p>
   </div>
   <div class="col-md-9">
     <div style="height:20px"></div>
@@ -21,14 +19,16 @@
       </ul>
     </nav>
     <div id="playlist-div" style="display:none;" class="well">
-  <legend>Playlist</legend>
-  <ul id="playlist" class='tracklist'>
-  </ul>
-<audio autoplay="autoplay" id="nav-audio-controls">  
-  <source src="" id="nav-audio-source">
-
-</audio> 
-</div>
+      <legend>Playlist</legend>
+      <ul id="playlist" class='tracklist'>
+      </ul>
+      <audio autoplay="autoplay" id="nav-audio-controls">  
+        <source src="" id="nav-audio-source">
+      </audio> 
+    </div>
+    <%= form_tag music_index_path, method: :get, remote: true do %>
+      <input type="text" class="form-control" placeholder="Filter Artists" name="artist">
+    <% end %>
   </div>
 </div>
 
