@@ -64,7 +64,7 @@
   }
 
   function set_song(filename) {
-    $('#nav-audio-source').attr('src', '/dev-theater/' + filename);
+    $('#nav-audio-source').attr('src', filename);
     var player = document.getElementById("nav-audio-controls");
     player.load();
     player.play();
