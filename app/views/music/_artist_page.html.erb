@@ -6,7 +6,7 @@
     <legend id="title"><%= @artist.name %></span></legend>
     <div class="row">
       <div class="col-md-6">
-        <p><%= @artist.bio.html_safe %></p>
+        <p><%= @artist.bio.split("\n")[1..-6].join('<br>').html_safe rescue "No bio available." %></p>
       </div>
       <div class="col-md-6">
         <table class='table'>
@@ -20,7 +20,7 @@
           </tr>
           <tr>
             <td>
-              <a href="<%= @artist.url %>"><%= image_tag "button-tmdb.png" %></a>
+              <a href="<%= @artist.url %>"><%= image_tag "button-lastfm.png" %></a>
             </td>
             <td></td>
           </tr>
