@@ -28,8 +28,10 @@ namespace :scan do
     puts "Movie scan starting..."
     new = false
 
+    formats = ['mp4', 'avi', 'xvid', 'divx', 'mts', 'mpeg', 'mkv', 'wmv', 'ogv', 'webm', 'mov', 'mpg', 'mpe', 'm4v', 'h264', 'avchd']
+
     # get file list
-    files = `find public/movies/ -type f`.split("\n").map {|f| f.gsub('public/movies/', '')}
+    files = `find public/movies/ -type f`.split("\n").map {|f| f.gsub('public/movies/', '') if formats.any? {|w| f =~ /.#{w}/ }}
 
     # populate db
     files.each do |file|
