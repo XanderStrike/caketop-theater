@@ -1,29 +1,41 @@
 movie-browser
 =============
 
-This is a simple rails app I built to allow my media server to make my movie library available over LAN. Eventually, it will behave like Netflix, allowing users to browse the contents of the server by genre/actor/director/studio/year/etc and watch them all through an HTML5 video player.
+This is a simple rails app I built to allow my media server to make my movie library available over LAN. Essentially, it's like a personal netflix, it shares your movie, tv, and music library in an easy to use web interface with an HTML5 player.
 
 [Here is what it looks like.](http://imgur.com/a/5GFME)
 
 installation
 -----
 
-Please use Linux, I've only tested this on Ubuntu 12.04
+Plays best on Ubuntu Server 14.04, your mileage may vary.
 
-Install Apache, Ruby, Rails, and Passenger. Once you've got apache installed (`sudo apt-get install apache2`), you can just use joshfng's [railsready](https://github.com/joshfng/railsready/) script.
+Install apache:
+
+    sudo apt-get install apache2
+    
+Install passenger for Apache (see [this guide for more info](https://rvm.io/integration/passenger)):
+
+    gem install passenger
+    passenger-install-apache2-module
+
+Install prerequisities:
+
+    sudo apt-get install mediainfo libtag1-dev
 
 Clone this repository and prepare the app for production:
 
     git clone https://github.com/XanderStrike/movie-browser.git
     cd movie-browser
-    rake db:migrate
-    rake assets:precompile
+    bundle install
+    RAILS_ENV=production rake db:migrate assets:precompile
 
-Create symbolic links to your movie and tv libraries in the `/public` directory of the app. The symlinks should be named "movies" and "tv":
+Create symbolic links to your movie and tv libraries in the `/public` directory of the app. The symlinks should be named "movies" and "tv" and "music":
 
     cd /path/to/movie-browser/public
-    ln -s /media/bigdrive/movies movies
-    ln -s /media/bigdrive/tv tv
+    ln -s /media/bigdrive/movies
+    ln -s /media/bigdrive/tv
+    ln -s /media/bigdrive/music
 
 Configure apache/passenger appropriately by modifying `/etc/apache2/sites-enabled/000-default` to suit your needs, your setup will almost certainly be different, but this is my configuration for hosting the app on the `/theater` sub-uri:
 
@@ -37,7 +49,7 @@ Configure apache/passenger appropriately by modifying `/etc/apache2/sites-enable
       Options -Multiviews
     </Directory> 
 
-Once you've got the app running, visit `/settings` to populate your settings table with defaults, and you should be good to go!    
+Once you've got the app running, visit `/settings` to populate your settings table with defaults, and you should be good to go!
 
 usage
 -----
@@ -57,7 +69,7 @@ This app uses the 'whenever' gem, you can edit `config/schedule.rb` to determine
 contributing
 ------------
 
-Please do! I'd love to see your pull requests.
+Please do! I'd love to see your pull requests. If you've got a feeature idea, go ahead and submit an issue.
 
 license and attribution
 -----------------------
