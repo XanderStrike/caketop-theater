@@ -14,7 +14,7 @@ class Movie < ActiveRecord::Base
   end
 
   def self.sort_orders
-    [ 
+    [
       ['Title (asc)', 'title asc'],
       ['Title (desc)', 'title desc'],
       ['Release Date (asc)', 'release_date asc'],

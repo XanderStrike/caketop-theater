@@ -97,8 +97,15 @@
     </div>
 
   </div>
+  <table class="table">
+    <tr>
+      <th>Name</th><th>text</th>
+    </tr>
+    <% @pages.each do |page| %>
+      <tr>
+        <td><%= page.name %></td>
+        <td><%= page.text %></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
-
-
-
-

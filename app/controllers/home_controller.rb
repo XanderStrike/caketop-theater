@@ -35,10 +35,12 @@ class HomeController < ApplicationController
       @admin_pass.save!
     end
 
+    @pages = Page.first(10)
+
     respond_to do |format|
       format.html
       format.js
-  	end
+    end
   end
 
   protected

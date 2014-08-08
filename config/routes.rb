@@ -1,4 +1,6 @@
 CaketopTheater::Application.routes.draw do
+  get "page/show"
+
   get '/', to: 'home#index'
   get '/theater', to: 'home#index'
   get '/settings', to: 'home#settings'
