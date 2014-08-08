@@ -96,7 +96,6 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.9)
-    taglib-ruby (0.6.0)
     themoviedb (0.0.21)
       httparty (~> 0.11.0)
     thin (1.6.2)
@@ -126,7 +125,6 @@ DEPENDENCIES
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3
-  taglib-ruby
   themoviedb
   thin
   uglifier (>= 1.0.3)
