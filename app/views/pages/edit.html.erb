@@ -1,0 +1,10 @@
+<%= form_for @page do |f| %>
+  <div>
+    <%= f.label :name %>:
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.text_area :text %>
+  </div>
+  <%= f.submit %>
+<% end %>
