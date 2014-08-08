@@ -103,7 +103,7 @@
     </tr>
     <% @pages.each do |page| %>
       <tr>
-        <td><%= page.name %></td>
+        <td><%= link_to page.name, page_show_path(id: page.id) %></td>
         <td><%= page.text %></td>
       </tr>
     <% end %>
