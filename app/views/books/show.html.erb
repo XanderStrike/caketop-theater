@@ -1,0 +1,4 @@
+<% @book.each_page_on_spine do |page| %>
+  <hr>
+  <%= page.read.html_safe %>
+<% end %>
