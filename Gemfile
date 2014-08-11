@@ -29,3 +29,6 @@ gem 'themoviedb'
 gem 'mediainfo'
 
 gem 'whenever'
+
+gem 'therubyracer'
+
