@@ -8,7 +8,7 @@ gem 'thin'
 
 gem 'sqlite3'
 gem 'taglib-ruby'
-
+gem 'yaml_db'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -29,3 +29,6 @@ gem 'themoviedb'
 gem 'mediainfo'
 
 gem 'whenever'
+
+gem 'therubyracer'
+
