@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
 
   def index
+    redirect_to(action: 'settings', first_time: true) if Setting.where(name: 'name').first.nil?
   end
 
   def about
@@ -35,10 +36,12 @@ class HomeController < ApplicationController
       @admin_pass.save!
     end
 
+    @greeting = params[:first_time] ? "Welcome to Caketop" : "Settings"
+
     respond_to do |format|
       format.html
       format.js
-  	end
+    end
   end
 
   protected
