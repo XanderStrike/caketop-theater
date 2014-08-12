@@ -1,6 +1,6 @@
 [![Homepage Image](http://i.imgur.com/mojqDRG.png)](http://imgur.com/a/5GFME)
 
-movie-browser
+caketop-theater
 =============
 
 This is a simple rails app I built to allow my media server to make my movie library available over LAN. Essentially, it's like a personal netflix, it shares your movie, tv, and music library in an easy to use web interface with an HTML5 player.
