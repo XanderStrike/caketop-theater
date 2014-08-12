@@ -13,6 +13,7 @@ class HomeController < ApplicationController
     @name = Setting.where(name: 'name').first || Setting.create(name: 'name', content: 'Caketop Theater')
     @about = Setting.where(name: 'about').first || Setting.create(name: 'about', content: "<h1>About Caketop</h1>\n\nCaketop Theater will make all your dreams come true!")
     @banner = Setting.where(name: 'banner').first || Setting.create(name: 'banner', content: '', boolean: false)
+    @footer = Setting.where(name: 'footer').first || Setting.create(name: 'footer', content: 'Maybe she\'s born with it, maybe it\'s caketop.', boolean: true)
 
     @admin = Setting.where(name: 'admin').first || Setting.create(name: 'admin', content: '', boolean: false)
     @admin_pass = Setting.where(name: 'admin-pass').first || Setting.create(name: 'admin-pass', content: '')
@@ -34,6 +35,10 @@ class HomeController < ApplicationController
       @admin_pass.content = Digest::SHA256.hexdigest(params[:admin_pass])
       @admin.save!
       @admin_pass.save!
+    when 'footer'
+      @footer.content = params[:footer_text]
+      @footer.boolean = (params[:footer_display] == 'true')
+      @footer.save
     end
 
     respond_to do |format|
