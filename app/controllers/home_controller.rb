@@ -3,20 +3,19 @@ class HomeController < ApplicationController
 
 
   def index
-    redirect_to(action: 'settings', first_time: true) if Setting.where(name: 'name').first.nil?
   end
 
   def about
   end
 
   def settings
-    @name = Setting.where(name: 'name').first || Setting.create(name: 'name', content: 'Caketop Theater', boolean: true)
-    @about = Setting.where(name: 'about').first || Setting.create(name: 'about', content: "<h1>About Caketop</h1>\n\nCaketop Theater will make all your dreams come true!", boolean: true)
-    @banner = Setting.where(name: 'banner').first || Setting.create(name: 'banner', content: '', boolean: false)
-    @footer = Setting.where(name: 'footer').first || Setting.create(name: 'footer', content: 'Maybe she\'s born with it, maybe it\'s caketop.', boolean: true)
+    @name = Setting.get(:name) || Setting.create(name: 'name', content: 'Caketop Theater', boolean: true)
+    @about = Setting.get(:about) || Setting.create(name: 'about', content: "<h1>About Caketop</h1>\n\nCaketop Theater will make all your dreams come true!", boolean: true)
+    @banner = Setting.get(:banner) || Setting.create(name: 'banner', content: '', boolean: false)
+    @footer = Setting.get(:footer) || Setting.create(name: 'footer', content: 'Maybe she\'s born with it, maybe it\'s caketop.', boolean: true)
 
-    @admin = Setting.where(name: 'admin').first || Setting.create(name: 'admin', content: '', boolean: false)
-    @admin_pass = Setting.where(name: 'admin-pass').first || Setting.create(name: 'admin-pass', content: '')
+    @admin = Setting.get(:admin) || Setting.create(name: 'admin', content: '', boolean: false)
+    @admin_pass = Setting.get('admin-pass') || Setting.create(name: 'admin-pass', content: '')
 
     case params[:setting]
     when 'name'
@@ -49,7 +48,7 @@ class HomeController < ApplicationController
 
   protected
   def authenticate
-    setting = Setting.where(name: 'admin').first
+    setting = Setting.get(:admin)
     if (!(setting.nil?) && setting.boolean)
       authenticate_or_request_with_http_basic do |username, password|
         username == setting.content && Digest::SHA256.hexdigest(password) == Setting.where(name: 'admin-pass').first.content
