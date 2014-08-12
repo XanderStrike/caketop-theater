@@ -1,3 +1,5 @@
+[![Homepage Image](http://i.imgur.com/mojqDRG.png)](http://imgur.com/a/5GFME)
+
 movie-browser
 =============
 
