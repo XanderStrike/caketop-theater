@@ -36,8 +36,6 @@ class HomeController < ApplicationController
       @admin_pass.save!
     end
 
-    @greeting = params[:first_time] ? "Welcome to Caketop" : "Settings"
-
     respond_to do |format|
       format.html
       format.js
