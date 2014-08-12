@@ -10,6 +10,10 @@ installation
 
 Plays best on Ubuntu Server 14.04, your mileage may vary.
 
+Install Ruby on Rails via [RVM](http://rvm.io/):
+
+    \curl -sSL https://get.rvm.io | bash -s stable --ruby --rails
+
 Install apache:
 
     sudo apt-get install apache2
@@ -58,18 +62,19 @@ Once you're installed and running populate your DB by running the rake scan task
 
     rake scan:movies
     rake scan:tv
+    rake scan:music
     
-These will take time, but once they're done you will be able to see your library when you visit the application.
+The first time it will take a while, but once they're done you will be able to see your library when you visit the application.
 
 automated scanning
 ------------------
 
-This app uses the 'whenever' gem, you can edit `config/schedule.rb` to determine how often you want to run scans, and simply run `whenever` in the app directory to get the lines you need to copy and paste into your cron.
+This app uses the 'whenever' gem to handle your crontab, you can edit `config/schedule.rb` to determine how often you want to run scans, and simply run `whenever` in the app directory to get the lines you need to copy and paste into your cron. This step is highly recommended, especially if you're using something like CouchPotato's renamer to manage your movie folder.
 
 contributing
 ------------
 
-Please do! I'd love to see your pull requests. If you've got a feeature idea, go ahead and submit an issue.
+Please do! I'd love to see your pull requests. Check the issues if you'd like some ideas. If you've got a feeature idea, feel free to submit an issue.
 
 license and attribution
 -----------------------
