@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Caketop Theater</title>
+  <title><%= Setting.render(:name) %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -21,7 +21,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CAKETOP THEATER</a>
+            <a class="navbar-brand" href="#"><%= Setting.render(:name).upcase %></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
