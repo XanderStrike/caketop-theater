@@ -5,11 +5,11 @@ public/music
 tmp
 *~
 #*#
-app/assets/images/posters/*.jpg
-app/assets/images/posters/*.png
+public/posters/*.jpg
+public/posters/*.png
 
-app/assets/images/backdrops/*.jpg
-app/assets/images/backdrops/*.png
+public/backdrops/*.jpg
+public/backdrops/*.png
 
 public/assets/*
 

@@ -4,10 +4,10 @@ class Show < ActiveRecord::Base
   has_many :genres
 
   def poster
-    "posters/tv_#{self.id}.jpg"
+    "/posters/tv_#{self.id}.jpg"
   end
 
   def backdrop
-    "backdrops/tv_#{self.id}.jpg"
+    "/backdrops/tv_#{self.id}.jpg"
   end
 end
