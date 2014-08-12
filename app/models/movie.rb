@@ -6,11 +6,11 @@ class Movie < ActiveRecord::Base
   has_many :encodes
 
   def poster
-    "posters/#{self.id}.jpg"
+    "/posters/#{self.id}.jpg"
   end
 
   def backdrop
-    "backdrops/#{self.id}.jpg"
+    "/backdrops/#{self.id}.jpg"
   end
 
   def self.sort_orders

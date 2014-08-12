@@ -5,13 +5,6 @@ def get_info(id)
   Tmdb::Movie.detail(id)
 end
 
-def search_tv_title(title)
-  Tmdb::TV.find(title)
-end
-def get_tv_info(id)
-  Tmdb::TV.detail(id)
-end
-
 def clean_title(title)
   title = title.split("/").last.split(/[\s\.]/)
   title.size.times do |x|
@@ -26,7 +19,6 @@ namespace :scan do
   desc "Scans for changes in the movie library folder."
   task :movies => :environment do
     puts "Movie scan starting..."
-    new = false
 
     formats = ['mp4', 'avi', 'xvid', 'divx', 'mts', 'mpeg', 'mkv', 'wmv', 'ogv', 'webm', 'mov', 'mpg', 'mpe', 'm4v', 'h264', 'avchd']
 
@@ -47,15 +39,12 @@ namespace :scan do
         next
       end
 
-      # we've found a new movie, so we're gonna have to restart the server
-      new = true
-
       # get extended info
       info = get_info(movie.id)
 
       # download backdrop and poster
-      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./app/assets/images/posters/#{info.id}.jpg -b -q`
-      `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./app/assets/images/backdrops/#{info.id}.jpg -b -q`
+      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/posters/#{info.id}.jpg -b -q`
+      `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/backdrops/#{info.id}.jpg -b -q`
 
       # insert into db
       puts "Adding #{ file }\n    as #{ movie.title }"
@@ -121,54 +110,5 @@ namespace :scan do
     end
 
     puts "Movie scan complete."
-
-    `touch tmp/restart.txt` if new
-  end
-
-  desc "Scans for changes in the TV library folder."
-  task :tv => :environment do
-    puts "Scanning for new tv shows:"
-
-    files = `ls public/tv `.split("\n").map {|f| f.gsub("public/tv/", "")}
-    p files
-
-    files.each do |file|
-      show = search_tv_title(file).first
-
-      if show.nil?
-        puts "Error: Title for '#{file}' not found, skipping."
-        next
-      end
-
-      next if Show.where(id: show.id).count > 0
-
-      # insert into db
-      puts "Adding #{ file }\n    as #{ show.name }"
-      info = get_tv_info(show.id)
-      Show.create(backdrop_path: info.backdrop_path,
-                  id: info.id,
-                  original_name:  info.original_name,
-                  first_air_date:  info.first_air_date,
-                  poster_path:  info.poster_path,
-                  popularity:  info.popularity,
-                  name:  info.name,
-                  vote_average:  info.vote_average,
-                  vote_count:  info.vote_count,
-                  overview:  info.overview,
-                  folder:  file)
-
-      # populate genres table (unless it already is)
-      unless Genre.where(movie_id: show.id).count > 0
-        info.genres.each do |g|
-          Genre.create(id: g['id'], name: g['name'], movie_id: show.id)
-        end
-      end
-
-      # download images
-      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./app/assets/images/posters/tv_#{info.id}.jpg -b -q`
-      `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./app/assets/images/backdrops/tv_#{info.id}.jpg -b -q`
-    end
-
-    puts "TV scan complete."
-  end
+ end
 end
