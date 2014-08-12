@@ -10,8 +10,8 @@ class HomeController < ApplicationController
   end
 
   def settings
-    @name = Setting.where(name: 'name').first || Setting.create(name: 'name', content: 'Caketop Theater')
-    @about = Setting.where(name: 'about').first || Setting.create(name: 'about', content: "<h1>About Caketop</h1>\n\nCaketop Theater will make all your dreams come true!")
+    @name = Setting.where(name: 'name').first || Setting.create(name: 'name', content: 'Caketop Theater', boolean: true)
+    @about = Setting.where(name: 'about').first || Setting.create(name: 'about', content: "<h1>About Caketop</h1>\n\nCaketop Theater will make all your dreams come true!", boolean: true)
     @banner = Setting.where(name: 'banner').first || Setting.create(name: 'banner', content: '', boolean: false)
     @footer = Setting.where(name: 'footer').first || Setting.create(name: 'footer', content: 'Maybe she\'s born with it, maybe it\'s caketop.', boolean: true)
 

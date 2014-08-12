@@ -68,9 +68,7 @@
   </div>
 
   <div id="footer">
-    <% if Setting.get(:footer).boolean %>
-      <%= Setting.get(:footer).content.html_safe %>
-    <% end %>
+    <%= Setting.render(:footer) %>
 
     <a href="https://github.com/XanderStrike/movie-browser/">Github</a>. <a href="#" data-toggle="modal" data-target="#request-modal">Request</a>. <%= link_to "About", about_path %>. <%= link_to "Settings", settings_path %>.</p>
   </div>
