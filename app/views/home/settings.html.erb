@@ -1,10 +1,13 @@
-<div class="jumbotron">
-  <h1><%= @greeting %></h1>
-  <p>Take me to my movies!</p>
-  <%= button_to 'Okay', root_url, class: 'btn btn-primary btn-lg' %>
-</div>
+<% if params[:first_time] == 'true' %>
+  <div class="jumbotron">
+    <h1>Welcome to Caketop!</h1>
+    <p>Your settings have been populated with defaults, if you want to change anything now is the time!</p>
+    <%= button_to "I don't care, show me the movies!", root_url, class: 'btn btn-primary btn-lg' %>
+  </div>
+<% end %>
 
 <div class="row">
+  <h1>Settings</h1>
   <div class="col-md-6">
 
     <legend>Site Name</legend>
@@ -100,5 +103,28 @@
       <p>This text will appear on the <%= link_to 'home page', root_url %> above the title, front and center! It's useful for announcements and general information for your users. HTML is totally acceptable in this field, so go nuts.</p>
     </div>
 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <legend>Footer Text</legend>
+    <%= form_tag settings_path, remote: true do %>
+      <%= hidden_field_tag :setting, :footer %>
+      <div class="row">
+        <div class="col-md-9">
+          <%= text_area_tag :footer_text, @footer.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
+          <table class="table">
+            <tr>
+              <td><label><%= radio_button_tag :footer_display, true, @footer.boolean %> Show</label></td>
+              <td><label><%= radio_button_tag :footer_display, false, !@footer.boolean %> Hide</label></td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-3">
+          <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="footer"></span>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

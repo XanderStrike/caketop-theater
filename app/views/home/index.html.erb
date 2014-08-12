@@ -1,12 +1,8 @@
 <div class="jumbotron" style="text-align:center;background-color:#fff">
 
-  <% if Setting.get(:banner).boolean %>
-    <div class="well">
-      <%= Setting.get(:banner).content.html_safe %>
-    </div>
-  <% end %>
+  <%= Setting.render(:banner) %>
 
-  <h1><%= Setting.get(:name).content %></h1>
+  <h1><%= Setting.render(:name) %></h1>
   <p>Chose your adventure...</p>
   <div class="row">
     <div class="col-md-4">
