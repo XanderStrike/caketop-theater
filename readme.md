@@ -31,26 +31,26 @@ Install prerequisities:
 
 Clone this repository and prepare the app for production:
 
-    git clone https://github.com/XanderStrike/movie-browser.git
-    cd movie-browser
+    git clone https://github.com/XanderStrike/caketop-theater.git
+    cd caketop-theater
     bundle install
     RAILS_ENV=production rake db:migrate assets:precompile
 
 Create symbolic links to your movie and tv libraries in the `/public` directory of the app. The symlinks should be named "movies" and "tv" and "music":
 
-    cd /path/to/movie-browser/public
+    cd /path/to/caketop-theater/public
     ln -s /media/bigdrive/movies
     ln -s /media/bigdrive/tv
     ln -s /media/bigdrive/music
 
 Configure apache/passenger appropriately by modifying `/etc/apache2/sites-enabled/000-default` to suit your needs, your setup will almost certainly be different, but this is my configuration for hosting the app on the `/theater` sub-uri:
 
-    Alias /theater /home/xander/movie-browser/public
+    Alias /theater /home/xander/caketop-theater/public
     <location /theater>
       PassengerBaseURI /theater
-      PassengerAppRoot /home/xander/movie-browser
+      PassengerAppRoot /home/xander/caketop-theater
     </location>
-    <Directory /home/xander/movie-browser/public>
+    <Directory /home/xander/caketop-theater/public>
       Allow from all
       Options -Multiviews
     </Directory> 
