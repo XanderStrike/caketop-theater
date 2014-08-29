@@ -75,7 +75,13 @@
   <div id="footer">
     <%= Setting.render(:footer) %>
 
-    <a href="https://github.com/XanderStrike/movie-browser/">Github</a>. <a href="#" data-toggle="modal" data-target="#request-modal">Request</a>. <%= link_to "About", about_path %>. <%= link_to "Settings", settings_path %>.</p>
+    <a href="https://github.com/XanderStrike/movie-browser/">Github</a>. <%= link_to "About", about_path %>. <%= link_to "Settings", settings_path %>.
+
+    <% Page.footer.each do |page| %>
+      <%= link_to page.name, page %>.
+    <% end %>
+
+    </p>
   </div>
 
   <%= render partial: 'requests/modal' %>

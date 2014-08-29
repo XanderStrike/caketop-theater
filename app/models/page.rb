@@ -3,6 +3,7 @@ class Page < ActiveRecord::Base
   before_save :convert_markdown
 
   scope :navbar, -> { where(navbar: true) }
+  scope :footer, -> { where(footer: true) }
 
   private
 
