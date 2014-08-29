@@ -1,10 +1,11 @@
 <%= form_for @page do |f| %>
   <div>
     <%= f.label :name %>:
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
   <div>
-    <%= f.text_area :text %>
+    <%= f.text_area :text, class: 'form-control' %>
+    Contents of this field will be styled with <a href='http://daringfireball.net/projects/markdown/'>markdown</a>.
   </div>
   <div>
     <label>Show in navbar? <%= f.check_box :navbar %></label>
