@@ -25,4 +25,10 @@ class PagesController < ApplicationController
 
     redirect_to settings_path
   end
+
+  def destroy
+    Page.find(params[:id]).destroy
+    redirect_to settings_path
+    
+  end
 end

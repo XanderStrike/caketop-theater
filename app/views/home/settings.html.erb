@@ -142,6 +142,7 @@
           <tr>
             <td><%= link_to page.name, page_path(id: page.id) %></td>
             <td><%= link_to 'Edit', edit_page_path(id: page.id) %></td>
+            <td><%= link_to 'Delete', page, method: :delete %></td>
           </tr>
         <% end %>
       </tbody>
