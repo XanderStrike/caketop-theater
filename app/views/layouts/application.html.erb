@@ -57,6 +57,11 @@
 
               <li class="divider"></li>
               <li><%= link_to "Music", music_index_path %></li>
+
+              <li class="divider"></li>
+              <% Page.navbar.each do |page| %>
+                <li><%= link_to page.name, page %></li>
+              <% end %>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

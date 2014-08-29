@@ -6,5 +6,9 @@
   <div>
     <%= f.text_area :text %>
   </div>
+  <div>
+    <label>Show in navbar? <%= f.check_box :navbar %></label>
+    <label>Show in footer? <%= f.check_box :footer %></label>
+  </div>
   <%= f.submit %>
 <% end %>

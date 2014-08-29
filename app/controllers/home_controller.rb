@@ -40,7 +40,7 @@ class HomeController < ApplicationController
       @footer.save
     end
 
-    @pages = Page.first(10)
+    @pages = Page.all
 
     respond_to do |format|
       format.html

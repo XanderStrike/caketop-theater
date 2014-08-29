@@ -99,9 +99,13 @@ ActiveRecord::Schema.define(:version => 20140807232206) do
     t.text     "text"
     t.text     "content"
     t.string   "name"
+    t.boolean  "navbar"
+    t.boolean  "footer"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "pages", ["name"], :name => "index_pages_on_name", :unique => true
 
   create_table "requests", :force => true do |t|
     t.string   "name"
