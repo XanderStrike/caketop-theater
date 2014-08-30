@@ -145,3 +145,8 @@ a {
 .tracklist li a:hover {
   text-decoration:none;
 }
+
+.page-container {
+  margin: 0 auto auto;
+  max-width: 750px;
+}
