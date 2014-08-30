@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140422212556) do
+ActiveRecord::Schema.define(:version => 20140807232206) do
 
   create_table "albums", :force => true do |t|
     t.integer  "artist_id"
@@ -94,6 +94,18 @@ ActiveRecord::Schema.define(:version => 20140422212556) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
+
+  create_table "pages", :force => true do |t|
+    t.text     "text"
+    t.text     "content"
+    t.string   "name"
+    t.boolean  "navbar"
+    t.boolean  "footer"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "pages", ["name"], :name => "index_pages_on_name", :unique => true
 
   create_table "requests", :force => true do |t|
     t.string   "name"

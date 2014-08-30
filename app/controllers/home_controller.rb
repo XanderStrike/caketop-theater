@@ -40,6 +40,8 @@ class HomeController < ApplicationController
       @footer.save
     end
 
+    @pages = Page.all
+
     respond_to do |format|
       format.html
       format.js
