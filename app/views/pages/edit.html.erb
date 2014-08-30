@@ -1,15 +1,36 @@
-<%= form_for @page do |f| %>
-  <div>
-    <%= f.label :name %>:
-    <%= f.text_field :name, class: 'form-control' %>
+<div class='column'>
+  <div class="col-md-6">
+    <h1>Create a Page</h1>
+    <%= form_for @page do |f| %>
+      <div>
+        <%= f.label :name %>:
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.text_area :text, class: 'form-control' %>
+        Contents of this field will be styled with <a href='http://daringfireball.net/projects/markdown/'>markdown</a>.
+      </div>
+      <div>
+        <label>Show in navbar? <%= f.check_box :navbar %></label>
+        <label>Show in footer? <%= f.check_box :footer %></label>
+      </div>
+      <%= f.submit class: 'btn btn-success' %>
+    <% end %>
   </div>
-  <div>
-    <%= f.text_area :text, class: 'form-control' %>
-    Contents of this field will be styled with <a href='http://daringfireball.net/projects/markdown/'>markdown</a>.
+  <div class='col-md-6'>
+    <h1>Preview</h1>
+    <div id='preview'>
+
+    </div>
   </div>
-  <div>
-    <label>Show in navbar? <%= f.check_box :navbar %></label>
-    <label>Show in footer? <%= f.check_box :footer %></label>
-  </div>
-  <%= f.submit class: 'btn btn-success' %>
-<% end %>
+</div>
+
+<script>
+  $('#page_text').keyup(updatePreview);
+
+  function updatePreview() {
+    $('#preview').html(markdown.toHTML($('#page_text').val()));
+  }
+
+  updatePreview();
+</script>
