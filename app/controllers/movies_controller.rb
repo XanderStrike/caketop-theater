@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     @movie = Movie.find(params[:id])
-    @comments = @movie.comments.order('created_at asc').limit(20)
+    @comments = Comment.order(:id).page(params[:page]).per(3)
 
     respond_to do |format|
       format.html # show.html.erb
