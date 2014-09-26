@@ -59,3 +59,13 @@
     <%= f.submit 'Submit', class: 'btn' %>
   <% end %>
 </div>
+
+<script>
+  $('#comment_body').keyup(updatePreview);
+
+  function updatePreview() {
+    $('#preview').html(markdown.toHTML($('#comment_body').val()));
+  }
+
+  updatePreview();
+</script>
