@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
 
   def index
+    @comments = Comment.where(movie_id: 0).order('id desc').page(params[:page])
   end
 
   def about

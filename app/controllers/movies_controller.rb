@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
     @new = Movie.order('added desc').limit(12)
-    @discussed = Comment.order('id desc').limit(20).map(&:movie).uniq[0..5]
+    @discussed = Comment.where("movie_id > ?", 0).order('id desc').limit(20).map(&:movie).uniq[0..5]
     @random = Movie.order('random()').limit(6)
 
     respond_to do |format|
