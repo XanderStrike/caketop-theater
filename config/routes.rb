@@ -1,4 +1,5 @@
 CaketopTheater::Application.routes.draw do
+  resources :comments, only: [:index, :create]
   resources :pages
 
   get '/', to: 'home#index'

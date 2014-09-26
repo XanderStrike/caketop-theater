@@ -2,6 +2,10 @@
 
 <%= render partial: 'movies/grid', locals: {movies: @new, title: 'New Additions', link: link_to('Browse All', movies_browse_path)} %>
 
+<%= render partial: 'movies/grid', locals: {movies: @discussed, title: 'Being Discussed', link: nil} %>
+
 <div id="random">
   <%= render partial: 'movies/grid', locals: {movies: @random, title: 'Random Selection', link: link_to('Shuffle', movies_shuffle_path, remote: true)} %>
+
+
 </div>

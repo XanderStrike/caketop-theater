@@ -106,8 +106,33 @@
   </div>
 </div>
 
+<div id="comment-block">
+<%= render partial: 'comments/comment_block' %>
+</div>
+
+<div id="post-comment">
+  <legend>Post a Comment</legend>
+  <%= form_for Comment.new do |f| %>
+    <%= f.hidden_field :movie_id, value: @movie.id %>
+    <%= f.text_field :name, placeholder: 'Name', class: 'form-control' %><br>
+    Flavored with <a href='http://daringfireball.net/projects/markdown/'>markdown</a>.
+    <%= f.text_area :body, placeholder: 'This movie is aweful because...', class: 'form-control', rows:'10', required: true %><br>
+
+    <div class="well" id="preview"></div>
+    <%= f.submit 'Submit', class: 'btn' %>
+  <% end %>
+</div>
+
 <script>
   function switch_local_player() {
     $('.vid-container').html("<embed src='/theater/movies/<%= @movie.encodes.first.filename %>' autoplay=true width='100%' height='100%'></embed>");
   }
+
+  $('#comment_body').keyup(updatePreview);
+
+  function updatePreview() {
+    $('#preview').html(markdown.toHTML($('#comment_body').val()));
+  }
+
+  updatePreview();
 </script>

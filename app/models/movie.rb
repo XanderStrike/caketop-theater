@@ -5,6 +5,8 @@ class Movie < ActiveRecord::Base
 
   has_many :encodes
 
+  has_many :comments
+
   def poster
     "/posters/#{self.id}.jpg"
   end
