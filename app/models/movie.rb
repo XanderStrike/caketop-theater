@@ -26,7 +26,9 @@ class Movie < ActiveRecord::Base
       ['TMDB Rating (asc)', 'vote_average asc'],
       ['TMDB Rating (desc)', 'vote_average desc'],
       ['Revenue (asc)', 'revenue asc'],
-      ['Revenue (desc)', 'revenue desc']
+      ['Revenue (desc)', 'revenue desc'],
+      ['Added (asc)', 'added asc'],
+      ['Added (desc)', 'added desc']
     ]
 
   end
