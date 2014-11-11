@@ -76,7 +76,7 @@ This app uses the 'whenever' gem to handle your crontab, you can edit `config/sc
 contributing
 ------------
 
-Please do! I'd love to see your pull requests. Check the issues if you'd like some ideas. If you've got a feeature idea, feel free to submit an issue.
+Please do! I'd love to see your pull requests. Check the issues if you'd like some ideas. If you've got a feature idea, feel free to submit an issue.
 
 license and attribution
 -----------------------
