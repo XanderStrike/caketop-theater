@@ -17,5 +17,11 @@ FactoryGirl.define do
     status "Released"
     sequence(:vote_average) {|n| n/10.0}
     sequence(:vote_count) {|n| n*10}
+
+    after(:create) do |movie|
+      3.times do
+        create(:genre, movie: movie)
+      end
+    end
   end
 end

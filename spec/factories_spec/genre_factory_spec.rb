@@ -1,19 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe 'Movie Factory', type: :factory do
+RSpec.describe 'Genre Factory', type: :factory do
   include FactoryGirl::Syntax::Methods
 
-  describe "movie" do
+  describe "genre" do
     it 'has all the attributes from the model' do
-      expect(attributes_for(:movie)).to include(*(factory_attributes(Movie)))
+      expect(attributes_for(:genre)).to include(*(factory_attributes(Genre) - [:movie_id]))
     end
 
     it 'produces a valid model' do
-      expect(build(:movie)).to be_valid
-    end
-
-    it 'has genres' do
-      expect(create(:movie).genres.count).to eq(3)
+      expect(build(:genre)).to be_valid
     end
   end
 
