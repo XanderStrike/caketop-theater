@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:budget) {|n| n * 10000}
     sequence(:id) {|n| n + 1000}
     sequence(:imdb_id) {|n| n * 1234}
-    sequence(:original_title) {|n| "Movie #{n}"} # pretty sure this is how they picked the title for Movie 43
+    sequence(:original_title) {|n| "Movie #{n}"}
     sequence(:title) {|n| "Movie #{n}"} # pretty sure this is how they picked the title for Movie 43
     sequence(:overview) {|n| "You'll have to see Movie #{n} to believe it!"}
     sequence(:tagline) {|n| "You'll have to see Movie #{n} to believe it!"}
