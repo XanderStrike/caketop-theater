@@ -15,6 +15,10 @@ RSpec.describe 'Movie Factory', type: :factory do
     it 'has genres' do
       expect(create(:movie).genres.count).to eq(3)
     end
+
+    it 'has encodes' do
+      expect(create(:movie).encodes.count).to eq(2)
+    end
   end
 
   def factory_attributes(klass)

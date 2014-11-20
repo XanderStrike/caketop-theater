@@ -22,6 +22,10 @@ FactoryGirl.define do
       3.times do
         create(:genre, movie: movie)
       end
+
+      2.times do
+        create(:encode, movie: movie)
+      end
     end
   end
 end
