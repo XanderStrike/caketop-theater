@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Accounts Factory', type: :factory do
+RSpec.describe 'Album Factory', type: :factory do
   include FactoryGirl::Syntax::Methods
 
   describe 'album' do
