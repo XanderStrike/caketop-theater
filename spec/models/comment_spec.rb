@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Comment, :type => :model do
-  describe '#body_html' do
-    it 'should return the body of the comment in markdown-parsed html' do
-      comment = build(:comment)
-      expect(comment.body_html).to eq("<p>I love this movie!</p>\n")
+  describe 'callbacks' do
+    it 'should parse text with markdown and put it in contents on save' do
+      comment = create(:comment)
+      expect(comment.content).to_not eq(nil)
     end
   end
 end

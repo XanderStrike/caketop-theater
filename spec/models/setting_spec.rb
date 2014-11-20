@@ -19,7 +19,7 @@ RSpec.describe Setting, :type => :model do
     end
 
     context 'with boolean set to false' do
-      it 'should render the contents' do
+      it 'should not render the contents' do
         setting = Setting.new(name: 'testsetting', boolean: false, content: 'content')
         setting.save
         expect(Setting.render('testsetting')).to eq('')
