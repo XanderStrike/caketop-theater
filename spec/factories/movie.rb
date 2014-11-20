@@ -19,20 +19,13 @@ FactoryGirl.define do
     sequence(:vote_count) {|n| n*10}
 
     after(:create) do |movie|
-      3.times do
-        create(:genre, movie: movie)
-      end
-
-      2.times do
-        create(:encode, movie: movie)
-      end
+      create_list(:genre, 3, movie: movie)
+      create_list(:encode, 2, movie: movie)
     end
 
     factory :movie_with_comments do
       after(:create) do |movie|
-        50.times do
-          create(:comment, movie: movie)
-        end
+        create_list(:comment, 50, movie: movie)
       end
     end
   end
