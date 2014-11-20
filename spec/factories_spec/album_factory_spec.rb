@@ -24,10 +24,4 @@ RSpec.describe 'Accounts Factory', type: :factory do
       expect(album.songs.count).to eq(10)
     end
   end
-
-  private
-
-  def factory_attributes(klass)
-    klass.attribute_names.map(&:to_sym) - [:id, :created_at, :updated_at]
-  end
 end

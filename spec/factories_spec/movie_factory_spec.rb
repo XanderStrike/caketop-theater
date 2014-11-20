@@ -20,8 +20,4 @@ RSpec.describe 'Movie Factory', type: :factory do
       expect(create(:movie).encodes.count).to eq(2)
     end
   end
-
-  def factory_attributes(klass)
-    klass.attribute_names.map(&:to_sym) - [:id, :created_at, :updated_at]
-  end
 end

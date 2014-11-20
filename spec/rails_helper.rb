@@ -38,3 +38,7 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+def factory_attributes(klass)
+  klass.attribute_names.map(&:to_sym) - [:id, :created_at, :updated_at]
+end

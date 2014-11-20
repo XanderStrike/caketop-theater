@@ -12,8 +12,4 @@ RSpec.describe 'Encode Factory', type: :factory do
       expect(build(:encode)).to be_valid
     end
   end
-
-  def factory_attributes(klass)
-    klass.attribute_names.map(&:to_sym) - [:id, :created_at, :updated_at]
-  end
 end

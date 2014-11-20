@@ -34,8 +34,4 @@ RSpec.describe 'Artist Factory', type: :factory do
   it 'produces a valid model' do
     expect(build(:artist)).to be_valid
   end
-
-  def factory_attributes(klass)
-    klass.attribute_names.map(&:to_sym) - [:id, :created_at, :updated_at]
-  end
 end
