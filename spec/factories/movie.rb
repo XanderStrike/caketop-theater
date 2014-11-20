@@ -27,5 +27,13 @@ FactoryGirl.define do
         create(:encode, movie: movie)
       end
     end
+
+    factory :movie_with_comments do
+      after(:create) do |movie|
+        50.times do
+          create(:comment, movie: movie)
+        end
+      end
+    end
   end
 end

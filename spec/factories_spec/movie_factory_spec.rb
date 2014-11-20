@@ -20,4 +20,10 @@ RSpec.describe 'Movie Factory', type: :factory do
       expect(create(:movie).encodes.count).to eq(2)
     end
   end
+
+  describe "movie_with_comments" do
+    it "has some comments" do
+      expect(create(:movie_with_comments).comments.count).to eq(50)
+    end
+  end
 end
