@@ -5,7 +5,7 @@ RSpec.describe 'Comment Factory', type: :factory do
 
   describe "comment" do
     it 'has all the attributes from the model' do
-      expect(attributes_for(:comment)).to include(*(factory_attributes(Comment) - [:movie_id]))
+      expect(attributes_for(:comment)).to include(*(factory_attributes(Comment) - [:movie_id, :content]))
     end
 
     it 'produces a valid model' do
