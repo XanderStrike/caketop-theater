@@ -14,4 +14,13 @@ RSpec.describe Movie, :type => :model do
       expect(movie.backdrop).to eq("/backdrops/#{movie.id}.jpg")
     end
   end
+
+  describe '#watch' do
+    it 'should add one to the movies watches' do
+      movie = build(:movie)
+      count = movie.watches
+      movie.watch
+      expect(movie.watches).to eq(count + 1)
+    end
+  end
 end
