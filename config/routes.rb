@@ -14,6 +14,7 @@ CaketopTheater::Application.routes.draw do
   get 'movies/shuffle'
   post 'movies/browse'
   get 'movies/browse'
+  get 'movies/watch/:id', to: 'movies#watch'
   resources :movies
 
   post 'encodes/find_movie'
