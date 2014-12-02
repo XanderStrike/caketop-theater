@@ -43,3 +43,13 @@ end
 def factory_attributes(klass)
   klass.attribute_names.map(&:to_sym) - [:id, :created_at, :updated_at]
 end
+
+def create_settings
+  create(:setting, name: 'name', content: 'Caketop Theater', boolean: true)
+  create(:setting, name: 'about', content: '<h1>About</h1>', boolean: true)
+  create(:setting, name: 'banner', content: '', boolean: false)
+  create(:setting, name: 'footer', content: 'This is the footer.', boolean: false)
+  
+  create(:setting, name: 'admin', content: '', boolean: false)
+  create(:setting, name: 'admin-pass', content: '', boolean: false)
+end
