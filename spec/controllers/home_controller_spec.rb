@@ -64,6 +64,28 @@ RSpec.describe HomeController, type: :controller do
       expect(Setting.get('name').content).to eq('A New Name')
     end
 
-    
+    it "updates the about page" do
+      post :settings, setting: 'about', about_text: 'A new about page'
+      expect(Setting.get('about').content).to eq('A new about page')
+    end
+
+    it "updates the banner" do
+      post :settings, setting: 'banner', banner_text: 'A new banner', banner_display: 'true'
+      expect(Setting.get('banner').content).to eq('A new banner')
+      expect(Setting.get('banner').boolean).to be_truthy
+    end
+
+    it "updates the footer" do
+      post :settings, setting: 'footer', footer_text: 'A new footer', footer_display: 'true'
+      expect(Setting.get('footer').content).to eq('A new footer')
+      expect(Setting.get('footer').boolean).to be_truthy
+    end
+
+    it "updates the admin account" do
+      post :settings, setting: 'admin', admin_username: 'xanderstrike', protect: 'true', admin_pass: 'password'
+      expect(Setting.get('admin').content).to eq('xanderstrike')
+      expect(Setting.get('admin').boolean).to be_truthy
+      expect(Setting.get('admin-pass').content).to eq(Digest::SHA256.hexdigest('password'))
+    end
   end
 end
