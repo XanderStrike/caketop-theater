@@ -1,5 +1,5 @@
 class Movie < ActiveRecord::Base
-  attr_accessible :added, :backdrop_path, :budget, :filename, :id, :imdb_id, :original_title, :overview, :popularity, :poster_path, :release_date, :revenue, :runtime, :status, :tagline, :title, :vote_average, :vote_count
+  attr_accessible :added, :backdrop_path, :budget, :id, :imdb_id, :original_title, :overview, :popularity, :poster_path, :release_date, :revenue, :runtime, :status, :tagline, :title, :vote_average, :vote_count, :watches
 
   has_many :genres
 
@@ -32,4 +32,9 @@ class Movie < ActiveRecord::Base
     ]
 
   end
+
+  def watch
+    self.update_attributes(watches: self.watches + 1)
+  end
+
 end

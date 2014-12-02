@@ -14,6 +14,7 @@ CaketopTheater::Application.routes.draw do
   get 'movies/shuffle'
   post 'movies/browse'
   get 'movies/browse'
+  get 'movies/watch/:id', to: 'movies#watch'
   resources :movies
 
   post 'encodes/find_movie'
@@ -21,8 +22,6 @@ CaketopTheater::Application.routes.draw do
 
   post 'shows/search'
   resources :shows
-
-  resources :requests
 
   get 'music/artist/:id', to: 'music#artist', as: :music_artist
   resources :music

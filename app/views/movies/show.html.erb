@@ -2,7 +2,7 @@
 
 <div class="vid-container" style="background: url(<%= asset_path @movie.backdrop %>);background-size:cover;">
   <video id="player" poster="<%= asset_path 'transparent.png' %>" controls>
-  <source src="/theater/movies/<%= @movie.encodes.first.filename %>">
+  <source src="/movies/<%= @movie.encodes.first.filename %>">
   </video>
 </div>
 <p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "/theater/movies/#{ @movie.encodes.first.filename }" %>.</p>
@@ -20,6 +20,10 @@
       <div class="col-md-6">
         <table class='table'>
           <tr>
+            <th>Watched: </th>
+            <td><%= @movie.watches %> times</td>
+          </tr>
+          <tr>
             <th>Release Date: </th>
             <td><%= @movie.release_date %></td>
           </tr>
@@ -29,7 +33,7 @@
           </tr>
           <tr>
             <th>Runtime: </th>
-            <td><%= @movie.runtime %></td>
+            <td><%= @movie.runtime %> minutes</td>
           </tr>
           <tr>
             <th>Genre: </th>
@@ -135,4 +139,16 @@
   }
 
   updatePreview();
+
+  var video = document.getElementsByTagName('video')[0];
+  function check_if_played() {
+    console.log("checking...");
+    if (video.currentTime > (video.duration / 2)) {
+      $.ajax("watch/<%= @movie.id %>");
+      console.log("marked as seen");
+      clearInterval(checker);
+    }
+  }
+
+  var checker = window.setInterval(check_if_played, 10000);
 </script>

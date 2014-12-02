@@ -77,4 +77,9 @@ class MoviesController < ApplicationController
   def shuffle
     @random = Movie.order('random()').limit(6)
   end
+
+  def watch
+    Movie.find(params[:id]).watch
+    render nothing: true
+  end
 end

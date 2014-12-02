@@ -3,7 +3,6 @@ class CreateSongs < ActiveRecord::Migration
     create_table :songs do |t|
       t.belongs_to :album
       t.string :title
-      t.string :filepath
       t.string :filename
       t.integer :track
 

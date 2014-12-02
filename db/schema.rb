@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140926220108) do
+ActiveRecord::Schema.define(:version => 20141202001524) do
 
   create_table "albums", :force => true do |t|
     t.integer  "artist_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20140926220108) do
     t.string   "movie_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "content"
   end
 
   create_table "encodes", :force => true do |t|
@@ -62,15 +63,6 @@ ActiveRecord::Schema.define(:version => 20140926220108) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.text     "filename"
-  end
-
-  create_table "feedbacks", :force => true do |t|
-    t.string   "name"
-    t.string   "content"
-    t.string   "path"
-    t.string   "ip"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "genres", :id => false, :force => true do |t|
@@ -97,10 +89,10 @@ ActiveRecord::Schema.define(:version => 20140926220108) do
     t.string   "title"
     t.float    "vote_average",   :limit => 255
     t.integer  "vote_count",     :limit => 255
-    t.string   "filename"
     t.string   "added"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.integer  "watches",                       :default => 0
   end
 
   create_table "pages", :force => true do |t|
@@ -114,15 +106,6 @@ ActiveRecord::Schema.define(:version => 20140926220108) do
   end
 
   add_index "pages", ["name"], :name => "index_pages_on_name", :unique => true
-
-  create_table "requests", :force => true do |t|
-    t.string   "name"
-    t.string   "desc"
-    t.string   "link"
-    t.string   "ip"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "settings", :force => true do |t|
     t.string   "name"
@@ -151,7 +134,6 @@ ActiveRecord::Schema.define(:version => 20140926220108) do
   create_table "songs", :force => true do |t|
     t.integer  "album_id"
     t.string   "title"
-    t.string   "filepath"
     t.string   "filename"
     t.integer  "track"
     t.datetime "created_at", :null => false
