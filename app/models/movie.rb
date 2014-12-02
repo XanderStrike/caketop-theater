@@ -39,4 +39,8 @@ class Movie < ActiveRecord::Base
     self.update_attributes(watches: self.watches + 1)
   end
 
+  def filename
+    self.encodes.first.filename
+  end
+
 end
