@@ -28,7 +28,9 @@ class Movie < ActiveRecord::Base
       ['Revenue (asc)', 'revenue asc'],
       ['Revenue (desc)', 'revenue desc'],
       ['Added (asc)', 'added asc'],
-      ['Added (desc)', 'added desc']
+      ['Added (desc)', 'added desc'],
+      ['Watches (asc)', 'watches asc'],
+      ['Watches (desc)', 'watches desc']
     ]
 
   end
