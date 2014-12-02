@@ -5,7 +5,7 @@
     <% @comments.each do |c| %>
       <tr>
         <td width='20%'><strong><%= c.name.blank? ? 'Human' : c.name %></strong><br>#<%= c.id %></td>
-        <td><%= c.body %></td>
+        <td><%= c.content.html_safe %></td>
       </tr>
     <% end %>
   </tbody>
