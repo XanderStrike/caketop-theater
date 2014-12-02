@@ -88,4 +88,8 @@ RSpec.describe HomeController, type: :controller do
       expect(Setting.get('admin-pass').content).to eq(Digest::SHA256.hexdigest('password'))
     end
   end
+
+  describe ".authenticate" do
+    
+  end
 end
