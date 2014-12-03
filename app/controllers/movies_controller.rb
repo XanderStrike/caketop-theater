@@ -5,7 +5,11 @@ class MoviesController < ApplicationController
     @movies = Movie.all
     @new = Movie.order('added desc').limit(12)
     @discussed = Comment.where("movie_id > ?", 0).order('id desc').limit(20).map(&:movie).uniq[0..5]
-    @viewed = Movie.where("watches > ?", 0).order("watches desc").limit(6)
+
+    @viewed = View.where("created_at >= ?", Time.now - 1.day)
+                    .group(:movie_id).count.sort {|a,b| b[1] <=> a[1]}.map {|a| a[0]}.first(6)
+                    .map {|id| Movie.find(id)}
+    
     @random = Movie.order('random()').limit(6)
 
     respond_to do |format|

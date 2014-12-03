@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141202001524) do
+ActiveRecord::Schema.define(:version => 20141203054218) do
 
   create_table "albums", :force => true do |t|
     t.integer  "artist_id"
@@ -90,9 +90,8 @@ ActiveRecord::Schema.define(:version => 20141202001524) do
     t.float    "vote_average",   :limit => 255
     t.integer  "vote_count",     :limit => 255
     t.string   "added"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-    t.integer  "watches",                       :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "pages", :force => true do |t|
@@ -136,6 +135,12 @@ ActiveRecord::Schema.define(:version => 20141202001524) do
     t.string   "title"
     t.string   "filename"
     t.integer  "track"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "views", :force => true do |t|
+    t.integer  "movie_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
