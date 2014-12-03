@@ -7,6 +7,8 @@ class Movie < ActiveRecord::Base
 
   has_many :comments
 
+  has_many :views
+
   def poster
     "/posters/#{self.id}.jpg"
   end
@@ -36,7 +38,7 @@ class Movie < ActiveRecord::Base
   end
 
   def watch
-    self.update_attributes(watches: self.watches + 1)
+    self.views.create
   end
 
   def filename
