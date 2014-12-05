@@ -19,7 +19,7 @@ Install Ruby on Rails via [RVM](http://rvm.io/):
 Install apache:
 
     sudo apt-get install apache2
-    
+
 Install passenger for Apache (see [this guide for more info](https://rvm.io/integration/passenger)):
 
     gem install passenger
@@ -33,6 +33,7 @@ Clone this repository and prepare the app for production:
 
     git clone https://github.com/XanderStrike/caketop-theater.git
     cd caketop-theater
+    <package-manager> install taglib
     bundle install
     RAILS_ENV=production rake db:migrate assets:precompile
 
@@ -53,7 +54,7 @@ Configure apache/passenger appropriately by modifying `/etc/apache2/sites-enable
     <Directory /home/xander/caketop-theater/public>
       Allow from all
       Options -Multiviews
-    </Directory> 
+    </Directory>
 
 Once you've got the app running, visit `/settings` to populate your settings table with defaults, and you should be good to go!
 
@@ -65,7 +66,7 @@ Once you're installed and running populate your DB by running the rake scan task
     rake scan:movies
     rake scan:tv
     rake scan:music
-    
+
 The first time it will take a while, but once they're done you will be able to see your library when you visit the application.
 
 automated scanning
