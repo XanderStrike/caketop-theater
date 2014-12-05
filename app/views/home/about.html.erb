@@ -1,1 +1,6 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
+<%= bar_chart @top_movies %>
+<%= line_chart @views_by_day %>
+
 <%= Setting.render(:about) %>

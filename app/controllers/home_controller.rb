@@ -12,6 +12,12 @@ class HomeController < ApplicationController
   end
 
   def about
+    @top_movies   = View.group(:movie_id).count.sort_by { |_key, value| value }.reverse.first(10)
+    @views_by_day = View.where('created_at > ?', 1.week.ago).group_by { |u|
+      u.created_at.beginning_of_day
+    }.reduce({}) { |h, (k,v)|
+      h[k] = v.size; h
+    }
   end
 
   def settings
