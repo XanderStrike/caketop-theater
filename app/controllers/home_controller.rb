@@ -13,8 +13,8 @@ class HomeController < ApplicationController
 
   def charts
     @top_movies   = View.group(:movie_id).count.map { |id, val|
-      movie = Movie.find_by_id(id) || Struct.new(:name).new("Life Of Brian #{rand(10)}")
-      [movie.name, val]
+      movie = Movie.find_by_id(id) || Struct.new(:title).new("Life Of Brian #{rand(10)}")
+      [movie.title, val]
     }
     @views_by_day = View.where('created_at > ?', 1.week.ago).group_by { |u|
       u.created_at.beginning_of_day
