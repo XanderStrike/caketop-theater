@@ -11,13 +11,24 @@ class HomeController < ApplicationController
     end
   end
 
-  def about
-    @top_movies   = View.group(:movie_id).count.sort_by { |_key, value| value }.reverse.first(10)
+  def charts
+    @top_movies   = View.group(:movie_id).count.map { |id, val|
+      movie = Movie.find_by_id(id) || Struct.new(:name).new("Life Of Brian #{rand(10)}")
+      [movie.name, val]
+    }
     @views_by_day = View.where('created_at > ?', 1.week.ago).group_by { |u|
       u.created_at.beginning_of_day
     }.reduce({}) { |h, (k,v)|
       h[k] = v.size; h
     }
+
+    @genre_views = View.group(:movie_id).count.map { |id, val|
+      movie = Genre.find_by_movie_id(id) || Struct.new(:name).new("Neo Noir #{rand(10)}")
+      [movie.name, val]
+    }
+  end
+
+  def about
   end
 
   def settings
