@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
   before_filter :authenticate, only: :settings
 
+  NilMovie = Struct.new(:title)
+  NilGenre = Struct.new(:name)
 
   def index
     @comments = Comment.where(movie_id: 0).order('id desc').page(params[:page]).per(10)
@@ -13,7 +15,7 @@ class HomeController < ApplicationController
 
   def charts
     @top_movies   = View.group(:movie_id).count.map { |id, val|
-      movie = Movie.find_by_id(id) || Struct.new(:title).new("Life Of Brian #{rand(10)}")
+      movie = Movie.find_by_id(id) || NilMovie.new("Unknown")
       [movie.title, val]
     }
     @views_by_day = View.where('created_at > ?', 1.week.ago).group_by { |u|
@@ -23,7 +25,7 @@ class HomeController < ApplicationController
     }
 
     @genre_views = View.group(:movie_id).count.map { |id, val|
-      movie = Genre.find_by_movie_id(id) || Struct.new(:name).new("Neo Noir #{rand(10)}")
+      movie = Genre.find_by_movie_id(id) || NilGenre.new("Unknown")
       [movie.name, val]
     }
   end
