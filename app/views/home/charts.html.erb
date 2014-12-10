@@ -2,19 +2,52 @@
 
 <h1>Statistics</h1>
 <legend></legend>
+<div class='row'>
+  <div class='col-md-4'>
+    <h3>Movies: <%= Movie.count %></h3>
+  </div>
+  <div class='col-md-4'>
+    <h3>Shows: <%= Show.count %></h3>
+  </div>
+  <div class='col-md-4'>
+    <h3>Songs: <%= Song.count %></h3>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-4'>
+    <h3>Hours of Video: <%= Movie.sum(:runtime) / 60 %></h3>
+  </div>
+  <div class='col-md-4'>
+    <h3>Views: <%= View.count %></h3>
+  </div>
+  <div class='col-md-4'>
+    <h3>Comments: <%= Comment.count %></h3>
+  </div>
+</div>
+
+<br><br>
 
 <h2>Top 20 Most Viewed Movies</h2>
-<legend><i>Feeling Mainstream? I know you are.</i></legend>
-<%= column_chart @top_movies %>
-
-<h2>Total views by day</h2>
-<legend><i>People watching movies and stuffs</i></legend>
-<%= line_chart @views_by_day %>
+<legend><i>Feeling mainstream? I know you are.</i></legend>
+<%= column_chart @top_movies, {library: {hAxis: {title: "Movie"}, vAxis: {title: "Views"}}} %>
 
 <h2>Popular Genres</h2>
-<legend><i>watching <b>another</b> comedy? really?</i></legend>
-<%= column_chart @genre_views %>
+<legend><i>Watching <b>another</b> <%= @genre_views[0][0].downcase %> movie? Really?</i></legend>
+<%= column_chart @genre_views, {library: {hAxis: {title: "Genre"}, vAxis: {title: "Views"}}} %>
+
+<h2>Views This Week</h2>
+<legend><i>How many hours have you wasted in the last 7 days?</i></legend>
+<%= line_chart @views_by_day, {library: {hAxis: {title: "Day"}, vAxis: {title: "Views"}}} %>
 
 <h2>Views by Hour of the Day</h2>
 <legend><i>You should be working.</i></legend>
-<%= column_chart @views_by_hour %>
+<%= column_chart @views_by_hour, {library: {hAxis: {title: "Hour"}, vAxis: {title: "Views"}}} %>
+
+<h2>Views by Day of Week</h2>
+<legend><i>Friday night movie night!</i></legend>
+<%= column_chart @views_by_day_of_week, {library: {hAxis: {title: "Day of Week"}, vAxis: {title: "Views"}}} %>
+
+<h2>Number of Movies Per Genre</h2>
+<legend><i>Who even likes sports movies?</i></legend>
+<%= pie_chart @movies_per_genre %>

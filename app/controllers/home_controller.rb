@@ -26,8 +26,11 @@ class HomeController < ApplicationController
     }
 
     @views_by_hour = View.where('').group_by(&:hour).map { |k, views| [k.to_i, views.count]}.sort
+    @views_by_day_of_week = View.where('').group_by(&:day_of_week).sort.map { |k, views| [Date::DAYNAMES[k.to_i], views.count]}
 
     @genre_views = View.joins("JOIN genres ON genres.movie_id = views.movie_id").select("*").group("genres.name").count.sort { |a,b| b[1] <=> a[1] }
+
+    @movies_per_genre = Genre.where('').group_by(&:name).map { |n, gs| [n, gs.count] }.sort {|a,b| b[1] <=> a[1]}
   end
 
   def about
