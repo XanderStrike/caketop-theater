@@ -1,12 +1,20 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
 <h1>Statistics</h1>
 <legend></legend>
-<h2>Top 10 Movies</h2>
+
+<h2>Top 20 Most Viewed Movies</h2>
 <legend><i>Feeling Mainstream? I know you are.</i></legend>
 <%= column_chart @top_movies %>
+
 <h2>Total views by day</h2>
 <legend><i>People watching movies and stuffs</i></legend>
 <%= line_chart @views_by_day %>
+
 <h2>Popular Genres</h2>
 <legend><i>watching <b>another</b> comedy? really?</i></legend>
 <%= column_chart @genre_views %>
+
+<h2>Views by Hour of the Day</h2>
+<legend><i>You should be working.</i></legend>
+<%= column_chart @views_by_hour %>

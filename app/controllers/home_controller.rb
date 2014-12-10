@@ -14,10 +14,11 @@ class HomeController < ApplicationController
   end
 
   def charts
-    @top_movies   = View.group(:movie_id).count.map { |id, val|
+    @top_movies = View.group(:movie_id).count.sort {|a,b| b[1] <=> a[1]}[0..19].map { |id, val|
       movie = Movie.find_by_id(id) || NilMovie.new("Unknown")
       [movie.title, val]
     }
+
     @views_by_day = View.where('created_at > ?', 1.week.ago).group_by { |u|
       u.created_at.beginning_of_day
     }.reduce({}) { |h, (k,v)|
@@ -28,6 +29,8 @@ class HomeController < ApplicationController
       movie = Genre.find_by_movie_id(id) || NilGenre.new("Unknown")
       [movie.name, val]
     }
+
+    @views_by_hour = View.where('').group_by(&:hour).map { |k, views| [k.to_i, views.count]}.sort
   end
 
   def about
