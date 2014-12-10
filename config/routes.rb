@@ -7,6 +7,7 @@ CaketopTheater::Application.routes.draw do
   get '/settings', to: 'home#settings'
   post '/settings', to: 'home#settings'
   get '/about', to: 'home#about'
+  get '/stats', to: 'home#charts'
 
   resources :genres
 
