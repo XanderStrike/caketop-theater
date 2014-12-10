@@ -24,10 +24,7 @@ class HomeController < ApplicationController
       h[k] = v.size; h
     }
 
-    @genre_views = View.group(:movie_id).count.map { |id, val|
-      movie = Genre.find_by_movie_id(id) || NilGenre.new("Unknown")
-      [movie.name, val]
-    }
+    @genre_views = View.joins("JOIN genres ON genres.movie_id = views.movie_id").select("*").group("genres.name").count.sort { |a,b| b[1] <=> a[1] }
   end
 
   def about
