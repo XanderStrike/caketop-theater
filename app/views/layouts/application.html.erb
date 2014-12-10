@@ -82,7 +82,7 @@
       <%= link_to page.name, page %>.
     <% end %>
 
-    <a href="/stats">Stats</a>
+    <%= link_to 'Stats', controller: :home, action: :charts  %>
     </p>
   </div>
 
