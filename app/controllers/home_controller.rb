@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     }
 
     @views_by_day = View.where('created_at > ?', 1.week.ago).group_by { |u|
-      u.created_at.beginning_of_day
+      u.created_at.localtime.beginning_of_day
     }.reduce({}) { |h, (k,v)|
       h[k] = v.size; h
     }
