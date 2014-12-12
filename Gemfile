@@ -10,9 +10,9 @@ gem 'sqlite3'
 gem 'redcarpet'
 gem 'taglib-ruby'
 gem 'yaml_db'
-gem "chartkick"
+gem 'chartkick'
+gem 'searchkick'
 gem 'kaminari'
-
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
