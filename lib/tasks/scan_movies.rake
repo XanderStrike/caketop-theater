@@ -22,9 +22,15 @@ namespace :scan do
 
     formats = ['mp4', 'avi', 'xvid', 'divx', 'mts', 'mpeg', 'mkv', 'wmv', 'ogv', 'webm', 'mov', 'mpg', 'mpe', 'm4v', 'h264', 'avchd']
 
+
+
     # get file list
-    files = `find public/movies/ -type f`.split("\n").map {|f| f.gsub('public/movies/', '')}
-    files = files.reject {|f| !formats.any? {|w| f =~ /#{w}/ }}
+    movie_dirs = Settings.where(name: 'Movie-dir')
+    files = movie_dirs.map { |movie_dir|
+      `find #{movie_dirs["content"]} -type f`.split("\n").map {|f|
+        f.gsub('public/movies/', '') if formats.ay? { |w| f =~ /#{w}/ }
+      }.compact
+    }
 
     # populate db
     files.each do |file|
@@ -79,22 +85,22 @@ namespace :scan do
       # get encode info
       mediainfo = Mediainfo.new "public/movies/#{file}"
       Encode.create(
-              movie_id: info.id, 
+              movie_id: info.id,
               filename: file,
-              a_bitrate: mediainfo.audio[0].bit_rate, 
-              a_format: mediainfo.audio[0].format_info, 
-              a_stream_size: mediainfo.audio[0].stream_size, 
-              aspect_ratio: mediainfo.video[0].display_aspect_ratio, 
-              container: mediainfo.general.format, 
-              duration: mediainfo.general.duration_before_type_cast, 
-              framerate: mediainfo.video[0].frame_rate, 
-              resolution: mediainfo.video[0].width, 
-              rip_date: mediainfo.encoded_date, 
-              size: mediainfo.size, 
-              v_bitrate: mediainfo.video[0].bit_rate, 
-              v_codec: mediainfo.video[0].codec_id, 
-              v_format: mediainfo.video[0].format, 
-              v_profile: mediainfo.video[0].format_profile, 
+              a_bitrate: mediainfo.audio[0].bit_rate,
+              a_format: mediainfo.audio[0].format_info,
+              a_stream_size: mediainfo.audio[0].stream_size,
+              aspect_ratio: mediainfo.video[0].display_aspect_ratio,
+              container: mediainfo.general.format,
+              duration: mediainfo.general.duration_before_type_cast,
+              framerate: mediainfo.video[0].frame_rate,
+              resolution: mediainfo.video[0].width,
+              rip_date: mediainfo.encoded_date,
+              size: mediainfo.size,
+              v_bitrate: mediainfo.video[0].bit_rate,
+              v_codec: mediainfo.video[0].codec_id,
+              v_format: mediainfo.video[0].format,
+              v_profile: mediainfo.video[0].format_profile,
               v_stream_size: mediainfo.video[0].stream_size)
     end
 

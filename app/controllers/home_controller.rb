@@ -45,6 +45,9 @@ class HomeController < ApplicationController
     @admin = Setting.get(:admin) || Setting.create(name: 'admin', content: '', boolean: false)
     @admin_pass = Setting.get('admin-pass') || Setting.create(name: 'admin-pass', content: '')
 
+    movie_dirs = Setting.where(name: 'movie-dir')
+    @movie_dirs = movie_dirs.count > 0 ? Setting.where(name: 'movie-dir') : [Setting.create(name: 'movie-dir', content: "#{rails.root}/public/movies/")]
+
     case params[:setting]
     when 'name'
       @name.content = params[:name_text]
@@ -66,6 +69,8 @@ class HomeController < ApplicationController
       @footer.content = params[:footer_text]
       @footer.boolean = (params[:footer_display] == 'true')
       @footer.save
+    when 'movie_dir'
+      Setting.create!(name: 'movie-dir', content: params[:movie_dir])
     end
 
     @pages = Page.all
