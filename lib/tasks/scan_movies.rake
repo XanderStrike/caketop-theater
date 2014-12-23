@@ -28,7 +28,7 @@ namespace :scan do
     movie_dirs = Settings.where(name: 'Movie-dir')
     files = movie_dirs.map { |movie_dir|
       `find #{movie_dirs["content"]} -type f`.split("\n").map {|f|
-        f.gsub('public/movies/', '') if formats.ay? { |w| f =~ /#{w}/ }
+        f if formats.ay? { |w| f =~ /#{w}/ }
       }.compact
     }
 
