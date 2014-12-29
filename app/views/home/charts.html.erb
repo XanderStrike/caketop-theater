@@ -4,25 +4,25 @@
 <legend></legend>
 <div class='row'>
   <div class='col-md-4'>
-    <h3>Movies: <%= Movie.count %></h3>
+    <h3>Movies: <%= format_num(Movie.count) %></h3>
   </div>
   <div class='col-md-4'>
-    <h3>Shows: <%= Show.count %> (<%= @tv_eps %> episodes)</h3>
+    <h3>Shows: <%= format_num(Show.count) %> (<%= format_num(@tv_eps) %> episodes)</h3>
   </div>
   <div class='col-md-4'>
-    <h3>Songs: <%= Song.count %></h3>
+    <h3>Songs: <%= format_num(Song.count) %></h3>
   </div>
 </div>
 
 <div class='row'>
   <div class='col-md-4'>
-    <h3>Hours of Video: <%= Movie.sum(:runtime) / 60 %></h3>
+    <h3>Hours of Video: <%= format_num(Movie.sum(:runtime) / 60) %></h3>
   </div>
   <div class='col-md-4'>
-    <h3>Views: <%= View.count %></h3>
+    <h3>Views: <%= format_num(View.count) %></h3>
   </div>
   <div class='col-md-4'>
-    <h3>Comments: <%= Comment.count %></h3>
+    <h3>Comments: <%= format_num(Comment.count) %></h3>
   </div>
 </div>
 

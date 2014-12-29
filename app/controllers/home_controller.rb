@@ -25,7 +25,7 @@ class HomeController < ApplicationController
       h[k] = v.size; h
     }
 
-    @tv_eps = `find public/tv/* | wc -l`
+    @tv_eps = `find public/tv/* | wc -l`.to_i
 
     @views_by_hour = View.where('').group_by(&:hour).map { |k, views| [k.to_i, views.count]}.sort
     @views_by_day_of_week = View.where('').group_by(&:day_of_week).sort.map { |k, views| [Date::DAYNAMES[k.to_i], views.count]}
