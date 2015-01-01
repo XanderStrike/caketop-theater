@@ -74,6 +74,13 @@ automated scanning
 
 This app uses the 'whenever' gem to handle your crontab, you can edit `config/schedule.rb` to determine how often you want to run scans, and simply run `whenever` in the app directory to get the lines you need to copy and paste into your cron. This step is highly recommended, especially if you're using something like CouchPotato's renamer to manage your movie folder.
 
+automated conversion
+--------------------
+
+Many media formats aren't compatible with HTML5. You can automatically convert your movie library with `rake convert:movies`. The first time could take days depending on how big your media library is, so it's best to run it in a screen.
+
+Right now it's destructive, it overwrites the existing movie, so be aware.
+
 contributing
 ------------
 
