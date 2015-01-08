@@ -14,6 +14,16 @@ class Episode
   end
 
   def convert
+    if @audio && @video
+      `avconv -i "public/tv/#{@show}/#{@season}/#{@filename}" -strict experimental "public/tv/#{@show}/#{@season}/#{@filename}.mp4"`
+      `rm "public/tv/#{@show}/#{@season}/#{@filename}"`
+    elsif @audio
+      `avconv -i "public/tv/#{@show}/#{@season}/#{@filename}" -c:v copy -strict experimental "public/tv/#{@show}/#{@season}/#{@filename}.mp4"`
+      `rm "public/tv/#{@show}/#{@season}/#{@filename}"`
+    elsif @video
+      `avconv -i "public/tv/#{@show}/#{@season}/#{@filename}" -c:a copy -strict experimental "public/tv/#{@show}/#{@season}/#{@filename}.mp4"`
+      `rm "public/tv/#{@show}/#{@season}/#{@filename}"`
+    end
   end
 end
 
@@ -36,9 +46,8 @@ namespace :convert do
         episodes = `ls "public/tv/#{show}/#{season}"`.split("\n")
         
         episodes.each do |ep|
-          info = Mediainfo.new "public/tv/#{show}/#{season}/#{ep}"
-
           begin
+            info = Mediainfo.new "public/tv/#{show}/#{season}/#{ep}"
             if (info.audio[0].format_info != 'Advanced Audio Codec') || (info.video[0].codec_id != 'avc1')
               ep = Episode.new(show,
                           season,
@@ -56,5 +65,7 @@ namespace :convert do
 
     puts "Found #{eps_needing_conv.count} episodes that need conversion..."
 
+    puts "Starting conversion..."
+    eps_needing_conv.map(&:convert)
   end
 end
