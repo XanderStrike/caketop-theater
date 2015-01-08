@@ -37,14 +37,18 @@ namespace :convert do
         
         episodes.each do |ep|
           info = Mediainfo.new "public/tv/#{show}/#{season}/#{ep}"
-          if (info.audio[0].format_info != 'Advanced Audio Codec') || (info.video[0].codec_id != 'avc1')
-            ep = Episode.new(show,
-                        season,
-                        ep,
-                        (info.audio[0].format_info != 'Advanced Audio Codec'),
-                        (info.video[0].codec_id != 'avc1')
-              )
-            eps_needing_conv << ep
+
+          begin
+            if (info.audio[0].format_info != 'Advanced Audio Codec') || (info.video[0].codec_id != 'avc1')
+              ep = Episode.new(show,
+                          season,
+                          ep,
+                          (info.audio[0].format_info != 'Advanced Audio Codec'),
+                          (info.video[0].codec_id != 'avc1')
+                )
+              eps_needing_conv << ep
+            end
+          rescue
           end
         end
       end
