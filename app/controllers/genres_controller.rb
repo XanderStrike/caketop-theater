@@ -1,7 +1,7 @@
 class GenresController < ApplicationController
   def show
-    @genre = Genre.find(params[:id])
-    @movies = Movie.where(id: Genre.where(id: params[:id]).map(&:movie_id))
+    @genre = Genre.where(id: params[:id]).first
+    @movies = Genre.where(id: params[:id]).map(&:movie)
 
     respond_to do |format|
       format.html # show.html.erb

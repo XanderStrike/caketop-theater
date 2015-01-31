@@ -2,7 +2,7 @@
 
 <div class="vid-container" style="background: url(<%= asset_path @movie.backdrop %>);background-size:cover;">
   <video id="player" poster="<%= asset_path 'transparent.png' %>" controls>
-  <source src="/theater/movies/<%= @movie.encodes.first.filename %>">
+  <source src="/movies/<%= @movie.encodes.first.filename %>">
   </video>
 </div>
 <p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "/theater/movies/#{ @movie.encodes.first.filename }" %>.</p>
@@ -67,12 +67,12 @@
     </div>
     <div id="encode" class="panel-collapse collapse">
       <div class="panel-body">
-       
+
         <% @movie.encodes.each do |encode| %>
           <legend><%= encode.filename %>
           </legend>
             <%= render partial: 'encodes/retag_modal', locals: {encode: encode} %>
-          
+
           <div class="row">
             <div class="col-md-6">
               <h4>File Information</h4>
@@ -104,7 +104,7 @@
             </div>
           </div>
         <% end %>
-        
+
       </div>
     </div>
   </div>
