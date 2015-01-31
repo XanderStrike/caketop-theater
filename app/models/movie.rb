@@ -1,11 +1,13 @@
 class Movie < ActiveRecord::Base
-  attr_accessible :added, :backdrop_path, :budget, :id, :imdb_id, :original_title, :overview, :popularity, :poster_path, :release_date, :revenue, :runtime, :status, :tagline, :title, :vote_average, :vote_count, :watches
+  attr_accessible :added, :backdrop_path, :budget, :id, :imdb_id, :original_title, :overview, :popularity, :poster_path, :release_date, :revenue, :runtime, :status, :tagline, :title, :vote_average, :vote_count
 
   has_many :genres
 
   has_many :encodes
 
   has_many :comments
+
+  has_many :views
 
   def poster
     "/posters/#{self.id}.jpg"
@@ -29,14 +31,12 @@ class Movie < ActiveRecord::Base
       ['Revenue (desc)', 'revenue desc'],
       ['Added (asc)', 'added asc'],
       ['Added (desc)', 'added desc'],
-      ['Watches (asc)', 'watches asc'],
-      ['Watches (desc)', 'watches desc']
     ]
 
   end
 
   def watch
-    self.update_attributes(watches: self.watches + 1)
+    self.views.create
   end
 
   def filename

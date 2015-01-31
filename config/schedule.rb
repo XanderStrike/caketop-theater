@@ -15,5 +15,13 @@ every 1.day do
   rake "scan:music"
 end
 
+every :wednesday do
+  rake "convert:movies"
+end
+
+every :monday do
+  rake "convert:tv"
+end
+
 # Uncomment this line to save a log somewhere
-# set :output, "/srv/theater/log/scans.log"
+set :output, "/srv/theater/log/scans.log"

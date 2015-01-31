@@ -17,10 +17,10 @@ RSpec.describe Movie, :type => :model do
 
   describe '#watch' do
     it 'should add one to the movies watches' do
-      movie = build(:movie)
-      count = movie.watches
+      movie = create(:movie)
+      count = movie.views.count
       movie.watch
-      expect(movie.watches).to eq(count + 1)
+      expect(movie.views.count).to eq(count + 1)
     end
   end
 end

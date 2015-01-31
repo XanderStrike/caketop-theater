@@ -19,7 +19,7 @@ Install Ruby on Rails via [RVM](http://rvm.io/):
 Install apache:
 
     sudo apt-get install apache2
-    
+
 Install passenger for Apache (see [this guide for more info](https://rvm.io/integration/passenger)):
 
     gem install passenger
@@ -33,6 +33,7 @@ Clone this repository and prepare the app for production:
 
     git clone https://github.com/XanderStrike/caketop-theater.git
     cd caketop-theater
+    <package-manager> install taglib
     bundle install
     RAILS_ENV=production rake db:migrate assets:precompile
 
@@ -53,7 +54,7 @@ Configure apache/passenger appropriately by modifying `/etc/apache2/sites-enable
     <Directory /home/xander/caketop-theater/public>
       Allow from all
       Options -Multiviews
-    </Directory> 
+    </Directory>
 
 Once you've got the app running, visit `/settings` to populate your settings table with defaults, and you should be good to go!
 
@@ -65,13 +66,20 @@ Once you're installed and running populate your DB by running the rake scan task
     rake scan:movies
     rake scan:tv
     rake scan:music
-    
+
 The first time it will take a while, but once they're done you will be able to see your library when you visit the application.
 
 automated scanning
 ------------------
 
 This app uses the 'whenever' gem to handle your crontab, you can edit `config/schedule.rb` to determine how often you want to run scans, and simply run `whenever` in the app directory to get the lines you need to copy and paste into your cron. This step is highly recommended, especially if you're using something like CouchPotato's renamer to manage your movie folder.
+
+automated conversion
+--------------------
+
+Many media formats aren't compatible with HTML5. You can automatically convert your movie library with `rake convert:movies`. The first time could take days depending on how big your media library is, so it's best to run it in a screen.
+
+Right now it's destructive, it overwrites the existing movie, so be aware.
 
 contributing
 ------------

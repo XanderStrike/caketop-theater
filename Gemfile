@@ -10,7 +10,7 @@ gem 'sqlite3'
 gem 'redcarpet'
 gem 'taglib-ruby'
 gem 'yaml_db'
-
+gem "chartkick"
 gem 'kaminari'
 
 
@@ -35,4 +35,3 @@ gem 'mediainfo'
 gem 'whenever'
 
 gem 'therubyracer'
-
