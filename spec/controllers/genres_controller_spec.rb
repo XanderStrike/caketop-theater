@@ -12,11 +12,11 @@ RSpec.describe GenresController, type: :controller do
 			expect(response).to render_template(:show)
 		end
 
-		it "runs the appropriate queries" do
-			expect(Genre).to receive(:find)
-			expect(Movie).to receive(:where)
-			expect(Genre).to receive_message_chain('where.map')
-			get :show, id: 1
+		it "gets the genre and the movies attached to it" do
+			create(:genre)
+			get :show, id: Genre.first.id
+			expect(assigns(:genre)).to be_a(Genre)
+			expect(assigns(:movies).first).to be_a(Movie)
 		end
   end
 end

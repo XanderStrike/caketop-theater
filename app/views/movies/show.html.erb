@@ -2,7 +2,7 @@
 
 <div class="vid-container" style="background: url(<%= asset_path @movie.backdrop %>);background-size:cover;">
   <video id="player" poster="<%= asset_path 'transparent.png' %>" controls>
-  <source src="/movies/<%= @movie.encodes.first.filename %>">
+  <source src="/theater/movies/<%= @movie.encodes.first.filename %>">
   </video>
 </div>
 <p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "/theater/movies/#{ @movie.encodes.first.filename }" %>.</p>
