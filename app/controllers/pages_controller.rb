@@ -5,7 +5,6 @@ class PagesController < ApplicationController
 
   def new
     @page = Page.new
-
     render :edit
   end
 
@@ -14,21 +13,18 @@ class PagesController < ApplicationController
   end
   
   def create
-    @page = Page.new(params[:page]).save
-
+    Page.new(params[:page]).save
     redirect_to settings_path
   end
 
   def update
     @page = Page.find(params[:id])
     @page.update_attributes(params[:page])
-
     redirect_to settings_path
   end
 
   def destroy
     Page.find(params[:id]).destroy
     redirect_to settings_path
-    
   end
 end
