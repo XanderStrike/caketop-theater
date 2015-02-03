@@ -99,9 +99,7 @@ RSpec.describe MoviesController, type: :controller do
   describe 'GET watch' do
   	it 'adds a view for a movie' do
   		movie = create(:movie)
-  		views = movie.views.count
-  		get :watch, id: movie.id
-  		expect(movie.views.count).to eq(views + 1)
+  		expect { get(:watch, id: movie.id) }.to change { View.count }.by(1 )
   	end
   end
 end
