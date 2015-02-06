@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe MoviesController, type: :controller do
 	before(:each) do
     create_settings
