@@ -28,5 +28,11 @@ FactoryGirl.define do
         create_list(:comment, 50, movie: movie)
       end
     end
+
+    factory :movie_with_views do
+      after(:create) do |movie|
+        create_list(:view, rand(100), movie: movie)
+      end
+    end
   end
 end

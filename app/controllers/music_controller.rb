@@ -9,7 +9,7 @@ class MusicController < ApplicationController
     @limited_artists = @artists.limit(@page_size).offset(@page_size * params[:page].to_i)
 
     respond_to do |format|
-      format.html { render 'index.html'}
+      format.html { render 'index.html' }
       format.js { render layout: false }
     end
   end
