@@ -7,6 +7,8 @@ This is a simple rails app I built to allow my media server to make my movie lib
 
 [Here is what it looks like.](http://imgur.com/a/5GFME)
 
+Current Build: [![Circle CI](https://circleci.com/gh/XanderStrike/caketop-theater/tree/master.svg?style=svg)](https://circleci.com/gh/XanderStrike/caketop-theater/tree/master)
+
 installation
 -----
 
