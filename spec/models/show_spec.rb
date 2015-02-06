@@ -9,7 +9,7 @@ RSpec.describe Show, :type => :model do
   end
 
   describe '#backdrop' do
-    it 'should return the path to the packdrop' do
+    it 'should return the path to the backdrop' do
       show = Show.new(id: 1234)
       expect(show.backdrop).to eq('/backdrops/tv_1234.jpg')
     end

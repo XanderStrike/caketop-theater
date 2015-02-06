@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
     @viewed = View.where("created_at >= ?", Time.now - 1.day)
                     .group(:movie_id).count.sort {|a,b| b[1] <=> a[1]}.map {|a| a[0]}.first(6)
                     .map {|id| Movie.find(id)}
-    
+
     @random = Movie.order('random()').limit(6)
 
     respond_to do |format|
