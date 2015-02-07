@@ -127,6 +127,20 @@
         </div>
       </div>
     <% end %>
+
+    <legend>Movie's Directory</legend>
+    <%= form_tag settings_path do %>
+        <%= hidden_field_tag :setting, :movie_dir %>
+        <table class="table">
+        <% @movie_dirs.each do |movie_dir|  %>
+              <tr><td><%= text_field_tag :movie_dir, movie_dir.content %></td></tr>
+
+        <% end %>
+        <tr><td><%= text_field_tag :movie_dir, "", placeholder: "add directory" %></td>
+            <td><%= submit_tag "Add", class: 'btn btn-success btn-xs', remote: true %></td>
+        </tr>
+        <table class="table">
+    <% end %>
   </div>
 
   <div class="col-md-6">
@@ -151,4 +165,3 @@
     <%= link_to 'Create New Page', new_page_path, class: 'btn btn-success' %>
   </div>
 </div>
-
