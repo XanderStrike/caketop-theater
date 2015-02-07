@@ -49,6 +49,7 @@ def create_settings
   create(:setting, name: 'about', content: '<h1>About</h1>', boolean: true)
   create(:setting, name: 'banner', content: '', boolean: false)
   create(:setting, name: 'footer', content: 'This is the footer.', boolean: false)
+  create(:setting, name: 'url', content: '/', boolean: false)
   
   create(:setting, name: 'admin', content: '', boolean: false)
   create(:setting, name: 'admin-pass', content: '', boolean: false)

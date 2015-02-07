@@ -59,6 +59,17 @@ RSpec.describe HomeController, type: :controller do
       expect(response).to render_template("settings")
     end
 
+    it 'assigns all the variables needed for the view' do
+      create_settings
+      get :settings
+      expect(assigns(:name)).to eq(Setting.get(:name))
+      expect(assigns(:about)).to eq(Setting.get(:about))
+      expect(assigns(:banner)).to eq(Setting.get(:banner))
+      expect(assigns(:footer)).to eq(Setting.get(:footer))
+      expect(assigns(:url)).to eq(Setting.get(:url))
+      expect(assigns(:admin)).to eq(Setting.get(:admin))
+    end
+
     context "first visit" do
       it "creates new settings" do
         expect(Setting.count).to eq(0)
@@ -112,6 +123,11 @@ RSpec.describe HomeController, type: :controller do
       expect(Setting.get('admin').content).to eq('xanderstrike')
       expect(Setting.get('admin').boolean).to be_truthy
       expect(Setting.get('admin-pass').content).to eq(Digest::SHA256.hexdigest('password'))
+    end
+
+    it "updates the url" do
+      post :settings, setting: 'url', url: '/theater'
+      expect(Setting.get('url').content).to eq('/theater')
     end
   end
 end

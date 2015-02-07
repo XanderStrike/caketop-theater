@@ -2,8 +2,9 @@
 
 <%= render partial: 'movies/grid', locals: {movies: @new, title: 'New Additions', link: link_to('Browse All', movies_browse_path)} %>
 
-<%= render partial: 'movies/grid', locals: {movies: @discussed, title: 'Being Discussed', link: nil} %>
-<%= render partial: 'movies/grid', locals: {movies: @viewed, title: 'Most Viewed This Week', link: nil} %>
+<%= render partial: 'movies/grid', locals: {movies: @discussed, title: 'Being Discussed', link: nil} unless @discussed.blank? %>
+
+<%= render partial: 'movies/grid', locals: {movies: @viewed, title: 'Most Viewed This Week', link: nil} unless @viewed.blank? %>
 
 <div id="random">
   <%= render partial: 'movies/grid', locals: {movies: @random, title: 'Random Selection', link: link_to('Shuffle', movies_shuffle_path, remote: true)} %>

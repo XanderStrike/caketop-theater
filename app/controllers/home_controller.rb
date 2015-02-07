@@ -44,6 +44,8 @@ class HomeController < ApplicationController
     @banner = Setting.get(:banner) || Setting.create(name: 'banner', content: '', boolean: false)
     @footer = Setting.get(:footer) || Setting.create(name: 'footer', content: 'Maybe she\'s born with it, maybe it\'s caketop.', boolean: true)
 
+    @url = Setting.get(:url) || Setting.create(name: 'url', content: '', boolean: false)
+
     @admin = Setting.get(:admin) || Setting.create(name: 'admin', content: '', boolean: false)
     @admin_pass = Setting.get('admin-pass') || Setting.create(name: 'admin-pass', content: '')
 
@@ -68,6 +70,9 @@ class HomeController < ApplicationController
       @footer.content = params[:footer_text]
       @footer.boolean = (params[:footer_display] == 'true')
       @footer.save
+    when 'url'
+      @url.content = params[:url]
+      @url.save
     end
 
     @pages = Page.all

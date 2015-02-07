@@ -127,6 +127,21 @@
         </div>
       </div>
     <% end %>
+
+    <legend>Sub URL</legend>
+    <%= form_tag settings_path, remote: true do %>
+      <%= hidden_field_tag :setting, :url %>
+      <div class="row">
+        <div class="col-md-9">
+          <%= text_field_tag :url, @url.content, class: 'form-control', placeholder: "/theater" %>
+        </div>
+        <div class="col-md-3">
+          <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="url"></span>
+        </div>
+      </div>
+    <% end %>
+    <p>Use this if you are hosting Caketop on a url other than the root (like <code>/theater</code>). Otherwise videos will not play properly.</p>
+    <p>Include a slash at the beginning, but leave blank if not using a sub url.</p>
   </div>
 
   <div class="col-md-6">

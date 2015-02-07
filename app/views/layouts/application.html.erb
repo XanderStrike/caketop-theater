@@ -30,7 +30,7 @@
             <ul class="nav navbar-nav navbar-right">
 
 
-              <li><%= link_to "Home", '/theater' %></li>
+              <li><%= link_to "Home", (sub_url.blank? ? '/' : sub_url) %></li>
 
               <li class="divider"></li>
               <li><%= link_to "Films", movies_path %></li>

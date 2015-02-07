@@ -66,7 +66,7 @@
           <div id="collapse-<%= f.gsub(/\s|\./, '') %>" class="panel-collapse collapse">
             <div class="panel-body">
               <% @seasons[f].map {|file| file unless ['srt', 'txt'].include? file.split('.').last}.compact.sort.each do |file| %>
-                <p><a href="#player-div" onClick="set_player('/theater<%= file %>')"><%= file.split("/").last %></a></p>
+                <p><a href="#player-div" onClick="set_player('<%= sub_url %><%= file %>')"><%= file.split("/").last %></a></p>
               <% end %>
             </div>
           </div>
