@@ -2,10 +2,10 @@
 
 <div class="vid-container" style="background: url(<%= asset_path @movie.backdrop %>);background-size:cover;">
   <video id="player" poster="<%= asset_path 'transparent.png' %>" controls>
-  <source src="/theater/movies/<%= @movie.encodes.first.filename %>">
+  <source src="<%= sub_url %>/movies/<%= @movie.encodes.first.filename %>">
   </video>
 </div>
-<p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "/theater/movies/#{ @movie.encodes.first.filename }" %>.</p>
+<p>Video not playing properly? Try switching to a <a href="#player-div" onClick="switch_local_player()">local player</a>, or download the file <%= link_to "here", "#{sub_url}/movies/#{ @movie.encodes.first.filename }" %>.</p>
 
 <div class="row movie" style="padding-top:20px;">
   <div class="col-md-3">
@@ -129,7 +129,7 @@
 
 <script>
   function switch_local_player() {
-    $('.vid-container').html("<embed src='/theater/movies/<%= @movie.encodes.first.filename %>' autoplay=true width='100%' height='100%'></embed>");
+    $('.vid-container').html("<embed src='<%= sub_url %>/movies/<%= @movie.encodes.first.filename %>' autoplay=true width='100%' height='100%'></embed>");
   }
 
   $('#comment_body').keyup(updatePreview);

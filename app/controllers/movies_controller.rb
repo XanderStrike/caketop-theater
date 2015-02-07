@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
     @new = Movie.order('added desc').limit(12)
-    @discussed = Comment.where("movie_id > ?", 0).order('id desc').limit(20).map(&:movie).uniq[0..5]
+    @discussed = Comment.where("movie_id > ?", 0).order('id desc').limit(20).map(&:movie).uniq[0..5].compact
 
     @viewed = View.where("created_at >= ?", Time.now - 1.day)
                     .group(:movie_id).count.sort {|a,b| b[1] <=> a[1]}.map {|a| a[0]}.first(6)
