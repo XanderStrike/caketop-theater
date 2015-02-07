@@ -63,11 +63,15 @@ Once you've got the app running, visit `/settings` to populate your settings tab
 usage
 -----
 
-Once you're installed and running populate your DB by running the rake scan tasks:
+Once you're installed and running populate your DB by calling the rake scan tasks in the directory of the app:
 
     rake scan:movies
     rake scan:tv
     rake scan:music
+
+Or more simply:
+
+    rake scan:all
 
 The first time it will take a while, but once they're done you will be able to see your library when you visit the application.
 
@@ -79,9 +83,13 @@ This app uses the 'whenever' gem to handle your crontab, you can edit `config/sc
 automated conversion
 --------------------
 
-Many media formats aren't compatible with HTML5. You can automatically convert your movie library with `rake convert:movies`. The first time could take days depending on how big your media library is, so it's best to run it in a screen.
+Rake tasks are available to perform background conversion of your media to make it compatible with the HTML5 player (Advanced Video Codec and Advanced Audio Codec). The tasks available are:
 
-Right now it's destructive, it overwrites the existing movie, so be aware.
+    rake convert:movies
+    rake convert:tv
+    rake convert:all
+
+Automated conversion is not for everyone. It is a perminant change to your media, the old file is replaced with the converted one. Also, conversion from one format to another causes reduction in quality, sometimes noticeable. It is always best to find media already in AVC/AAC format.
 
 contributing
 ------------
