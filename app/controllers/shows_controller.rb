@@ -28,12 +28,7 @@ class ShowsController < ApplicationController
   end
 
   def search
-    @results = Show.where("name like ?", "%#{params[:q]}%")
-    @results += Show.where("original_name like ?", "%#{params[:q]}%")
-    @results += Show.where("folder like ?", "%#{params[:q]}%")
-    @results += Show.where("overview like ?", "%#{params[:q]}%")
-    @results = @results.uniq
-
+    @results = Movie.search(params[:q], fields: ["name^10", "original_name^10", "overview"])
     respond_to do |format|
       format.html
       format.json { render json: @movie }

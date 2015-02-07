@@ -68,15 +68,12 @@ class MoviesController < ApplicationController
   end
 
   def search
-    @results = Movie.where("title like ?", "%#{params[:q]}%")
-    @results += Movie.where("original_title like ?", "%#{params[:q]}%")
-    @results += Movie.where("overview like ?", "%#{params[:q]}%")
-    @results = @results.uniq
-
+    @results = Movie.search(params[:q], fields: ["title^10", "original_title^10", "tagline", "overview"])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @results }
     end
+
   end
 
   def shuffle
