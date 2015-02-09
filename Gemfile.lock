@@ -38,6 +38,8 @@ GEM
       xpath (~> 2.0)
     chartkick (1.3.2)
     chronic (0.10.2)
+    codeclimate-test-reporter (0.4.6)
+      simplecov (>= 0.7.1, < 1.0.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -47,6 +49,7 @@ GEM
     coffee-script-source (1.7.1)
     daemons (1.1.9)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.1)
@@ -129,6 +132,11 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    simplecov (0.9.1)
+      docile (~> 1.1.0)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -168,6 +176,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   chartkick
+  codeclimate-test-reporter
   coffee-rails (~> 3.2.1)
   factory_girl_rails
   jquery-rails
