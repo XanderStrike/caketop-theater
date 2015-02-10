@@ -1,11 +1,3 @@
-<% if params[:first_time] == 'true' %>
-  <div class="jumbotron">
-    <h1>Welcome to Caketop!</h1>
-    <p>Your settings have been populated with defaults, if you want to change anything now is the time!</p>
-    <%= button_to "I don't care, show me the movies!", root_url, class: 'btn btn-primary btn-lg' %>
-  </div>
-<% end %>
-
 <div class="row">
   <h1>Settings</h1>
   <div class="col-md-6">
@@ -18,7 +10,7 @@
         <%= hidden_field_tag :setting, :name %>
         <div class="row">
           <div class="col-md-9">
-            <%= text_field_tag :name_text, @name.content, class: 'form-control', placeholder: "Caketop Theater" %>
+            <%= text_field_tag :content, @name.content, class: 'form-control', placeholder: "Caketop Theater" %>
           </div>
           <div class="col-md-3">
             <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="name"></span>
@@ -38,7 +30,7 @@
         <%= hidden_field_tag :setting, :about %>
         <div class="row">
           <div class="col-md-9">
-            <%= text_area_tag :about_text, @about.content, class: 'form-control', placeholder: "Caketop Theater is run by muppets." %>
+            <%= text_area_tag :content, @about.content, class: 'form-control', placeholder: "Caketop Theater is run by muppets." %>
           </div>
           <div class="col-md-3">
             <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="about"></span>
@@ -64,11 +56,11 @@
           <div class="col-md-9">
             <table class="table">
               <tr>
-                <td><label><%= radio_button_tag :protect, true, @admin.boolean %> Yes</label></td>
-                <td><label><%= radio_button_tag :protect, false, !@admin.boolean %> No</label></td>
+                <td><label><%= radio_button_tag :boolean, true, @admin.boolean %> Yes</label></td>
+                <td><label><%= radio_button_tag :boolean, false, !@admin.boolean %> No</label></td>
               </tr>
             </table>
-            <%= text_field_tag :admin_username, @admin.content, class: 'form-control', placeholder: "username" %><br>
+            <%= text_field_tag :content, @admin.content, class: 'form-control', placeholder: "username" %><br>
             <%= password_field_tag :admin_pass, @admin_pass.content, class: 'form-control', placeholder: "password" %>
           </div>
           <div class="col-md-3">
@@ -87,11 +79,11 @@
         <%= hidden_field_tag :setting, :banner %>
         <div class="row">
           <div class="col-md-9">
-            <%= text_area_tag :banner_text, @banner.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
+            <%= text_area_tag :content, @banner.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
             <table class="table">
               <tr>
-                <td><label><%= radio_button_tag :banner_display, true, @banner.boolean %> Show</label></td>
-                <td><label><%= radio_button_tag :banner_display, false, !@banner.boolean %> Hide</label></td>
+                <td><label><%= radio_button_tag :boolean, true, @banner.boolean %> Show</label></td>
+                <td><label><%= radio_button_tag :boolean, false, !@banner.boolean %> Hide</label></td>
               </tr>
             </table>
           </div>
@@ -114,11 +106,11 @@
       <%= hidden_field_tag :setting, :footer %>
       <div class="row">
         <div class="col-md-9">
-          <%= text_area_tag :footer_text, @footer.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
+          <%= text_area_tag :content, @footer.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
           <table class="table">
             <tr>
-              <td><label><%= radio_button_tag :footer_display, true, @footer.boolean %> Show</label></td>
-              <td><label><%= radio_button_tag :footer_display, false, !@footer.boolean %> Hide</label></td>
+              <td><label><%= radio_button_tag :boolean, true, @footer.boolean %> Show</label></td>
+              <td><label><%= radio_button_tag :boolean, false, !@footer.boolean %> Hide</label></td>
             </tr>
           </table>
         </div>
@@ -133,7 +125,7 @@
       <%= hidden_field_tag :setting, :url %>
       <div class="row">
         <div class="col-md-9">
-          <%= text_field_tag :url, @url.content, class: 'form-control', placeholder: "/theater" %>
+          <%= text_field_tag :content, @url.content, class: 'form-control', placeholder: "/theater" %>
         </div>
         <div class="col-md-3">
           <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="url"></span>
@@ -166,4 +158,3 @@
     <%= link_to 'Create New Page', new_page_path, class: 'btn btn-success' %>
   </div>
 </div>
-

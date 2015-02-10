@@ -6,6 +6,10 @@ RSpec.describe Setting, :type => :model do
       setting = create(:setting, name: 'testsetting')
       expect(Setting.get('testsetting')).to eq(setting)
     end
+
+    it 'should create a setting if one does not exist' do
+      expect(Setting.get(:name).content).to eq('Caketop Theater')
+    end
   end
 
   describe '.render' do
@@ -21,6 +25,14 @@ RSpec.describe Setting, :type => :model do
         setting = create(:setting, name: 'testsetting', boolean: false)
         expect(Setting.render('testsetting')).to eq('')
       end
+    end
+  end
+
+  describe '.update' do
+    it 'should update any given setting' do
+      setting = create(:setting, name: 'testsetting', boolean: false)
+      Setting.update(setting: 'testsetting', content: 'somevalue')
+      expect(Setting.get('testsetting').content).to eq('somevalue')
     end
   end
 end
