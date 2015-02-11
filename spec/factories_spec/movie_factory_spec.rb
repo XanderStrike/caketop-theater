@@ -26,4 +26,10 @@ RSpec.describe 'Movie Factory', type: :factory do
       expect(create(:movie_with_comments).comments.count).to eq(50)
     end
   end
+
+  describe "movie_with_views" do
+    it "has some views" do
+      expect(create(:movie_with_views).views.count).to_not eq(0)
+    end
+  end
 end

@@ -1,13 +1,13 @@
 class Movie < ActiveRecord::Base
   attr_accessible :added, :backdrop_path, :budget, :id, :imdb_id, :original_title, :overview, :popularity, :poster_path, :release_date, :revenue, :runtime, :status, :tagline, :title, :vote_average, :vote_count
 
-  has_many :genres
+  has_many :genres, dependent: :destroy
 
   has_many :encodes
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
-  has_many :views
+  has_many :views, dependent: :destroy
 
   def poster
     "/posters/#{self.id}.jpg"
