@@ -14,9 +14,7 @@ installation
 
 Plays best on Ubuntu Server 14.04, your mileage may vary.
 
-Install Ruby on Rails via [RVM](http://rvm.io/):
-
-    \curl -sSL https://get.rvm.io | bash -s stable --ruby --rails
+Install Ruby on Rails via [RVM](http://rvm.io/). Use the commands on the homepage, with the `--ruby` and `--rails` options.
 
 Install apache:
 
