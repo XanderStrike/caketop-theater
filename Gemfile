@@ -24,6 +24,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 gem "codeclimate-test-reporter", group: :test, require: nil
