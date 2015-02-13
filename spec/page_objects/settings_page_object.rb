@@ -54,4 +54,29 @@ class SettingsPage
 			click_button 'Save'
 		end
 	end
+
+	def create_page
+		click_link 'Create New Page'
+		EditPage.new
+	end
+
+	def edit_page name
+		within '#pages_table' do
+			find(:xpath, "//tr[td[contains(.,'#{name}')]]/td/a", :text => 'Edit').click
+		end
+		EditPage.new
+	end
+
+	def show_page name
+		within '#pages_table' do
+			click_link name
+		end
+		ShowPage.new
+	end
+
+	def delete_page name
+		within '#pages_table' do
+			find(:xpath, "//tr[td[contains(.,'#{name}')]]/td/a", :text => 'Delete').click
+		end
+	end
 end
