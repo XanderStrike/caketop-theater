@@ -33,4 +33,8 @@ class HomePage
 		fill_in 'music-search', with: q
 		find_field('music-search').native.send_key(:enter)
 	end
+
+	def home_link
+		find_link('Home')
+	end
 end
