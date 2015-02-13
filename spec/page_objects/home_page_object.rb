@@ -12,14 +12,25 @@ class HomePage
 	end
 
 	def comment_forward
-		click_link "Next ›"
+		click_link "Next"
 	end
 
 	def comment_back
-		click_link '‹ Prev'
+		click_link 'Prev'
 	end
 
-	def search_television(q='')
+	def search_tv q=''
+		fill_in 'tv-search', with: q
+		find_field('tv-search').native.send_key(:enter)
+	end
 
+	def search_movies q=''
+		fill_in 'movie-search', with: q
+		find_field('movie-search').native.send_key(:enter)
+	end
+
+	def search_music q=''
+		fill_in 'music-search', with: q
+		find_field('music-search').native.send_key(:enter)
 	end
 end

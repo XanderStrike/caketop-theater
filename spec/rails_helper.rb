@@ -34,6 +34,10 @@ RSpec.configure do |config|
   end
 end
 
+
+# Ignore "image not found" errors and that sort of thing
+Capybara.raise_server_errors = false
+
 def factory_attributes(klass)
   klass.attribute_names.map(&:to_sym) - [:id, :created_at, :updated_at]
 end
