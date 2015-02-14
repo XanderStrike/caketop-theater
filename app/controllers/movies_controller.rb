@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     @movie = Movie.find(params[:id])
-    @comments = @movie.comments.order(:id).page(params[:page]).per(10)
+    @comments = @movie.comments.order('id desc').page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # show.html.erb
