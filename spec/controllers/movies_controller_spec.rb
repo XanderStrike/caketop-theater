@@ -77,17 +77,9 @@ RSpec.describe MoviesController, type: :controller do
   	it 'filters on the query string' do
   		movies = create_list(:movie, 40)
   		create(:movie, title: 'Patton')
-  		create(:movie, original_title: 'Battleship Potempkin')
-  		create(:movie, overview: 'Saving Private Ryan')
 
   		get :search, q: 'Patton'
   		expect(assigns(:results).first.title).to eq('Patton')
-
-  		get :search, q: 'Battleship Potempkin'
-  		expect(assigns(:results).first.original_title).to eq('Battleship Potempkin')
-
-  		get :search, q: 'Saving Private Ryan'
-  		expect(assigns(:results).first.overview).to eq('Saving Private Ryan')
   	end
   end
 

@@ -32,31 +32,7 @@ class MoviesController < ApplicationController
   end
 
   def browse
-    # movie filters
-    @movies = Movie.where("title like ?", "%#{params[:title]}%")
-    @movies = @movies.where("overview like ?", "%#{params[:desc]}%") unless params[:desc].blank?
-    @movies = @movies.where("runtime > ?", params[:runtime_min]) unless params[:runtime_min].blank?
-    @movies = @movies.where("runtime < ?", params[:runtime_max]) unless params[:runtime_max].blank?
-    @movies = @movies.where("revenue > ?", params[:revenue_min]) unless params[:revenue_min].blank?
-    @movies = @movies.where("revenue < ?", params[:revenue_max]) unless params[:revenue_max].blank?
-    @movies = @movies.where("budget > ?", params[:budget_min]) unless params[:budget_min].blank?
-    @movies = @movies.where("budget < ?", params[:budget_max]) unless params[:budget_max].blank?
-    @movies = @movies.where("vote_average > ?", params[:vote_average_min]) unless params[:vote_average_min].blank?
-    @movies = @movies.where("vote_average < ?", params[:vote_average_max]) unless params[:vote_average_max].blank?
-
-    # encode filters
-    @movies = @movies.where('encodes.filename like ?', "%#{params[:filename]}%").includes(:encodes) unless params[:filename].blank?
-    @movies = @movies.where('encodes.container = ?', "#{params[:container]}").includes(:encodes) unless params[:container].blank?
-    @movies = @movies.where('encodes.a_format = ?', "#{params[:a_format]}").includes(:encodes) unless params[:a_format].blank?
-    @movies = @movies.where('encodes.v_format = ?', "#{params[:v_format]}").includes(:encodes) unless params[:v_format].blank?
-    @movies = @movies.where('encodes.resolution = ?', "#{params[:resolution]}").includes(:encodes) unless params[:resolution].blank?
-
-    # genre, includes doesn't work so we do it the hard way
-    @movies = @movies.where(id: Genre.where(id: params[:genre]).map(&:movie_id)) unless params[:genre].blank?
-
-    # sort
-    @movies = @movies.order((params[:sort] || 'title asc'))
-
+    @movies = MovieSearch.new(params).results
     @page_size = 24
     @limited_movies = @movies.limit(@page_size).offset(@page_size * params[:page].to_i)
 
@@ -68,10 +44,7 @@ class MoviesController < ApplicationController
   end
 
   def search
-    @results = Movie.where("title like ?", "%#{params[:q]}%")
-    @results += Movie.where("original_title like ?", "%#{params[:q]}%")
-    @results += Movie.where("overview like ?", "%#{params[:q]}%")
-    @results = @results.uniq
+    @results = MovieSearch.simple_search(params[:q])
 
     respond_to do |format|
       format.html # show.html.erb
