@@ -63,17 +63,17 @@ body {
 }
 
 #push,
-#footer {
+.footer {
   height: 20px;
 }
-#footer {
+.footer {
   background-color: #eee;
   text-align: right;
   color: #a0a0a0;
 }
 
 @media (max-width: 767px) {
-  #footer {
+  .footer {
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 20px;

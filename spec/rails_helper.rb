@@ -7,41 +7,36 @@ require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'database_cleaner'
 
-# Requires supporting ruby files with custom matchers and macros, etc, in
-# spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
-# run as spec files by default. This means that files in spec/support that end
-# in _spec.rb will both be required and run as specs, causing the specs to be
-# run twice. It is recommended that you do not name files matching this glob to
-# end with _spec.rb. You can configure this pattern with with the --pattern
-# option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+# Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
+# Require page objects
+Dir[Rails.root.join("spec/page_objects/*.rb")].each { |f| require f }
+
 
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
   config.include FactoryGirl::Syntax::Methods
-
-  # RSpec Rails can automatically mix in different behaviours to your tests
-  # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
-  #
-  # You can disable this behaviour by removing the line below, and instead
-  # explicitly tag your specs with their type, e.g.:
-  #
-  #     RSpec.describe UsersController, :type => :controller do
-  #       # ...
-  #     end
-  #
-  # The different available types are documented in the features, such as in
-  # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.strategy = :truncation if example.metadata.fetch(:js, false)
+
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 end
+
+
+# Ignore "image not found" errors and that sort of thing
+Capybara.raise_server_errors = false
 
 def factory_attributes(klass)
   klass.attribute_names.map(&:to_sym) - [:id, :created_at, :updated_at]
@@ -56,4 +51,16 @@ def create_settings
   
   create(:setting, name: 'admin', content: '', boolean: false)
   create(:setting, name: 'admin-pass', content: '', boolean: false)
+end
+
+def basic_auth(name, password)
+  if page.driver.respond_to?(:basic_auth)
+    page.driver.basic_auth(name, password)
+  elsif page.driver.respond_to?(:basic_authorize)
+    page.driver.basic_authorize(name, password)
+  elsif page.driver.respond_to?(:browser) && page.driver.browser.respond_to?(:basic_authorize)
+    page.driver.browser.basic_authorize(name, password)
+  else
+    raise "I don't know how to log in!"
+  end
 end
