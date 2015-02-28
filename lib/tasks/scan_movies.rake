@@ -43,7 +43,7 @@ namespace :scan do
       info = get_info(movie.id)
 
       # download backdrop and poster
-      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/posters/#{info.id}.jpg -b -q`
+      `wget http://image.tmdb.org/t/p/w500/#{ info.poster_path } -O ./public/posters/#{info.id}.jpg -b -q`
       `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/backdrops/#{info.id}.jpg -b -q`
 
       # insert into db
