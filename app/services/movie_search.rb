@@ -8,11 +8,6 @@ class MovieSearch
      filter
   end
 
-  def self.simple_search(q)
-    q = "%#{q}%"
-    Movie.where("title like ? or original_title like ? or overview like ?", q, q, q)
-  end
-
   private
 
   def filter

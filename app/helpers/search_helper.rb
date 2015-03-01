@@ -1,8 +1,6 @@
 module SearchHelper
   def model_search(model, fields, query)
-    puts "in model search"
-    fields.reduce([]) { |results, field|
-      results + model.where("#{field} LIKE ?", "%#{query}%")
-    }.uniq
+    where_clause = fields.map { |field| "#{field} LIKE '%#{query}%'"}.join(" OR ")
+    model.where(where_clause)
   end
 end

@@ -1,6 +1,10 @@
 class MoviesController < ApplicationController
+  include SearchHelper
   # GET /movies
   # GET /movies.json
+
+  SEARCHABLE_FIELDS = %w(title original_title overview)
+
   def index
     @movies = Movie.all
     @new = Movie.order('added desc').limit(12)
@@ -44,7 +48,7 @@ class MoviesController < ApplicationController
   end
 
   def search
-    @results = MovieSearch.simple_search(params[:q])
+    @results = model_search(Movie, SEARCHABLE_FIELDS, params[:q])
 
     respond_to do |format|
       format.html # show.html.erb
