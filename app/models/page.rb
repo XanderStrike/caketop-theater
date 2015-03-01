@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  include RendererHelper
+  include HTMLRenderer
 
   attr_accessible :text, :content, :name, :navbar, :footer
   before_save :convert_markdown

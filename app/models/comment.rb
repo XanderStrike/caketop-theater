@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  include RendererHelper
+  include HTMLRenderer
 
   attr_accessible :content, :body, :movie_id, :name
   before_save :convert_markdown

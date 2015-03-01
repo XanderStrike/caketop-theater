@@ -1,5 +1,5 @@
 class ShowsController < ApplicationController
-  include SearchHelper
+  include ModelSearch
   # GET /shows
   # GET /shows.json
 

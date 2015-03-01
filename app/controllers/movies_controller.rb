@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  include SearchHelper
+  include ModelSearch
   # GET /movies
   # GET /movies.json
 
