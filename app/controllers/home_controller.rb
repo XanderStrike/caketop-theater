@@ -14,16 +14,9 @@ class HomeController < ApplicationController
   end
 
   def charts
-    @top_movies = View.group(:movie_id).count.sort {|a,b| b[1] <=> a[1]}[0..19].map { |id, val|
-      movie = Movie.find_by_id(id) || NilMovie.new("Unknown")
-      [movie.title, val]
-    }
+    @top_movies = top_movies
 
-    @views_by_day = View.where('created_at > ?', 1.week.ago).group_by { |u|
-      u.created_at.localtime.beginning_of_day
-    }.reduce({}) { |h, (k,v)|
-      h[k] = v.size; h
-    }
+    @views_by_day = views_by_day
 
     @tv_eps = `find public/tv/* | wc -l`.to_i
 
@@ -36,5 +29,22 @@ class HomeController < ApplicationController
   end
 
   def about
+  end
+
+  private
+
+  def top_movies
+    View.group(:movie_id).count.sort {|a,b| b[1] <=> a[1]}[0..19].map { |id, val|
+      movie = Movie.find_by_id(id) || NilMovie.new("Unknown")
+      [movie.title, val]
+    }
+  end
+
+  def views_by_day
+    View.where('created_at > ?', 1.week.ago).group_by { |u|
+      u.created_at.localtime.beginning_of_day
+    }.reduce({}) { |h, (k,v)|
+      h[k] = v.size; h
+    }
   end
 end
