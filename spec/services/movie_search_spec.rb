@@ -11,7 +11,6 @@ RSpec.describe MovieSearch, :type => :model do
       expect(MovieSearch.simple_search('patton')).to eq([patton])
       expect(MovieSearch.simple_search('potempkin')).to eq([potempkin])
       expect(MovieSearch.simple_search('ryan')).to eq([ryan])
-
     end
   end
 
@@ -84,8 +83,8 @@ RSpec.describe MovieSearch, :type => :model do
 
     it 'filters on genre' do
       movie = create(:movie)
-      search = MovieSearch.new(genre: movie.genres.first.id)
-      expect(search.results).to include(movie)      
+      search = MovieSearch.new(genre: movie.genres.first.genre_id)
+      expect(search.results).to include(movie)
     end
 
     it 'sorts the results' do
@@ -95,6 +94,5 @@ RSpec.describe MovieSearch, :type => :model do
       search = MovieSearch.new(sort: 'vote_average asc')
       expect(search.results).to eq(Movie.order('vote_average asc'))
     end
-
   end
 end
