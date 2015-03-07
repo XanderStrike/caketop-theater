@@ -24,7 +24,7 @@ class MovieSearch
     [:filename].each {|key| encode_like(key)}
     [:container, :a_format, :v_format, :resolution].each {|key| encode_equals(key)}
 
-    @results = @results.where(id: Genre.where(id: @params[:genre]).map(&:movie_id)) unless @params[:genre].blank?
+    @results = @results.where(id: Genre.where(genre_id: @params[:genre]).map(&:movie_id)) unless @params[:genre].blank?
     @results = @results.order((@params[:sort] || 'title asc'))
   end
 
