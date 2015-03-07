@@ -37,11 +37,9 @@ namespace :scan do
                   overview:  info.overview,
                   folder:  file)
 
-      # populate genres table (unless it already is)
-      unless Genre.where(movie_id: show.id).count > 0
-        info.genres.each do |g|
-          Genre.create(id: g['id'], name: g['name'], movie_id: show.id)
-        end
+      # populate genres table
+      info.genres.each do |g|
+        Genre.create(genre_id: g['id'], name: g['name'], movie_id: show.id) rescue nil
       end
 
       # download images
