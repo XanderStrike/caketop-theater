@@ -69,32 +69,30 @@ namespace :scan do
       movie.added = Time.now.to_s
       movie.save
 
-      # populate genres table (unless it already is)
-      unless Genre.where(movie_id: info.id).count > 0
-        info.genres.each do |g|
-          Genre.create(id: g['id'], name: g['name'], movie_id: info.id)
-        end
+      # populate genres table
+      info.genres.each do |g|
+        Genre.create(genre_id: g['id'], name: g['name'], movie_id: info.id) rescue nil
       end
 
       # get encode info
       mediainfo = Mediainfo.new "public/movies/#{file}"
       Encode.create(
-              movie_id: info.id, 
+              movie_id: info.id,
               filename: file,
-              a_bitrate: mediainfo.audio[0].bit_rate, 
-              a_format: mediainfo.audio[0].format_info, 
-              a_stream_size: mediainfo.audio[0].stream_size, 
-              aspect_ratio: mediainfo.video[0].display_aspect_ratio, 
-              container: mediainfo.general.format, 
-              duration: mediainfo.general.duration_before_type_cast, 
-              framerate: mediainfo.video[0].frame_rate, 
-              resolution: mediainfo.video[0].width, 
-              rip_date: mediainfo.encoded_date, 
-              size: mediainfo.size, 
-              v_bitrate: mediainfo.video[0].bit_rate, 
-              v_codec: mediainfo.video[0].codec_id, 
-              v_format: mediainfo.video[0].format, 
-              v_profile: mediainfo.video[0].format_profile, 
+              a_bitrate: mediainfo.audio[0].bit_rate,
+              a_format: mediainfo.audio[0].format_info,
+              a_stream_size: mediainfo.audio[0].stream_size,
+              aspect_ratio: mediainfo.video[0].display_aspect_ratio,
+              container: mediainfo.general.format,
+              duration: mediainfo.general.duration_before_type_cast,
+              framerate: mediainfo.video[0].frame_rate,
+              resolution: mediainfo.video[0].width,
+              rip_date: mediainfo.encoded_date,
+              size: mediainfo.size,
+              v_bitrate: mediainfo.video[0].bit_rate,
+              v_codec: mediainfo.video[0].codec_id,
+              v_format: mediainfo.video[0].format,
+              v_profile: mediainfo.video[0].format_profile,
               v_stream_size: mediainfo.video[0].stream_size)
     end
 
