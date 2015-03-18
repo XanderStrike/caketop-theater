@@ -48,7 +48,10 @@ def create_settings
   create(:setting, name: 'banner', content: '', boolean: false)
   create(:setting, name: 'footer', content: 'This is the footer.', boolean: false)
   create(:setting, name: 'url', content: '/', boolean: false)
-  
+  create(:setting, name: 'movie_dir', content: '/srv/movies/', boolean: false)
+  create(:setting, name: 'tv_dir', content: '/srv/tv/', boolean: false)
+  create(:setting, name: 'music_dir', content: '/srv/music/', boolean: false)
+
   create(:setting, name: 'admin', content: '', boolean: false)
   create(:setting, name: 'admin-pass', content: '', boolean: false)
 end

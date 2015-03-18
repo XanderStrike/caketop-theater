@@ -9,17 +9,15 @@ class SettingsPage
 		SettingsPage.new
 	end
 
-	def set_name name
-		within '#name_form' do
-			fill_in :content, with: name
-			click_button 'Save'
-		end
-	end
-
-	def set_about content
-		within '#about_form' do
-			fill_in :content, with: content
-			click_button 'Save'
+	def method_missing(method_sym, *args, &block)
+		if method_sym.to_s =~ /^set_(.*)$/
+			within "##{$1}_form" do
+				fill_in :content, with: args.first
+				choose (args.second ? 'Show' : 'Hide') unless args.second.nil?
+				click_button 'Save'
+			end
+		else
+			super
 		end
 	end
 
@@ -28,29 +26,6 @@ class SettingsPage
 			fill_in :content, with: username
 			fill_in :admin_pass, with: password
 			choose (enabled ? 'Yes' : 'No')
-			click_button 'Save'
-		end
-	end
-
-	def set_banner content, enabled
-		within '#banner_form' do
-			fill_in :content, with: content
-			choose (enabled ? 'Show' : 'Hide')
-			click_button 'Save'
-		end
-	end
-
-	def set_footer content, enabled
-		within '#footer_form' do
-			fill_in :content, with: content
-			choose (enabled ? 'Show' : 'Hide')
-			click_button 'Save'
-		end
-	end
-
-	def set_url url
-		within '#url_form' do
-			fill_in :content, with: url
 			click_button 'Save'
 		end
 	end
