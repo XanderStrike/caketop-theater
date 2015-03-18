@@ -10,7 +10,9 @@ class Setting < ActiveRecord::Base
       admin:          { name: 'admin', content: '', boolean: false },
       'admin-pass' => { name: 'admin-pass', content: '' },
       url:            { name: 'url', content: '' },
-      movie_dir:      { name: 'movie_dir', content: '', boolean: true }
+      movie_dir:      { name: 'movie_dir', content: '', boolean: true },
+      tv_dir:         { name: 'tv_dir', content: '', boolean: true },
+      music_dir:      { name: 'music_dir', content: '', boolean: true }
     }
 
   def self.render name

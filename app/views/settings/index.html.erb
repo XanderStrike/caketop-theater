@@ -1,25 +1,22 @@
+<h1>Settings</h1>
+
+<div class="row setting-row">
+  <div class="col-md-4">
+    <%= render partial: 'simple_setting', locals: {title: 'Movie Directory', setting: 'movie_dir', boolean: true, placeholder: '/srv/movies', current_setting: @movie_dir } %>
+  </div>
+
+  <div class="col-md-4">
+    <%= render partial: 'simple_setting', locals: {title: 'TV Directory', setting: 'tv_dir', boolean: true, placeholder: '/srv/tv', current_setting: @tv_dir } %>
+  </div>
+
+  <div class="col-md-4">
+    <%= render partial: 'simple_setting', locals: {title: 'Music Directory', setting: 'music_dir', boolean: true, placeholder: '/srv/musics', current_setting: @music_dir } %>
+  </div>
+</div>
+
 <div class="row">
-  <h1>Settings</h1>
   <div class="col-md-6">
-
-    <legend>Site Name</legend>
-    <div id="name" class="setting">
-      <p>This is the name of the site, duh.</p>
-
-      <%= form_tag settings_path, remote: true, id: :name_form do %>
-        <%= hidden_field_tag :setting, :name %>
-        <%= hidden_field_tag :boolean, true %>
-        <div class="row">
-          <div class="col-md-9">
-            <%= text_field_tag :content, @name.content, class: 'form-control', placeholder: "Caketop Theater" %>
-          </div>
-          <div class="col-md-3">
-            <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="name"></span>
-          </div>
-        </div>
-      <% end %>
-    </div>
-
+    <%= render partial: 'simple_setting', locals: {title: 'Site Name', setting: 'name', boolean: true, placeholder: 'Caketop Theater', current_setting: @name } %>
   </div>
   <div class="col-md-6">
 
@@ -142,22 +139,6 @@
 </div>
 
 <div class="row">
-
-  <div class="col-md-6">
-    <legend>Movie's Directory</legend>
-    <%= form_tag settings_path, remote: true, id: :movie_dir_form do %>
-      <%= hidden_field_tag :setting, :movie_dir %>
-      <%= hidden_field_tag :boolean, true %>
-      <div class="row">
-        <div class="col-md-9">
-          <%= text_field_tag :content, @movie_dir.content, class: 'form-control', placeholder: '/srv/movies' %>
-        </div>
-        <div class="col-md-3">
-          <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="movie_dir"></span>
-        </div>
-      </div>
-    <% end %>
-  </div>
 
   <div class="col-md-6">
     <legend>Pages</legend>

@@ -10,6 +10,15 @@ namespace :scan do
   task :tv => :environment do
     puts "Scanning for new tv shows:"
 
+    # create tv symlink
+    setting = Setting.get(:tv_dir)
+    if !File.exists?('public/tv') || setting.boolean
+      puts 'Creating symlink for new tv directory.'
+      File.unlink('public/tv') rescue nil
+      File.symlink(Setting.get(:tv_dir).content, 'public/tv')
+      setting.update_attributes(boolean: false)
+    end
+
     files = `ls public/tv `.split("\n").map {|f| f.gsub("public/tv/", "")}
 
     files.each do |file|

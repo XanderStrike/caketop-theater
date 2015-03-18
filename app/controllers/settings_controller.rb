@@ -11,6 +11,8 @@ class SettingsController < ApplicationController
     @admin_pass = Setting.get('admin-pass')
     @url = Setting.get(:url)
     @movie_dir = Setting.get(:movie_dir)
+    @tv_dir = Setting.get(:tv_dir)
+    @music_dir = Setting.get(:music_dir)
     @pages = Page.all
 
     Setting.update(params) unless params[:setting].blank?

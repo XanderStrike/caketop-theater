@@ -45,6 +45,15 @@ namespace :scan do
   task :music => :environment do
     puts "Scanning for new music:"
 
+    # create tv symlink
+    setting = Setting.get(:music_dir)
+    if !File.exists?('public/music') || setting.boolean
+      puts 'Creating symlink for new music directory.'
+      File.unlink('public/music') rescue nil
+      File.symlink(Setting.get(:music_dir).content, 'public/music')
+      setting.update_attributes(boolean: false)
+    end
+
     files = `find public/music/ -type f | grep \.mp3$`
     files = files.split("\n").map {|f| f.gsub('public/', '')}
     db_files = Song.select(:filename).map(&:filename)

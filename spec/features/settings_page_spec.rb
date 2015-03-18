@@ -79,4 +79,18 @@ feature "settings page" do
 		expect(page).to have_content('Saved')
 		expect(Setting.get(:movie_dir).content).to eq('/srv/movies')
 	end
+
+	scenario "user changes tv dir setting", js: true do
+		page = SettingsPage.new
+		page.set_tv_dir '/srv/tv'
+		expect(page).to have_content('Saved')
+		expect(Setting.get(:tv_dir).content).to eq('/srv/tv')
+	end
+
+	scenario "user changes music dir setting", js: true do
+		page = SettingsPage.new
+		page.set_music_dir '/srv/music'
+		expect(page).to have_content('Saved')
+		expect(Setting.get(:music_dir).content).to eq('/srv/music')
+	end
 end
