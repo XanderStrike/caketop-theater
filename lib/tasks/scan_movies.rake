@@ -22,6 +22,15 @@ namespace :scan do
 
     formats = ['mp4', 'avi', 'xvid', 'divx', 'mts', 'mpeg', 'mkv', 'wmv', 'ogv', 'webm', 'mov', 'mpg', 'mpe', 'm4v', 'h264', 'avchd']
 
+    # create movie symlink
+    setting = Setting.get(:movie_dir)
+    if !File.exists?('public/movies') || setting.boolean
+      puts 'Creating symlink for new movie directory.'
+      File.unlink('public/movies') rescue nil
+      File.symlink(Setting.get(:movie_dir).content, 'public/movies')
+      setting.update_attributes(boolean: false)
+    end
+
     # get file list
     files = `find public/movies/ -type f`.split("\n").map {|f| f.gsub('public/movies/', '')}
     files = files.reject {|f| !formats.any? {|w| f =~ /#{w}/ }}
@@ -49,7 +58,6 @@ namespace :scan do
       # insert into db
       puts "Adding #{ file }\n    as #{ movie.title }"
       movie = Movie.find_by_id(info.id) || Movie.create(id: info.id)
-      movie.backdrop_path = info.backdrop_path
       movie.backdrop_path = info.backdrop_path
       movie.budget = info.budget
       movie.id = info.id

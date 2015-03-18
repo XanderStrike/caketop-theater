@@ -121,6 +121,8 @@
         </div>
       </div>
     <% end %>
+  </div>
+  <div class="col-md-6">
 
     <legend>Sub URL</legend>
     <%= form_tag settings_path, remote: true, id: :url_form do %>
@@ -137,26 +139,45 @@
     <p>Use this if you are hosting Caketop on a url other than the root (like <code>/theater</code>). Otherwise videos will not play properly.</p>
     <p>Include a slash at the beginning, but leave blank if not using a sub url.</p>
   </div>
+</div>
+
+<div class="row">
 
   <div class="col-md-6">
-  <legend>Pages</legend>
-    <table class="table" id="pages_table">
-      <thead>
-        <tr>
-          <th>Name</th><th></th><th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @pages.each do |page| %>
-          <tr>
-            <td><%= link_to page.name, page_path(id: page.id) %></td>
-            <td><%= link_to 'Edit', edit_page_path(id: page.id), class: 'btn btn-success btn-xs' %></td>
-            <td><%= link_to 'Delete', page, method: :delete, class: 'btn btn-danger btn-xs', confirm: 'Are you sure you want to delete this whole page? You can\'t undo this!' %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <legend>Movie's Directory</legend>
+    <%= form_tag settings_path, remote: true, id: :movie_dir_form do %>
+      <%= hidden_field_tag :setting, :movie_dir %>
+      <%= hidden_field_tag :boolean, true %>
+      <div class="row">
+        <div class="col-md-9">
+          <%= text_field_tag :content, @movie_dir.content, class: 'form-control', placeholder: '/srv/movies' %>
+        </div>
+        <div class="col-md-3">
+          <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="movie_dir"></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-    <%= link_to 'Create New Page', new_page_path, class: 'btn btn-success' %>
+  <div class="col-md-6">
+    <legend>Pages</legend>
+      <table class="table" id="pages_table">
+        <thead>
+          <tr>
+            <th>Name</th><th></th><th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pages.each do |page| %>
+            <tr>
+              <td><%= link_to page.name, page_path(id: page.id) %></td>
+              <td><%= link_to 'Edit', edit_page_path(id: page.id), class: 'btn btn-success btn-xs' %></td>
+              <td><%= link_to 'Delete', page, method: :delete, class: 'btn btn-danger btn-xs', confirm: 'Are you sure you want to delete this whole page? You can\'t undo this!' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= link_to 'Create New Page', new_page_path, class: 'btn btn-success' %>
   </div>
 </div>
