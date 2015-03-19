@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20150307175148) do
   create_table "songs", :force => true do |t|
     t.integer  "album_id"
     t.string   "title"
+    t.string   "filepath"
     t.string   "filename"
     t.integer  "track"
     t.datetime "created_at", :null => false
