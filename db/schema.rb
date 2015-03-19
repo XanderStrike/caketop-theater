@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141203054218) do
+ActiveRecord::Schema.define(:version => 20150307175148) do
 
   create_table "albums", :force => true do |t|
     t.integer  "artist_id"
@@ -65,12 +65,10 @@ ActiveRecord::Schema.define(:version => 20141203054218) do
     t.text     "filename"
   end
 
-  create_table "genres", :id => false, :force => true do |t|
-    t.string   "id"
-    t.string   "movie_id"
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "genres", :force => true do |t|
+    t.integer "genre_id"
+    t.integer "movie_id"
+    t.string  "name"
   end
 
   create_table "movies", :force => true do |t|

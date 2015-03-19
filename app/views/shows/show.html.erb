@@ -21,8 +21,7 @@
           <tr>
             <th>Genre: </th>
             <td>
-              <!-- TODO add show_id to genres duh -->
-              <%# @show.genres.map {|g| link_to(g.genre, "/genre/#{g.genre_id}")}.join(', ') %>
+              <%= @show.genres.map(&:name).join(', ').html_safe %>
             </td>
           </tr>
           <tr>

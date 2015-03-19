@@ -9,15 +9,18 @@ class Setting < ActiveRecord::Base
       footer:         { name: 'footer', content: 'Maybe she\'s born with it, maybe it\'s caketop.', boolean: true },
       admin:          { name: 'admin', content: '', boolean: false },
       'admin-pass' => { name: 'admin-pass', content: '' },
-      url:            { name: 'url', content: '' }
+      url:            { name: 'url', content: '' },
+      movie_dir:      { name: 'movie_dir', content: '', boolean: true },
+      tv_dir:         { name: 'tv_dir', content: '', boolean: true },
+      music_dir:      { name: 'music_dir', content: '', boolean: true }
     }
 
   def self.render name
-  	if get(name).boolean
+    if get(name).boolean
       return get(name).content.html_safe
     else
       return ''
-  	end
+    end
   end
 
   def self.get name

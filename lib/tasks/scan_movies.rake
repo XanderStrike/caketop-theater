@@ -22,6 +22,15 @@ namespace :scan do
 
     formats = ['mp4', 'avi', 'xvid', 'divx', 'mts', 'mpeg', 'mkv', 'wmv', 'ogv', 'webm', 'mov', 'mpg', 'mpe', 'm4v', 'h264', 'avchd']
 
+    # create movie symlink
+    setting = Setting.get(:movie_dir)
+    if !File.exists?('public/movies') || setting.boolean
+      puts 'Creating symlink for new movie directory.'
+      File.unlink('public/movies') rescue nil
+      File.symlink(Setting.get(:movie_dir).content, 'public/movies')
+      setting.update_attributes(boolean: false)
+    end
+
     # get file list
     files = `find public/movies/ -type f`.split("\n").map {|f| f.gsub('public/movies/', '')}
     files = files.reject {|f| !formats.any? {|w| f =~ /#{w}/ }}
@@ -43,13 +52,12 @@ namespace :scan do
       info = get_info(movie.id)
 
       # download backdrop and poster
-      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/posters/#{info.id}.jpg -b -q`
+      `wget http://image.tmdb.org/t/p/w500/#{ info.poster_path } -O ./public/posters/#{info.id}.jpg -b -q`
       `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/backdrops/#{info.id}.jpg -b -q`
 
       # insert into db
       puts "Adding #{ file }\n    as #{ movie.title }"
       movie = Movie.find_by_id(info.id) || Movie.create(id: info.id)
-      movie.backdrop_path = info.backdrop_path
       movie.backdrop_path = info.backdrop_path
       movie.budget = info.budget
       movie.id = info.id
@@ -69,32 +77,30 @@ namespace :scan do
       movie.added = Time.now.to_s
       movie.save
 
-      # populate genres table (unless it already is)
-      unless Genre.where(movie_id: info.id).count > 0
-        info.genres.each do |g|
-          Genre.create(id: g['id'], name: g['name'], movie_id: info.id)
-        end
+      # populate genres table
+      info.genres.each do |g|
+        Genre.create(genre_id: g['id'], name: g['name'], movie_id: info.id) rescue nil
       end
 
       # get encode info
       mediainfo = Mediainfo.new "public/movies/#{file}"
       Encode.create(
-              movie_id: info.id, 
+              movie_id: info.id,
               filename: file,
-              a_bitrate: mediainfo.audio[0].bit_rate, 
-              a_format: mediainfo.audio[0].format_info, 
-              a_stream_size: mediainfo.audio[0].stream_size, 
-              aspect_ratio: mediainfo.video[0].display_aspect_ratio, 
-              container: mediainfo.general.format, 
-              duration: mediainfo.general.duration_before_type_cast, 
-              framerate: mediainfo.video[0].frame_rate, 
-              resolution: mediainfo.video[0].width, 
-              rip_date: mediainfo.encoded_date, 
-              size: mediainfo.size, 
-              v_bitrate: mediainfo.video[0].bit_rate, 
-              v_codec: mediainfo.video[0].codec_id, 
-              v_format: mediainfo.video[0].format, 
-              v_profile: mediainfo.video[0].format_profile, 
+              a_bitrate: mediainfo.audio[0].bit_rate,
+              a_format: mediainfo.audio[0].format_info,
+              a_stream_size: mediainfo.audio[0].stream_size,
+              aspect_ratio: mediainfo.video[0].display_aspect_ratio,
+              container: mediainfo.general.format,
+              duration: mediainfo.general.duration_before_type_cast,
+              framerate: mediainfo.video[0].frame_rate,
+              resolution: mediainfo.video[0].width,
+              rip_date: mediainfo.encoded_date,
+              size: mediainfo.size,
+              v_bitrate: mediainfo.video[0].bit_rate,
+              v_codec: mediainfo.video[0].codec_id,
+              v_format: mediainfo.video[0].format,
+              v_profile: mediainfo.video[0].format_profile,
               v_stream_size: mediainfo.video[0].stream_size)
     end
 

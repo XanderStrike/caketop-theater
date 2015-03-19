@@ -10,6 +10,15 @@ namespace :scan do
   task :tv => :environment do
     puts "Scanning for new tv shows:"
 
+    # create tv symlink
+    setting = Setting.get(:tv_dir)
+    if !File.exists?('public/tv') || setting.boolean
+      puts 'Creating symlink for new tv directory.'
+      File.unlink('public/tv') rescue nil
+      File.symlink(Setting.get(:tv_dir).content, 'public/tv')
+      setting.update_attributes(boolean: false)
+    end
+
     files = `ls public/tv `.split("\n").map {|f| f.gsub("public/tv/", "")}
 
     files.each do |file|
@@ -37,15 +46,13 @@ namespace :scan do
                   overview:  info.overview,
                   folder:  file)
 
-      # populate genres table (unless it already is)
-      unless Genre.where(movie_id: show.id).count > 0
-        info.genres.each do |g|
-          Genre.create(id: g['id'], name: g['name'], movie_id: show.id)
-        end
+      # populate genres table
+      info.genres.each do |g|
+        Genre.create(genre_id: g['id'], name: g['name'], movie_id: show.id) rescue nil
       end
 
       # download images
-      `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/posters/tv_#{info.id}.jpg -b -q`
+      `wget http://image.tmdb.org/t/p/w500/#{ info.poster_path } -O ./public/posters/tv_#{info.id}.jpg -b -q`
       `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/backdrops/tv_#{info.id}.jpg -b -q`
     end
 
