@@ -1,3 +1,5 @@
+passenger*
+.sass-cache
 .DS_store
 *.db
 public/movies
