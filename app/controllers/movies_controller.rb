@@ -48,11 +48,11 @@ class MoviesController < ApplicationController
   end
 
   def search
-    @results = model_search(Movie, SEARCHABLE_FIELDS, params[:q])
+    @movies = model_search(Movie, SEARCHABLE_FIELDS, params[:q])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @results }
+      format.json { render json: @movies }
     end
   end
 

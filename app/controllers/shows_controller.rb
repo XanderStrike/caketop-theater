@@ -32,11 +32,11 @@ class ShowsController < ApplicationController
   end
 
   def search
-    @results = model_search(Show, SEARCHABLE_FIELDS, params[:q])
+    @shows = model_search(Show, SEARCHABLE_FIELDS, params[:q])
 
     respond_to do |format|
       format.html
-      format.json { render json: @movie }
+      format.json { render json: @shows }
     end
   end
 end
