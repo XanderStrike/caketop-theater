@@ -12,54 +12,18 @@ This is a simple rails app I built to allow my media server to make my movie lib
 installation
 -----
 
-Plays best on Ubuntu Server 14.04, your mileage may vary.
+This is the simple installation, suitable for home servers with a dozen or less users at any given time. For high traffic servers and many simultaneous clients (20+) see the [advanced setup](https://github.com/XanderStrike/caketop-theater/blob/master/doc/advanced-installation.md).
 
-Install Ruby on Rails via [RVM](http://rvm.io/). Use the commands on the homepage, with the `--ruby` and `--rails` options.
+Easy setup on Ubuntu 14.04 and above machines (server, desktop, kodibuntu, and other variants):
 
-Install apache:
-
-    sudo apt-get install apache2
-
-Install passenger for Apache (see [this guide for more info](https://rvm.io/integration/passenger)):
-
-    gem install passenger
-    passenger-install-apache2-module
-
-Install prerequisities:
-
-    sudo apt-get install mediainfo libtag1-dev
-
-Clone this repository and prepare the app for production:
-
-    git clone https://github.com/XanderStrike/caketop-theater.git
-    cd caketop-theater
-    <package-manager> install taglib
-    bundle install
-    RAILS_ENV=production rake db:migrate assets:precompile
-
-Create symbolic links to your movie and tv libraries in the `/public` directory of the app. The symlinks should be named "movies" and "tv" and "music":
-
-    cd /path/to/caketop-theater/public
-    ln -s /media/bigdrive/movies
-    ln -s /media/bigdrive/tv
-    ln -s /media/bigdrive/music
-
-Configure apache/passenger appropriately by modifying `/etc/apache2/sites-enabled/000-default` to suit your needs, your setup will almost certainly be different, but this is my configuration for hosting the app on the `/theater` sub-uri:
-
-    Alias /theater /home/xander/caketop-theater/public
-    <location /theater>
-      PassengerBaseURI /theater
-      PassengerAppRoot /home/xander/caketop-theater
-    </location>
-    <Directory /home/xander/caketop-theater/public>
-      Allow from all
-      Options -Multiviews
-    </Directory>
-
-Once you've got the app running, visit `/settings` to populate your settings table with defaults, and you should be good to go!
+    wget 'https://raw.githubusercontent.com/XanderStrike/caketop-theater/master/lib/setup.sh'
+    chmod +x setup.sh
+    bash setup.sh
 
 usage
 -----
+
+Start and stop the app by running `./start.sh` and `./stop.sh`. Visit the web interface on `http://<server-ip>:3131`
 
 Once you're installed and running populate your DB by calling the rake scan tasks in the directory of the app:
 

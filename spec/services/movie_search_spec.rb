@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe MovieSearch, :type => :model do
+  describe '.simple_search' do
+    it 'should filter a list of movies' do
+      movies = create_list(:movie, 40)
+      patton = create(:movie, title: 'Patton')
+      potempkin = create(:movie, original_title: 'Battleship Potempkin')
+      ryan = create(:movie, overview: 'Saving Private Ryan')
+
+      expect(MovieSearch.simple_search('patton')).to eq([patton])
+      expect(MovieSearch.simple_search('potempkin')).to eq([potempkin])
+      expect(MovieSearch.simple_search('ryan')).to eq([ryan])
+    end
+  end
+
   describe '.initialize' do
     before(:each) do
       @movies = create_list(:movie, 40)
