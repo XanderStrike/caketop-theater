@@ -1,5 +1,11 @@
 <h1>Settings</h1>
 
+<div class='row'>
+    <div class="col-md-12">
+        <%= render partial: 'simple_setting', locals: {title: 'Site Name', setting: 'name', boolean: true, placeholder: 'Caketop Theater', current_setting: @name } %>
+    </div>
+</div>
+
 <div class="row setting-row">
   <div class="col-md-4">
     <%= render partial: 'simple_setting', locals: {title: 'Movie Directory', setting: 'movie_dir', boolean: true, placeholder: '/srv/movies', current_setting: @movie_dir } %>
@@ -16,96 +22,12 @@
 
 <div class="row">
   <div class="col-md-6">
-    <%= render partial: 'simple_setting', locals: {title: 'Site Name', setting: 'name', boolean: true, placeholder: 'Caketop Theater', current_setting: @name } %>
-  </div>
-  <div class="col-md-6">
-
-    <legend>About Page</legend>
-    <div id="about" class="setting">
-      <p>This is the contents of the About page. Who you are, why you're hosting this, etc. <br>HTML is a-okay.</p>
-
-      <%= form_tag settings_path, remote: true, id: :about_form do %>
-        <%= hidden_field_tag :setting, :about %>
-        <%= hidden_field_tag :boolean, true %>
-        <div class="row">
-          <div class="col-md-9">
-            <%= text_area_tag :content, @about.content, class: 'form-control', placeholder: "Caketop Theater is run by muppets." %>
-          </div>
-          <div class="col-md-3">
-            <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="about"></span>
-          </div>
-        </div>
-      <% end %>
-    </div>
-
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-md-6">
-
-    <legend>Settings Page</legend>
-    <div id="name" class="setting">
-      <p>Password protect this page?</p>
-
-      <%= form_tag settings_path, remote: true, id: :admin_form do %>
-        <%= hidden_field_tag :setting, :admin %>
-        <div class="row">
-          <div class="col-md-9">
-            <table class="table">
-              <tr>
-                <td><label><%= radio_button_tag :boolean, true, @admin.boolean %> Yes</label></td>
-                <td><label><%= radio_button_tag :boolean, false, !@admin.boolean %> No</label></td>
-              </tr>
-            </table>
-            <%= text_field_tag :content, @admin.content, class: 'form-control', placeholder: "username" %><br>
-            <%= password_field_tag :admin_pass, @admin_pass.content, class: 'form-control', placeholder: "password" %>
-          </div>
-          <div class="col-md-3">
-            <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="admin"></span>
-          </div>
-        </div>
-      <% end %>
-    </div>
-
-  </div>
-  <div class="col-md-6">
-
-    <legend>Banner Area</legend>
-    <div id="banner" class="setting">
-      <%= form_tag settings_path, remote: true, id: :banner_form do %>
-        <%= hidden_field_tag :setting, :banner %>
-        <div class="row">
-          <div class="col-md-9">
-            <%= text_area_tag :content, @banner.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
-            <table class="table">
-              <tr>
-                <td><label><%= radio_button_tag :boolean, true, @banner.boolean %> Show</label></td>
-                <td><label><%= radio_button_tag :boolean, false, !@banner.boolean %> Hide</label></td>
-              </tr>
-            </table>
-          </div>
-          <div class="col-md-3">
-            <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="banner"></span>
-          </div>
-        </div>
-      <% end %>
-      <p>This text will appear on the <%= link_to 'home page', root_url %> above the title, front and center! It's useful for announcements and general information for your users. HTML is totally acceptable in this field, so go nuts.</p>
-    </div>
-
-  </div>
-
-</div>
-
-<div class="row">
-  <div class="col-md-6">
-    <legend>Footer Text</legend>
+    <h3>Footer Text</h3>
     <%= form_tag settings_path, remote: true, id: :footer_form do %>
       <%= hidden_field_tag :setting, :footer %>
       <div class="row">
         <div class="col-md-9">
-          <%= text_area_tag :content, @footer.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
+          <%= text_area_tag :content, @footer.content, class: 'form-control', rows: 5, placeholder: "Welcome to Caketop Theater!" %>
           <table class="table">
             <tr>
               <td><label><%= radio_button_tag :boolean, true, @footer.boolean %> Show</label></td>
@@ -114,34 +36,99 @@
           </table>
         </div>
         <div class="col-md-3">
-          <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="footer"></span>
+          <%= submit_tag "Save", class: 'btn btn-success', id: 'footer_button', remote: true %>
         </div>
       </div>
     <% end %>
   </div>
   <div class="col-md-6">
+    <h3>About Page</h3>
+    <div id="about" class="setting">
+      <%= form_tag settings_path, remote: true, id: :about_form do %>
+        <%= hidden_field_tag :setting, :about %>
+        <%= hidden_field_tag :boolean, true %>
+        <div class="row">
+          <div class="col-md-9">
+            <%= text_area_tag :content, @about.content, class: 'form-control', rows: 5, placeholder: "Caketop Theater is run by muppets." %>
+          </div>
+          <div class="col-md-3">
+            <%= submit_tag "Save", class: 'btn btn-success', id: 'about_button', remote: true %>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
-    <legend>Sub URL</legend>
-    <%= form_tag settings_path, remote: true, id: :url_form do %>
-      <%= hidden_field_tag :setting, :url %>
-      <div class="row">
-        <div class="col-md-9">
-          <%= text_field_tag :content, @url.content, class: 'form-control', placeholder: "/theater" %>
-        </div>
-        <div class="col-md-3">
-          <%= submit_tag "Save", class: 'btn btn-success', remote: true %> <span id="url"></span>
-        </div>
-      </div>
-    <% end %>
-    <p>Use this if you are hosting Caketop on a url other than the root (like <code>/theater</code>). Otherwise videos will not play properly.</p>
-    <p>Include a slash at the beginning, but leave blank if not using a sub url.</p>
   </div>
 </div>
 
+
 <div class="row">
+  <div class="col-md-6">
+    <h3>Settings Page <small>Password protect this page?</small></h3>
+    <div id="name" class="setting">
+      <%= form_tag settings_path, remote: true, id: :admin_form do %>
+        <%= hidden_field_tag :setting, :admin %>
+        <div class="row">
+          <div class="col-md-9">
+            <%= text_field_tag :content, @admin.content, class: 'form-control', placeholder: "username" %><br>
+            <%= password_field_tag :admin_pass, @admin_pass.content, class: 'form-control', placeholder: "password" %>
+              <br>
+            <table class="table">
+              <tr>
+                <td><label><%= radio_button_tag :boolean, true, @admin.boolean %> Yes</label></td>
+                <td><label><%= radio_button_tag :boolean, false, !@admin.boolean %> No</label></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-3">
+            <%= submit_tag "Save", class: 'btn btn-success', id: 'admin_button', remote: true %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="col-md-6">
+    <h3>Banner Area <small>Make an announcement</h3>
+    <div id="banner" class="setting">
+      <%= form_tag settings_path, remote: true, id: :banner_form do %>
+        <%= hidden_field_tag :setting, :banner %>
+        <div class="row">
+          <div class="col-md-12">
+              <div class="input-group">
+                  <%= text_field_tag :content, @banner.content, class: 'form-control', placeholder: "Welcome to Caketop Theater!" %>
+                  <span class="input-group-btn">
+                      <%= submit_tag "Save", class: 'btn btn-success', id: 'banner_button', remote: true %>
+                  </span>
+              </div>
+              <br>
+            <table class="table">
+              <tr>
+                <td><label><%= radio_button_tag :boolean, true, @banner.boolean %> Show</label></td>
+                <td><label><%= radio_button_tag :boolean, false, !@banner.boolean %> Hide</label></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-3">
+
+          </div>
+        </div>
+      <% end %>
+      <p>This text will appear on the <%= link_to 'home page', root_url %> above the title, front and center! HTML is totally acceptable in this field, so go nuts.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <%= render partial: 'simple_setting', locals: {title: 'Sub URL', setting: 'url', boolean: true, placeholder: '/theater', current_setting: @url } %>
+    <p>Use this if you are hosting Caketop on a url other than the root (like <code>/theater</code>). Otherwise videos will not play properly.</p>
+  </div>
 
   <div class="col-md-6">
-    <legend>Pages</legend>
+    <h3>Pages</h3>
       <table class="table" id="pages_table">
         <thead>
           <tr>
@@ -158,7 +145,10 @@
           <% end %>
         </tbody>
       </table>
-
-      <%= link_to 'Create New Page', new_page_path, class: 'btn btn-success' %>
+      <%= link_to '+ New Page', new_page_path, class: 'btn btn-primary' %>
   </div>
 </div>
+
+<script type="text/javascript">
+ $('input#name_field').keyup(function(event) { $('.navbar-brand')[0].text = $('input#name_field')[0].value.toUpperCase(); });
+</script>

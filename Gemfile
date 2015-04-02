@@ -26,6 +26,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'selenium-webdriver', '2.45'
   gem 'database_cleaner'
+  gem 'pry'
 end
 
 gem "codeclimate-test-reporter", group: :test, require: nil

@@ -1,14 +1,16 @@
-<legend><%= title %></legend>
+<h3><%= title %></h3>
 <%= form_tag settings_path, remote: true, id: "#{setting}_form" do %>
   <%= hidden_field_tag :setting, setting %>
   <%= hidden_field_tag :boolean, boolean %>
   <div class="row">
-    <div class="col-md-9">
-      <%= text_field_tag :content, current_setting.content, class: 'form-control', placeholder: placeholder %>
-    </div>
-    <div class="col-md-3">
-      <%= submit_tag "Save", class: 'btn btn-success', remote: true %>
-      <br><span id="<%= setting %>"></span><br>
-    </div>
+      <div class="col-md-12">
+          <div class="input-group">
+              <%= text_field_tag :content, current_setting.content, class: 'form-control', id: setting + "_field", placeholder: placeholder %>
+              <span class="input-group-btn">
+                  <%= submit_tag "Save", class: 'btn btn-success', id: setting + "_button", remote: true %>
+              </span>
+          </div>
+      </div>
+      <br><br>
   </div>
 <% end %>
