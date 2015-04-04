@@ -23,7 +23,8 @@ feature "home page" do
 	end
 
 	scenario "user retags movie", js: true do
-		page = MoviePage.new(create(:movie))
+		movie = create(:movie)
+		page = MoviePage.new(movie)
 		page.open_retag_modal
 		page.retag_modal_search 'Jurassic Park'
 		page.retag_modal_select 'Jurassic Park'

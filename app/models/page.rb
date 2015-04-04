@@ -1,4 +1,6 @@
 class Page < ActiveRecord::Base
+  include HTMLRenderer
+
   attr_accessible :text, :content, :name, :navbar, :footer
   before_save :convert_markdown
 
@@ -8,9 +10,7 @@ class Page < ActiveRecord::Base
   private
 
   def convert_markdown
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-                                       :autolink => true, :space_after_headers => true)
-    self.content = markdown.render(self.text)
+    self.content = red_carpet.render(self.text)
   end
 
 end

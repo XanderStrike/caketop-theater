@@ -34,5 +34,10 @@ FactoryGirl.define do
         create_list(:view, rand(100), movie: movie)
       end
     end
+    factory :movie_with_encode do
+      after(:create) do |movie|
+        create_list(:encode, 1, movie: movie)
+      end
+    end
   end
 end

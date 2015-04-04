@@ -1,6 +1,10 @@
 class ShowsController < ApplicationController
+  include ModelSearch
   # GET /shows
   # GET /shows.json
+
+  SEARCHABLE_FIELDS = %w(name original_name folder overview)
+
   def index
     @shows = Show.order('name asc')
 
@@ -28,15 +32,11 @@ class ShowsController < ApplicationController
   end
 
   def search
-    @results = Show.where("name like ?", "%#{params[:q]}%")
-    @results += Show.where("original_name like ?", "%#{params[:q]}%")
-    @results += Show.where("folder like ?", "%#{params[:q]}%")
-    @results += Show.where("overview like ?", "%#{params[:q]}%")
-    @results = @results.uniq
+    @shows = model_search(Show, SEARCHABLE_FIELDS, params[:q])
 
     respond_to do |format|
       format.html
-      format.json { render json: @movie }
+      format.json { render json: @shows }
     end
   end
 end
