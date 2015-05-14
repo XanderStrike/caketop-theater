@@ -16,7 +16,7 @@ RSpec.describe ShowsController, type: :controller do
   	it 'displays all the shows' do
   		get :index
   		expect(assigns(:shows).first).to be_a(Show)
-  		expect(assigns(:shows).count).to eq(16) 
+  		expect(assigns(:shows).count).to eq(16)
   	end
   end
 

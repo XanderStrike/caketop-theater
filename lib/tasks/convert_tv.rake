@@ -44,10 +44,10 @@ namespace :convert do
     eps_needing_conv = []
     shows.each do |show|
       seasons = `ls "public/tv/#{show}"`.split("\n")
-      
+
       seasons.each do |season|
         episodes = `ls "public/tv/#{show}/#{season}"`.split("\n")
-        
+
         episodes.each do |ep|
           break if eps_needing_conv.count > limit
           begin
