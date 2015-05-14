@@ -3,7 +3,7 @@ class CreateSettings < ActiveRecord::Migration
     create_table :settings do |t|
       t.string :name
       t.column :id, :string
-      
+
       t.string :content
       t.column :number, :integer
       t.column :boolean, :boolean

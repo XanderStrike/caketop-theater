@@ -7,7 +7,7 @@ This is a simple rails app I built to allow my media server to make my movie lib
 
 [Here is what it looks like.](http://imgur.com/a/5GFME)
 
-[![Circle CI](https://circleci.com/gh/XanderStrike/caketop-theater/tree/master.svg?style=svg)](https://circleci.com/gh/XanderStrike/caketop-theater/tree/master) [![Test Coverage](https://codeclimate.com/github/XanderStrike/caketop-theater/badges/coverage.svg)](https://codeclimate.com/github/XanderStrike/caketop-theater) [![Code Climate](https://codeclimate.com/github/XanderStrike/caketop-theater/badges/gpa.svg)](https://codeclimate.com/github/XanderStrike/caketop-theater) 
+[![Circle CI](https://circleci.com/gh/XanderStrike/caketop-theater/tree/master.svg?style=svg)](https://circleci.com/gh/XanderStrike/caketop-theater/tree/master) [![Test Coverage](https://codeclimate.com/github/XanderStrike/caketop-theater/badges/coverage.svg)](https://codeclimate.com/github/XanderStrike/caketop-theater) [![Code Climate](https://codeclimate.com/github/XanderStrike/caketop-theater/badges/gpa.svg)](https://codeclimate.com/github/XanderStrike/caketop-theater)
 
 installation
 -----

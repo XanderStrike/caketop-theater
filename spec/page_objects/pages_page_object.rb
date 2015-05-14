@@ -25,6 +25,6 @@ end
 class ShowPage
 	include Capybara::DSL
 
-	def initialize 
+	def initialize
 	end
 end

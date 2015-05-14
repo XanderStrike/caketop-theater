@@ -15,7 +15,7 @@ namespace :convert do
       `avconv -i "public/movies/#{filename}" -c:v copy -strict experimental "/tmp/#{filename}.mp4"`
       `rm "public/movies/#{filename}"`
     end
-    
+
     puts "Copying transcoded movies..."
     `mv "/tmp/"*".mp4" public/movies/`
 
