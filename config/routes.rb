@@ -25,8 +25,9 @@ CaketopTheater::Application.routes.draw do
   post 'shows/search'
   resources :shows
 
-  get 'music/artist/:id', to: 'music#artist', as: :music_artist
-  resources :music
+  resources :songs
+  resources :artists
+  resources :albums
 
   root to: 'home#index'
 end

@@ -11,6 +11,9 @@ class MusicController < ApplicationController
     respond_to do |format|
       format.html { render 'index.html' }
       format.js { render layout: false }
+      format.json {
+        render json: Song.joins(:artist, :album).to_json(include: [:artist, :album])
+      }
     end
   end
 
@@ -23,6 +26,11 @@ class MusicController < ApplicationController
     respond_to do |format|
       format.html { render 'index.html'}
       format.js { render 'index.js' }
+      format.json { render json: @artist }
     end
+  end
+
+  def album
+
   end
 end
