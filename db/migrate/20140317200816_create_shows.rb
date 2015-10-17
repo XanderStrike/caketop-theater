@@ -1,8 +1,7 @@
 class CreateShows < ActiveRecord::Migration
   def change
-    create_table :shows do |t|
+    create_table(:shows) do |t|
       t.string :backdrop_path
-      t.string :id
       t.string :original_name
       t.string :first_air_date
       t.string :poster_path

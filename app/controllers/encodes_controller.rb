@@ -10,8 +10,8 @@ class EncodesController < ApplicationController
 
     old_movie = Movie.find_by_id(encode.movie_id)
 
-    `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/posters/#{info.id}.jpg -b -q`
-    `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/backdrops/#{info.id}.jpg -b -q`
+    # `wget https://d3gtl9l2a4fn1j.cloudfront.net/t/p/w500/#{ info.poster_path } -O ./public/posters/#{info.id}.jpg -b -q`
+    # `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/backdrops/#{info.id}.jpg -b -q`
 
     movie = Movie.find_by_id(info.id) || Movie.create(id: info.id)
     movie.backdrop_path = info.backdrop_path

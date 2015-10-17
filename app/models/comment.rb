@@ -1,5 +1,4 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :content, :body, :movie_id, :name
   before_save :convert_markdown
 
   belongs_to :movie

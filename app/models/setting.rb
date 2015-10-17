@@ -1,6 +1,4 @@
 class Setting < ActiveRecord::Base
-  attr_accessible :name, :id, :content, :number, :boolean
-
   DEFAULTS =
     {
       name:           { name: 'name', content: 'Caketop Theater', boolean: true },
@@ -15,11 +13,11 @@ class Setting < ActiveRecord::Base
       music_dir:      { name: 'music_dir', content: '', boolean: true }
     }
 
-  def self.render name
+  def self.render(name)
     if get(name).boolean
-      return get(name).content.html_safe
+      get(name).content.html_safe
     else
-      return ''
+      ''
     end
   end
 

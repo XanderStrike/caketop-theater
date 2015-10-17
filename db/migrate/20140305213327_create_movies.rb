@@ -1,9 +1,8 @@
 class CreateMovies < ActiveRecord::Migration
   def change
-    create_table :movies do |t|
+    create_table(:movies) do |t|
       t.string :backdrop_path
       t.string :budget
-      t.string :id
       t.string :imdb_id
       t.string :original_title
       t.string :overview

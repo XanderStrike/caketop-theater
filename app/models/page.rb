@@ -1,7 +1,4 @@
 class Page < ActiveRecord::Base
-  attr_accessible :text, :content, :name, :navbar, :footer
-  before_save :convert_markdown
-
   scope :navbar, -> { where(navbar: true) }
   scope :footer, -> { where(footer: true) }
 
