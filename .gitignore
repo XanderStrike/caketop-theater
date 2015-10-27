@@ -10,7 +10,7 @@ tmp
 #*#
 public/posters/*.jpg
 public/posters/*.png
-
+log/*/**
 public/backdrops/*.jpg
 public/backdrops/*.png
 

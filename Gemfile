@@ -10,9 +10,8 @@ gem 'sqlite3'
 gem 'redcarpet'
 gem 'taglib-ruby'
 gem 'yaml_db'
-gem "chartkick"
+gem 'chartkick'
 gem 'kaminari'
-
 
 group :assets do
   gem 'sass-rails'
@@ -29,7 +28,7 @@ group :development, :test do
   gem 'pry'
 end
 
-gem "codeclimate-test-reporter", group: :test, require: nil
+gem 'codeclimate-test-reporter', group: :test, require: nil
 
 gem 'jquery-rails'
 

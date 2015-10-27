@@ -2,12 +2,15 @@ class Page < ActiveRecord::Base
   scope :navbar, -> { where(navbar: true) }
   scope :footer, -> { where(footer: true) }
 
+  def content
+    markdown.render(text)
+  end
+
   private
 
-  def convert_markdown
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-                                       :autolink => true, :space_after_headers => true)
-    self.content = markdown.render(self.text)
+  def markdown
+    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+                                          :autolink => true, :space_after_headers => true)
   end
 
 end

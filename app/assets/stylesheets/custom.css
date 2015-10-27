@@ -6,42 +6,12 @@
   padding-bottom:25px;
 }
 
-#player {
-    width: 100%;
-    height: 60px;
-    background-color: black;
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    color: white;
-}
-
-#player span {
-    margin-top: 10px;
-    margin-left: 10px;
-    font-size: 35px;
-    color: white;
-}
-
-#player h4 {
-    padding-top: 10px;
-}
-
 .movie-cell {
   text-align:center;
 }
 
 .active {
   font-weight:bold;
-  /*background-color: #d2d2d2;*/
-}
-
-tr.song td span {
-  visibility: hidden;
-}
-
-tr.active td span {
-  visibility: visible;
   /*background-color: #d2d2d2;*/
 }
 
@@ -112,9 +82,16 @@ body {
 }
 
 
-.artist-container {
-    height: 250px;
+.artist-image {
+  width:100%;
+  height:200px;
+  background:url(http://placehold.it/300x150);
+  background-size:contain !important;
+  background-position:center !important;
   margin-bottom:20px;
+  padding-top:5px;
+  padding-left:8px;
+  padding-right:18px;
   cursor: pointer;
   color:white;
   text-shadow:
@@ -124,21 +101,7 @@ body {
     1px 1px 0 #000;
   font-size:16px;
 }
-
-.artist-img {
-    width: 190px;
-}
-
-.artist-img img {
-    width: 100%;
-    height: 100%;
-}
-
-.artist-container img.lastfm {
-    width: 25px;
-}
-
-.artist-container:hover {
+.artist-image:hover {
   box-shadow:0px 0px 10px #666;
 }
 
