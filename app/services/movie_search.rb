@@ -2,10 +2,10 @@ class MovieSearch
   attr_accessor :results
 
   def initialize(params)
-     @params = params
-     @results = Movie.where('')
+    @params = params
+    @results = Movie.where('')
 
-     filter
+    filter
   end
 
   def self.simple_search(q)
@@ -53,6 +53,6 @@ class MovieSearch
   end
 
   def encode_query(column, comparison, value)
-    @results = @results.where("encodes.#{column} #{comparison} ?", value).includes(:encodes) unless value.blank? || value == '%%'
+    @results = @results.includes(:encodes).where("encodes.#{column} #{comparison} ?", value).references(:encodes) unless value.blank? || value == '%%'
   end
 end

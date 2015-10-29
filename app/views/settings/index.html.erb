@@ -140,7 +140,7 @@
             <tr>
               <td><%= link_to page.name, page_path(id: page.id) %></td>
               <td><%= link_to 'Edit', edit_page_path(id: page.id), class: 'btn btn-success btn-xs' %></td>
-              <td><%= link_to 'Delete', page, method: :delete, class: 'btn btn-danger btn-xs', confirm: 'Are you sure you want to delete this whole page? You can\'t undo this!' %></td>
+              <td><%= link_to 'Delete', page, method: :delete, class: 'btn btn-danger btn-xs', data: { confirm: 'Are you sure you want to delete this whole page? You can\'t undo this!' } %></td>
             </tr>
           <% end %>
         </tbody>
