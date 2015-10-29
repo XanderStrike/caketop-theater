@@ -28,16 +28,15 @@ class Episode
 end
 
 namespace :convert do
-  desc "Converts TV shows that are not in good HTML5 formats"
-  task :tv => :environment do
-
+  desc 'Converts TV shows that are not in good HTML5 formats'
+  task tv: :environment do
     # How many episodes to do per
     limit = 50
 
     # Gotta do it folder by folder because we don't keep episode information.
     # Probably a problem.
 
-    puts "Finding episodes that need conversion..."
+    puts 'Finding episodes that need conversion...'
 
     shows = `ls public/tv`.split("\n")
 
@@ -54,11 +53,11 @@ namespace :convert do
             info = Mediainfo.new "public/tv/#{show}/#{season}/#{ep}"
             if (info.audio[0].format_info != 'Advanced Audio Codec') || (info.video[0].format_info != 'Advanced Video Codec')
               ep = Episode.new(show,
-                          season,
-                          ep,
-                          (info.audio[0].format_info != 'Advanced Audio Codec'),
-                          (info.video[0].format_info != 'Advanced Video Codec')
-                )
+                               season,
+                               ep,
+                               (info.audio[0].format_info != 'Advanced Audio Codec'),
+                               (info.video[0].format_info != 'Advanced Video Codec')
+                              )
               eps_needing_conv << ep
               puts "- #{ep}"
             end
@@ -70,8 +69,8 @@ namespace :convert do
 
     puts "Found #{eps_needing_conv.count} episodes that need conversion..."
 
-    puts "Starting conversion..."
+    puts 'Starting conversion...'
     eps_needing_conv.first(25).map(&:convert)
-    puts "Done."
+    puts 'Done.'
   end
 end

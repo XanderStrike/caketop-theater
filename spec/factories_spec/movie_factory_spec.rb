@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Movie Factory', type: :factory do
   include FactoryGirl::Syntax::Methods
 
-  describe "movie" do
+  describe 'movie' do
     it 'has all the attributes from the model' do
       expect(attributes_for(:movie)).to include(*(factory_attributes(Movie)))
     end
@@ -21,8 +21,8 @@ RSpec.describe 'Movie Factory', type: :factory do
     end
   end
 
-  describe "movie_with_comments" do
-    it "has some comments" do
+  describe 'movie_with_comments' do
+    it 'has some comments' do
       expect(create(:movie_with_comments).comments.count).to eq(50)
     end
   end

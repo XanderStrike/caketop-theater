@@ -1,8 +1,7 @@
-
 class SettingsController < ApplicationController
-	before_filter :authenticate
+  before_filter :authenticate
 
-	def index
+  def index
     @name = Setting.get(:name)
     @about = Setting.get(:about)
     @banner = Setting.get(:banner)
@@ -24,9 +23,10 @@ class SettingsController < ApplicationController
   end
 
   protected
+
   def authenticate
     setting = Setting.get(:admin)
-    if (!(setting.nil?) && setting.boolean)
+    if !(setting.nil?) && setting.boolean
       authenticate_or_request_with_http_basic do |username, password|
         username == setting.content && Digest::SHA256.hexdigest(password) == Setting.where(name: 'admin-pass').first.content
       end

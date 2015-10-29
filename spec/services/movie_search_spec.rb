@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MovieSearch, :type => :model do
+RSpec.describe MovieSearch, type: :model do
   describe '.simple_search' do
     it 'should filter a list of movies' do
       movies = create_list(:movie, 40)

@@ -1,7 +1,7 @@
 class AboutPage
-	include Capybara::DSL
+  include Capybara::DSL
 
-	def initialize
-		visit '/about'
-	end
+  def initialize
+    visit '/about'
+  end
 end

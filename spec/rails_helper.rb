@@ -1,10 +1,10 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require "codeclimate-test-reporter"
+require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
@@ -12,8 +12,7 @@ require 'database_cleaner'
 # Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Require page objects
-Dir[Rails.root.join("spec/page_objects/*.rb")].each { |f| require f }
-
+Dir[Rails.root.join('spec/page_objects/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
@@ -33,7 +32,6 @@ RSpec.configure do |config|
     end
   end
 end
-
 
 # Ignore "image not found" errors and that sort of thing
 Capybara.raise_server_errors = false
@@ -64,6 +62,6 @@ def basic_auth(name, password)
   elsif page.driver.respond_to?(:browser) && page.driver.browser.respond_to?(:basic_authorize)
     page.driver.browser.basic_authorize(name, password)
   else
-    raise "I don't know how to log in!"
+    fail "I don't know how to log in!"
   end
 end

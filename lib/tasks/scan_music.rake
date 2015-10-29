@@ -6,18 +6,18 @@ class SongInfo
   def initialize(filepath)
     m = Mediainfo.new("public/#{filepath}")
 
-    @format = m.streams.first.parsed_response[:general]["format"]
-    @file_size = m.streams.first.parsed_response[:general]["file_size"]
-    @duration = m.streams.first.parsed_response[:general]["duration"]
-    @bitrate = m.streams.first.parsed_response[:general]["overall_bit_rate"]
-    @bitrate_mode = m.streams.first.parsed_response[:general]["overall_bit_rate_mode"]
-    @artist = m.streams.first.parsed_response[:general]["performer"]
-    @album = m.streams.first.parsed_response[:general]["album"]
-    @title = m.streams.first.parsed_response[:general]["track_name"]
-    @track = m.streams.first.parsed_response[:general]["track_name_position"]
-    @composer = m.streams.first.parsed_response[:general]["composer"]
-    @genre = m.streams.first.parsed_response[:general]["genre"]
-    @record_date = m.streams.first.parsed_response[:general]["recorded_date"]
+    @format = m.streams.first.parsed_response[:general]['format']
+    @file_size = m.streams.first.parsed_response[:general]['file_size']
+    @duration = m.streams.first.parsed_response[:general]['duration']
+    @bitrate = m.streams.first.parsed_response[:general]['overall_bit_rate']
+    @bitrate_mode = m.streams.first.parsed_response[:general]['overall_bit_rate_mode']
+    @artist = m.streams.first.parsed_response[:general]['performer']
+    @album = m.streams.first.parsed_response[:general]['album']
+    @title = m.streams.first.parsed_response[:general]['track_name']
+    @track = m.streams.first.parsed_response[:general]['track_name_position']
+    @composer = m.streams.first.parsed_response[:general]['composer']
+    @genre = m.streams.first.parsed_response[:general]['genre']
+    @record_date = m.streams.first.parsed_response[:general]['recorded_date']
   end
 end
 
@@ -25,7 +25,7 @@ class ArtistInfo
   attr_accessor :name, :url, :image, :bio, :year, :home
 
   def initialize(name)
-    result = JSON.parse(open("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=#{URI::encode(name)}&api_key=138aa7ed99eb2137813efc55586d1d28&format=json").read)
+    result = JSON.parse(open("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=#{URI.encode(name)}&api_key=138aa7ed99eb2137813efc55586d1d28&format=json").read)
 
     if result['artist'].nil?
       @name = name
@@ -41,21 +41,25 @@ class ArtistInfo
 end
 
 namespace :scan do
-  desc "Scan for new music in library folder."
-  task :music => :environment do
-    puts "Scanning for new music:"
+  desc 'Scan for new music in library folder.'
+  task music: :environment do
+    puts 'Scanning for new music:'
 
     # create tv symlink
     setting = Setting.get(:music_dir)
-    if !File.exists?('public/music') || setting.boolean
+    if !File.exist?('public/music') || setting.boolean
       puts 'Creating symlink for new music directory.'
-      File.unlink('public/music') rescue nil
+      begin
+        File.unlink('public/music')
+      rescue
+        nil
+      end
       File.symlink(Setting.get(:music_dir).content, 'public/music')
       setting.update_attributes(boolean: false)
     end
 
     files = `find public/music/ -type f | grep \.mp3$`
-    files = files.split("\n").map {|f| f.gsub('public/', '')}
+    files = files.split("\n").map { |f| f.gsub('public/', '') }
     db_files = Song.select(:filename).map(&:filename)
     new_files = files - db_files
 
@@ -76,7 +80,7 @@ namespace :scan do
           artist.save!
         end
 
-        filepath = f.split('/')[0...f.split('/').size-1].join('/')
+        filepath = f.split('/')[0...f.split('/').size - 1].join('/')
         album_art = `ls #{"public/#{filepath}".shellescape} | grep #{'\.jpg$\|\.png$\|\.jpeg$'.shellescape}`.split("\n").first
         puts "#{filepath}/#{album_art}"
 
@@ -85,7 +89,7 @@ namespace :scan do
           year: s.record_date,
           genre: s.genre,
           art: (album_art.nil? ? nil : "#{filepath}/#{album_art}")
-          )
+        )
         album.save!
 
         song = album.songs.where(filename: f).first || album.songs.create(

@@ -17,8 +17,8 @@ RSpec.describe SettingsController, type: :controller do
 
       it 'assigns default values to the settings' do
         expect(Setting.count).to eq(0)
-      	get :index, first_time: 'true'
-      	expect(assigns(:name).content).to eq('Caketop Theater')
+        get :index, first_time: 'true'
+        expect(assigns(:name).content).to eq('Caketop Theater')
       end
     end
 
@@ -35,7 +35,7 @@ RSpec.describe SettingsController, type: :controller do
     end
   end
 
-   describe 'POST index' do
+  describe 'POST index' do
     before(:each) do
       create_settings
     end
@@ -70,8 +70,8 @@ RSpec.describe SettingsController, type: :controller do
     end
 
     it 'updates the url' do
-    	post :index, setting: 'url', content: '/caketoptheater'
-    	expect(Setting.get('url').content).to eq('/caketoptheater')
+      post :index, setting: 'url', content: '/caketoptheater'
+      expect(Setting.get('url').content).to eq('/caketoptheater')
     end
   end
 end

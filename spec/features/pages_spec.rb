@@ -1,12 +1,12 @@
-require "rails_helper"
+require 'rails_helper'
 
-feature "pages" do
-  scenario "user creates, edits, and deletes a page", js: true do
+feature 'pages' do
+  scenario 'user creates, edits, and deletes a page', js: true do
     page_object = SettingsPage.new
     page_object = page_object.create_page
 
     page_object.fill_out('Test Page', '# this is a header', false, false)
-    expect(page.html).to include("<h1>this is a header</h1>")
+    expect(page.html).to include('<h1>this is a header</h1>')
 
     page_object.fill_out('Test Page', '*hello* ' * 100, false, false)
     page_object = page_object.create
@@ -15,7 +15,7 @@ feature "pages" do
 
     page_object = page_object.show_page('Test Page')
     expect(page).to have_content('hello ' * 100)
-    expect(page.html).to include("<em>hello</em>")
+    expect(page.html).to include('<em>hello</em>')
 
     page_object = SettingsPage.new
     page_object = page_object.edit_page('Test Page')

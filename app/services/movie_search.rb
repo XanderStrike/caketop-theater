@@ -10,19 +10,19 @@ class MovieSearch
 
   def self.simple_search(q)
     q = "%#{q}%"
-    Movie.where("title like ? or original_title like ? or overview like ?", q, q, q)
+    Movie.where('title like ? or original_title like ? or overview like ?', q, q, q)
   end
 
   private
 
   def filter
     # poor man's strong params
-    [:title, :overview].map {|key| like(key) }
-    [:runtime_max, :revenue_max, :budget_max, :vote_average_max].each {|key| less_than(key) }
-    [:runtime_min, :revenue_min, :budget_min, :vote_average_min].each {|key| greater_than(key) }
+    [:title, :overview].map { |key| like(key) }
+    [:runtime_max, :revenue_max, :budget_max, :vote_average_max].each { |key| less_than(key) }
+    [:runtime_min, :revenue_min, :budget_min, :vote_average_min].each { |key| greater_than(key) }
 
-    [:filename].each {|key| encode_like(key)}
-    [:container, :a_format, :v_format, :resolution].each {|key| encode_equals(key)}
+    [:filename].each { |key| encode_like(key) }
+    [:container, :a_format, :v_format, :resolution].each { |key| encode_equals(key) }
 
     @results = @results.where(id: Genre.where(genre_id: @params[:genre]).map(&:movie_id)) unless @params[:genre].blank?
     @results = @results.order((@params[:sort] || 'title asc'))

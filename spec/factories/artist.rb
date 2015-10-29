@@ -1,13 +1,11 @@
 FactoryGirl.define do
   factory :artist do
-    sequence(:name) {|n| "Artist #{n}"}
-    sequence(:url) {|n| "http://artist#{n}.com"}
-    sequence(:bio) {|n| "This is a little about artist #{n}"}
-    sequence(:year) {|n| n + 2000}
-    sequence(:home) {|n| "#{n} County, California"}
-    image "music/artist/image.jpg"
-
-
+    sequence(:name) { |n| "Artist #{n}" }
+    sequence(:url) { |n| "http://artist#{n}.com" }
+    sequence(:bio) { |n| "This is a little about artist #{n}" }
+    sequence(:year) { |n| n + 2000 }
+    sequence(:home) { |n| "#{n} County, California" }
+    image 'music/artist/image.jpg'
 
     factory :artist_with_albums do
       after(:create) do |artist|

@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :album do
-    sequence(:name) {|n| "Album #{n}"}
-    sequence(:year) {|n| n + 2000}
-    art "music/artist/album/cover.jpg"
-    genre "Rock"
+    sequence(:name) { |n| "Album #{n}" }
+    sequence(:year) { |n| n + 2000 }
+    art 'music/artist/album/cover.jpg'
+    genre 'Rock'
 
     artist
 
