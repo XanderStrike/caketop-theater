@@ -1,18 +1,18 @@
-require "rails_helper"
+require 'rails_helper'
 
-feature "home page" do
-  scenario "user posts a comment" do
+feature 'home page' do
+  scenario 'user posts a comment' do
     page = MoviePage.new(create(:movie))
-    page.submit_comment "Stephen Spielberg", "Hello this is a comment wow"
+    page.submit_comment 'Stephen Spielberg', 'Hello this is a comment wow'
 
-    expect(page).to have_text("Stephen Spielberg")
-    expect(page).to have_text("Hello this is a comment wow")
+    expect(page).to have_text('Stephen Spielberg')
+    expect(page).to have_text('Hello this is a comment wow')
   end
 
-  scenario "user pages through comments", js: true do
+  scenario 'user pages through comments', js: true do
     page = MoviePage.new(create(:movie))
     page.submit_comment 'First Comment'
-    10.times {|n| page.submit_comment}
+    10.times { |_n| page.submit_comment }
     page.submit_comment 'Last Comment'
 
     page.comment_forward
@@ -22,7 +22,7 @@ feature "home page" do
     expect(page).to have_text('Last Comment')
   end
 
-  xscenario "user retags movie", js: true do
+  xscenario 'user retags movie', js: true do
     page = MoviePage.new(create(:movie))
     page.open_retag_modal
     page.retag_modal_search 'Jurassic Park'

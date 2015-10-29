@@ -1,43 +1,47 @@
 def search_title(title)
   Tmdb::Movie.find(title)
 end
+
 def get_info(id)
   Tmdb::Movie.detail(id)
 end
 
 def clean_title(title)
-  title = title.split("/").last.split(/[\s\.]/)
+  title = title.split('/').last.split(/[\s\.]/)
   title.size.times do |x|
     next if x == 0
-    results = search_title(title[0...(title.length - x)].join(" "))
+    results = search_title(title[0...(title.length - x)].join(' '))
     return results[0] if results.size > 0
   end
-  return false
+  false
 end
 
 namespace :scan do
-  desc "Scans for changes in the movie library folder."
-  task :movies => :environment do
-    puts "Movie scan starting..."
+  desc 'Scans for changes in the movie library folder.'
+  task movies: :environment do
+    puts 'Movie scan starting...'
 
-    formats = ['mp4', 'avi', 'xvid', 'divx', 'mts', 'mpeg', 'mkv', 'wmv', 'ogv', 'webm', 'mov', 'mpg', 'mpe', 'm4v', 'h264', 'avchd']
+    formats = %w(mp4 avi xvid divx mts mpeg mkv wmv ogv webm mov mpg mpe m4v h264 avchd)
 
     # create movie symlink
     setting = Setting.get(:movie_dir)
-    if !File.exists?('public/movies') || setting.boolean
+    if !File.exist?('public/movies') || setting.boolean
       puts 'Creating symlink for new movie directory.'
-      File.unlink('public/movies') rescue nil
+      begin
+        File.unlink('public/movies')
+      rescue
+        nil
+      end
       File.symlink(Setting.get(:movie_dir).content, 'public/movies')
       setting.update_attributes(boolean: false)
     end
 
     # get file list
-    files = `find public/movies/ -type f`.split("\n").map {|f| f.gsub('public/movies/', '')}
-    files = files.reject {|f| !formats.any? {|w| f =~ /#{w}/ }}
+    files = `find public/movies/ -type f`.split("\n").map { |f| f.gsub('public/movies/', '') }
+    files = files.reject { |f| !formats.any? { |w| f =~ /#{w}/ } }
 
     # populate db
     files.each do |file|
-
       # skip if we're already in the db
       next unless Encode.where(filename: file).empty?
 
@@ -56,7 +60,7 @@ namespace :scan do
       `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/backdrops/#{info.id}.jpg -b -q`
 
       # insert into db
-      puts "Adding #{ file }\n    as #{ movie.title }"
+      puts "Adding #{file}\n    as #{movie.title}"
       movie = Movie.find_by_id(info.id) || Movie.create(id: info.id)
       movie.backdrop_path = info.backdrop_path
       movie.budget = info.budget
@@ -79,29 +83,33 @@ namespace :scan do
 
       # populate genres table
       info.genres.each do |g|
-        Genre.create(genre_id: g['id'], name: g['name'], movie_id: info.id) rescue nil
+        begin
+          Genre.create(genre_id: g['id'], name: g['name'], movie_id: info.id)
+        rescue
+          nil
+        end
       end
 
       # get encode info
       mediainfo = Mediainfo.new "public/movies/#{file}"
       Encode.create(
-              movie_id: info.id,
-              filename: file,
-              a_bitrate: mediainfo.audio[0].bit_rate,
-              a_format: mediainfo.audio[0].format_info,
-              a_stream_size: mediainfo.audio[0].stream_size,
-              aspect_ratio: mediainfo.video[0].display_aspect_ratio,
-              container: mediainfo.general.format,
-              duration: mediainfo.general.duration_before_type_cast,
-              framerate: mediainfo.video[0].frame_rate,
-              resolution: mediainfo.video[0].width,
-              rip_date: mediainfo.encoded_date,
-              size: mediainfo.size,
-              v_bitrate: mediainfo.video[0].bit_rate,
-              v_codec: mediainfo.video[0].codec_id,
-              v_format: mediainfo.video[0].format,
-              v_profile: mediainfo.video[0].format_profile,
-              v_stream_size: mediainfo.video[0].stream_size)
+        movie_id: info.id,
+        filename: file,
+        a_bitrate: mediainfo.audio[0].bit_rate,
+        a_format: mediainfo.audio[0].format_info,
+        a_stream_size: mediainfo.audio[0].stream_size,
+        aspect_ratio: mediainfo.video[0].display_aspect_ratio,
+        container: mediainfo.general.format,
+        duration: mediainfo.general.duration_before_type_cast,
+        framerate: mediainfo.video[0].frame_rate,
+        resolution: mediainfo.video[0].width,
+        rip_date: mediainfo.encoded_date,
+        size: mediainfo.size,
+        v_bitrate: mediainfo.video[0].bit_rate,
+        v_codec: mediainfo.video[0].codec_id,
+        v_format: mediainfo.video[0].format,
+        v_profile: mediainfo.video[0].format_profile,
+        v_stream_size: mediainfo.video[0].stream_size)
     end
 
     # remove missing
@@ -111,10 +119,10 @@ namespace :scan do
       m.destroy if m.encodes.count < 1
     end
     unless missing.empty?
-      p "Removed missing files:"
+      p 'Removed missing files:'
       p missing
     end
 
-    puts "Movie scan complete."
- end
+    puts 'Movie scan complete.'
+  end
 end

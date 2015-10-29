@@ -1,25 +1,30 @@
 def search_tv_title(title)
   Tmdb::TV.find(title)
 end
+
 def get_tv_info(id)
   Tmdb::TV.detail(id)
 end
 
 namespace :scan do
-  desc "Scans for changes in the TV library folder."
-  task :tv => :environment do
-    puts "Scanning for new tv shows:"
+  desc 'Scans for changes in the TV library folder.'
+  task tv: :environment do
+    puts 'Scanning for new tv shows:'
 
     # create tv symlink
     setting = Setting.get(:tv_dir)
-    if !File.exists?('public/tv') || setting.boolean
+    if !File.exist?('public/tv') || setting.boolean
       puts 'Creating symlink for new tv directory.'
-      File.unlink('public/tv') rescue nil
+      begin
+        File.unlink('public/tv')
+      rescue
+        nil
+      end
       File.symlink(Setting.get(:tv_dir).content, 'public/tv')
       setting.update_attributes(boolean: false)
     end
 
-    files = `ls public/tv `.split("\n").map {|f| f.gsub("public/tv/", "")}
+    files = `ls public/tv `.split("\n").map { |f| f.gsub('public/tv/', '') }
 
     files.each do |file|
       show = search_tv_title(file).first
@@ -32,7 +37,7 @@ namespace :scan do
       next if Show.where(id: show.id).count > 0
 
       # insert into db
-      puts "Adding #{ file }\n    as #{ show.name }"
+      puts "Adding #{file}\n    as #{show.name}"
       info = get_tv_info(show.id)
       Show.create(backdrop_path: info.backdrop_path,
                   id: info.id,
@@ -48,7 +53,11 @@ namespace :scan do
 
       # populate genres table
       info.genres.each do |g|
-        Genre.create(genre_id: g['id'], name: g['name'], movie_id: show.id) rescue nil
+        begin
+          Genre.create(genre_id: g['id'], name: g['name'], movie_id: show.id)
+        rescue
+          nil
+        end
       end
 
       # download images
@@ -56,6 +65,6 @@ namespace :scan do
       `wget http://image.tmdb.org/t/p/w1000/#{ info.backdrop_path } -O ./public/backdrops/tv_#{info.id}.jpg -b -q`
     end
 
-    puts "TV scan complete."
+    puts 'TV scan complete.'
   end
 end

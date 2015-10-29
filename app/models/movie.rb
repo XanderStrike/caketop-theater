@@ -8,11 +8,11 @@ class Movie < ActiveRecord::Base
   has_many :views
 
   def poster
-    "/posters/#{self.id}.jpg"
+    "/posters/#{id}.jpg"
   end
 
   def backdrop
-    "/backdrops/#{self.id}.jpg"
+    "/backdrops/#{id}.jpg"
   end
 
   def self.sort_orders
@@ -28,17 +28,15 @@ class Movie < ActiveRecord::Base
       ['Revenue (asc)', 'revenue asc'],
       ['Revenue (desc)', 'revenue desc'],
       ['Added (asc)', 'added asc'],
-      ['Added (desc)', 'added desc'],
+      ['Added (desc)', 'added desc']
     ]
-
   end
 
   def watch
-    self.views.create
+    views.create
   end
 
   def filename
-    self.encodes.first.filename
+    encodes.first.filename
   end
-
 end

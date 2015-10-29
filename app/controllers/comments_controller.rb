@@ -3,8 +3,15 @@ class CommentsController < ApplicationController
     @comment = Comment.create(comment_params)
 
     respond_to do |format|
-      format.html { redirect_to (@comment.movie || root_url), notice: 'Comment was successfully created.' }
-      format.json { render json: @comment, status: :created, location: @comment }
+      format.html do
+        redirect_to @comment.movie || root_url,
+                    notice: 'Comment was successfully created.'
+      end
+      format.json do
+        render json: @comment,
+               status: :created,
+               location: @comment
+      end
     end
   end
 
