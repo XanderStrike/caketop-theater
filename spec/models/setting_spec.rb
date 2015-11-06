@@ -35,4 +35,12 @@ RSpec.describe Setting, type: :model do
       expect(Setting.get('testsetting').content).to eq('somevalue')
     end
   end
+
+  describe 'admin' do
+    it 'will sha the admin_pass' do
+      setting = create(:setting, name: 'testsetting', boolean: false)
+      Setting.update(setting: 'admin_pass', content: 'mypwd')
+      expect(Setting.get('testsetting').content).to_not be nil
+    end
+  end
 end

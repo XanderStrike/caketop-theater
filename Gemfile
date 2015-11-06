@@ -29,6 +29,7 @@ group :development, :test do
 end
 
 gem 'codeclimate-test-reporter', group: :test, require: nil
+gem 'mutant-rspec', group: :test, require: nil
 
 gem 'jquery-rails'
 
