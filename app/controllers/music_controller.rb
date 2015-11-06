@@ -1,6 +1,6 @@
 class MusicController < ApplicationController
   def index
-    @artists = Artist.where('name like ?', "%#{params[:artist]}%").order('name asc')
+    @artists = Artist.where('name ILIKE ?', "%#{params[:artist]}%").order('name asc')
     @partial = 'music/artists'
 
     @url = "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
