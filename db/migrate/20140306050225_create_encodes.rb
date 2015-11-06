@@ -16,7 +16,7 @@ class CreateEncodes < ActiveRecord::Migration
       t.string :a_format
       t.string :a_bitrate
       t.string :a_stream_size
-      t.string :movie_id
+      t.integer :movie_id
 
       t.timestamps
     end

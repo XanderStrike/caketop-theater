@@ -28,10 +28,10 @@ class ShowsController < ApplicationController
   end
 
   def search
-    @results = Show.where('name like ?', "%#{params[:q]}%")
-    @results += Show.where('original_name like ?', "%#{params[:q]}%")
-    @results += Show.where('folder like ?', "%#{params[:q]}%")
-    @results += Show.where('overview like ?', "%#{params[:q]}%")
+    @results = Show.where('name ILIKE ?', "%#{params[:q]}%")
+    @results += Show.where('original_name ILIKE ?', "%#{params[:q]}%")
+    @results += Show.where('folder ILIKE ?', "%#{params[:q]}%")
+    @results += Show.where('overview ILIKE ?', "%#{params[:q]}%")
     @results = @results.uniq
 
     respond_to do |format|

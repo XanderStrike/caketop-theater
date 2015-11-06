@@ -10,7 +10,7 @@ class MovieSearch
 
   def self.simple_search(q)
     q = "%#{q}%"
-    Movie.where('title like ? or original_title like ? or overview like ?', q, q, q)
+    Movie.where('title ILIKE ? or original_title ILIKE ? or overview ILIKE ?', q, q, q)
   end
 
   private
@@ -29,7 +29,7 @@ class MovieSearch
   end
 
   def like(k)
-    query(k, 'like', "%#{@params[k]}%")
+    query(k, 'ILIKE', "%#{@params[k]}%")
   end
 
   def greater_than(k)
@@ -41,7 +41,7 @@ class MovieSearch
   end
 
   def encode_like(k)
-    encode_query(k, 'like', "%#{@params[k]}%")
+    encode_query(k, 'ILIKE', "%#{@params[k]}%")
   end
 
   def encode_equals(k)
