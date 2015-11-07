@@ -13,18 +13,24 @@ class PagesController < ApplicationController
   end
 
   def create
-    Page.new(params[:page]).save
+    Page.new(page_params).save
     redirect_to settings_path
   end
 
   def update
     @page = Page.find(params[:id])
-    @page.update_attributes(params[:page])
+    @page.update_attributes(page_params)
     redirect_to settings_path
   end
 
   def destroy
     Page.find(params[:id]).destroy
     redirect_to settings_path
+  end
+
+  private
+
+  def page_params
+    params.require(:page).permit(:text, :name, :navbar, :footer)
   end
 end

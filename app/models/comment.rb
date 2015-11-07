@@ -1,5 +1,4 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :content, :body, :movie_id, :name
   before_save :convert_markdown
 
   belongs_to :movie
@@ -8,7 +7,7 @@ class Comment < ActiveRecord::Base
 
   def convert_markdown
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-                                       :autolink => true, :space_after_headers => true)
-    self.content = markdown.render(self.body)
+                                       autolink: true, space_after_headers: true)
+    self.content = markdown.render(body)
   end
 end

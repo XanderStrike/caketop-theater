@@ -1,23 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe ShowsController, type: :controller do
-	before(:each) do
+  before(:each) do
     create_settings
     @list = create_list(:show, 15)
     @show = create(:show)
   end
 
   describe 'GET index' do
-  	it 'renders the index template' do
-  		get :index
-  		expect(response).to render_template(:index)
-  	end
+    it 'renders the index template' do
+      get :index
+      expect(response).to render_template(:index)
+    end
 
-  	it 'displays all the shows' do
-  		get :index
-  		expect(assigns(:shows).first).to be_a(Show)
-  		expect(assigns(:shows).count).to eq(16)
-  	end
+    it 'displays all the shows' do
+      get :index
+      expect(assigns(:shows).first).to be_a(Show)
+      expect(assigns(:shows).count).to eq(16)
+    end
   end
 
   describe 'GET show' do

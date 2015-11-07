@@ -18,7 +18,7 @@ class ShowsController < ApplicationController
     @seasons = {}
     @files = `ls "public/tv/#{ @show.folder }"`.split("\n")
     @files.each do |f|
-      @seasons[f] = `find "public/tv/#{ @show.folder }/#{ f }" -type f`.split("\n").map {|ep| ep.gsub("public", "")}
+      @seasons[f] = `find "public/tv/#{ @show.folder }/#{ f }" -type f`.split("\n").map { |ep| ep.gsub('public', '') }
     end
 
     respond_to do |format|
@@ -28,10 +28,10 @@ class ShowsController < ApplicationController
   end
 
   def search
-    @results = Show.where("name like ?", "%#{params[:q]}%")
-    @results += Show.where("original_name like ?", "%#{params[:q]}%")
-    @results += Show.where("folder like ?", "%#{params[:q]}%")
-    @results += Show.where("overview like ?", "%#{params[:q]}%")
+    @results = Show.where('name like ?', "%#{params[:q]}%")
+    @results += Show.where('original_name like ?', "%#{params[:q]}%")
+    @results += Show.where('folder like ?', "%#{params[:q]}%")
+    @results += Show.where('overview like ?', "%#{params[:q]}%")
     @results = @results.uniq
 
     respond_to do |format|

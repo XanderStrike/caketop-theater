@@ -11,7 +11,7 @@ class SettingsPage
 
   def method_missing(method_sym, *args, &block)
     if method_sym.to_s =~ /^set_(.*)$/
-      within "##{$1}_form" do
+      within "##{Regexp.last_match(1)}_form" do
         fill_in :content, with: args.first
         choose (args.second ? 'Show' : 'Hide') unless args.second.nil?
         click_button 'Save'
@@ -21,7 +21,7 @@ class SettingsPage
     end
   end
 
-  def set_admin username, password, enabled
+  def set_admin(username, password, enabled)
     within '#admin_form' do
       fill_in :content, with: username
       fill_in :admin_pass, with: password
@@ -35,23 +35,23 @@ class SettingsPage
     EditPage.new
   end
 
-  def edit_page name
+  def edit_page(name)
     within '#pages_table' do
-      find(:xpath, "//tr[td[contains(.,'#{name}')]]/td/a", :text => 'Edit').click
+      find(:xpath, "//tr[td[contains(.,'#{name}')]]/td/a", text: 'Edit').click
     end
     EditPage.new
   end
 
-  def show_page name
+  def show_page(name)
     within '#pages_table' do
       click_link name
     end
     ShowPage.new
   end
 
-  def delete_page name
+  def delete_page(name)
     within '#pages_table' do
-      find(:xpath, "//tr[td[contains(.,'#{name}')]]/td/a", :text => 'Delete').click
+      find(:xpath, "//tr[td[contains(.,'#{name}')]]/td/a", text: 'Delete').click
     end
   end
 end

@@ -1,6 +1,6 @@
 class MusicController < ApplicationController
   def index
-    @artists = Artist.where("name like ?", "%#{params[:artist]}%").order('name asc')
+    @artists = Artist.where('name like ?', "%#{params[:artist]}%").order('name asc')
     @partial = 'music/artists'
 
     @url = "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
@@ -11,6 +11,9 @@ class MusicController < ApplicationController
     respond_to do |format|
       format.html { render 'index.html' }
       format.js { render layout: false }
+      format.json do
+        render json: Song.joins(:artist, :album).to_json(include: [:artist, :album])
+      end
     end
   end
 
@@ -21,8 +24,12 @@ class MusicController < ApplicationController
     @url = "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
 
     respond_to do |format|
-      format.html { render 'index.html'}
+      format.html { render 'index.html' }
       format.js { render 'index.js' }
+      format.json { render json: @artist }
     end
+  end
+
+  def album
   end
 end

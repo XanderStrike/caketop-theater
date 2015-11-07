@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Movie, :type => :model do
+RSpec.describe Movie, type: :model do
   describe '#poster' do
     it 'should return the path to the poster' do
       movie = build(:movie)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Setting, :type => :model do
+RSpec.describe Setting, type: :model do
   describe '.get' do
     it 'should get the setting by its name' do
       setting = create(:setting, name: 'testsetting')

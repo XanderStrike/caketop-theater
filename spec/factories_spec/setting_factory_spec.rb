@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Setting Factory', type: :factory do
   include FactoryGirl::Syntax::Methods
 
-  describe "setting" do
+  describe 'setting' do
     it 'has all the attributes from the model' do
       expect(attributes_for(:setting)).to include(*(factory_attributes(Setting)))
     end

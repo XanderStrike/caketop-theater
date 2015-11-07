@@ -26,7 +26,7 @@ CaketopTheater::Application.routes.draw do
   resources :shows
 
   get 'music/artist/:id', to: 'music#artist', as: :music_artist
-  resources :music
+  resources :music, as: :songs
 
   root to: 'home#index'
 end

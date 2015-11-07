@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Show, :type => :model do
+RSpec.describe Show, type: :model do
   describe '#poster' do
     it 'should return the path to the poster' do
       show = Show.new(id: 1234)

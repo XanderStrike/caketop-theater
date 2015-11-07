@@ -1,6 +1,4 @@
 class Setting < ActiveRecord::Base
-  attr_accessible :name, :id, :content, :number, :boolean
-
   DEFAULTS =
     {
       name:           { name: 'name', content: 'Caketop Theater', boolean: true },
@@ -15,19 +13,19 @@ class Setting < ActiveRecord::Base
       music_dir:      { name: 'music_dir', content: '', boolean: true }
     }
 
-  def self.render name
+  def self.render(name)
     if get(name).boolean
-      return get(name).content.html_safe
+      get(name).content.html_safe
     else
-      return ''
+      ''
     end
   end
 
-  def self.get name
+  def self.get(name)
     Setting.find_by_name(name) || Setting.create(Setting::DEFAULTS[name])
   end
 
-  def self.update params
+  def self.update(params)
     s = Setting.get(params[:setting])
     s.update_attribute(:content, params[:content])
     s.update_attribute(:boolean, (params[:boolean] == 'true'))

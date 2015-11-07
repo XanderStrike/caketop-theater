@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.2.4'
 gem 'thin'
 
 # Bundle edge Rails instead:
@@ -10,13 +10,12 @@ gem 'sqlite3'
 gem 'redcarpet'
 gem 'taglib-ruby'
 gem 'yaml_db'
-gem "chartkick"
+gem 'chartkick'
 gem 'kaminari'
 
-
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -29,7 +28,7 @@ group :development, :test do
   gem 'pry'
 end
 
-gem "codeclimate-test-reporter", group: :test, require: nil
+gem 'codeclimate-test-reporter', group: :test, require: nil
 
 gem 'jquery-rails'
 

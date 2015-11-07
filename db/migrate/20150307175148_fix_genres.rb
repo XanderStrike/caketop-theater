@@ -1,6 +1,6 @@
 class FixGenres < ActiveRecord::Migration
   def up
-    puts "Saving current broken genres"
+    puts 'Saving current broken genres'
     tmp_genres = Genre.all.map do |g|
       "INSERT INTO genres (genre_id, movie_id, name) VALUES (#{g.id}, #{g.movie_id}, '#{g.name}')"
     end
@@ -13,7 +13,7 @@ class FixGenres < ActiveRecord::Migration
       t.string :name
     end
 
-    puts "Adding fixed genres"
+    puts 'Adding fixed genres'
     tmp_genres.each { |query| execute query }
   end
 
