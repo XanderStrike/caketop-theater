@@ -32,7 +32,7 @@ gem 'codeclimate-test-reporter', group: :test, require: nil
 
 gem 'jquery-rails'
 
-gem 'themoviedb'
+gem 'themoviedb', '0.1.0'
 
 gem 'mediainfo'
 
