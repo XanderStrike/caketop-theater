@@ -1,4 +1,19 @@
 class Movie < ActiveRecord::Base
+  SORT_ORDERS = [
+    ['Title (asc)', 'title asc'],
+    ['Title (desc)', 'title desc'],
+    ['Release Date (asc)', 'release_date asc'],
+    ['Release Date (desc)', 'release_date desc'],
+    ['Runtime (asc)', 'runtime asc'],
+    ['Runtime (desc)', 'runtime desc'],
+    ['TMDB Rating (asc)', 'vote_average asc'],
+    ['TMDB Rating (desc)', 'vote_average desc'],
+    ['Revenue (asc)', 'revenue asc'],
+    ['Revenue (desc)', 'revenue desc'],
+    ['Added (asc)', 'added asc'],
+    ['Added (desc)', 'added desc']
+  ]
+
   has_many :genres
 
   has_many :encodes
@@ -13,23 +28,6 @@ class Movie < ActiveRecord::Base
 
   def backdrop
     "/backdrops/#{id}.jpg"
-  end
-
-  def self.sort_orders
-    [
-      ['Title (asc)', 'title asc'],
-      ['Title (desc)', 'title desc'],
-      ['Release Date (asc)', 'release_date asc'],
-      ['Release Date (desc)', 'release_date desc'],
-      ['Runtime (asc)', 'runtime asc'],
-      ['Runtime (desc)', 'runtime desc'],
-      ['TMDB Rating (asc)', 'vote_average asc'],
-      ['TMDB Rating (desc)', 'vote_average desc'],
-      ['Revenue (asc)', 'revenue asc'],
-      ['Revenue (desc)', 'revenue desc'],
-      ['Added (asc)', 'added asc'],
-      ['Added (desc)', 'added desc']
-    ]
   end
 
   def watch

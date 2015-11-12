@@ -13,22 +13,31 @@ class Setting < ActiveRecord::Base
       music_dir:      { name: 'music_dir', content: '', boolean: true }
     }
 
-  def self.render(name)
-    if get(name).boolean
-      get(name).content.html_safe
-    else
-      ''
+  class << self
+
+    def render(name)
+      if get(name).boolean
+        get(name).content.html_safe
+      else
+        ''
+      end
     end
-  end
 
-  def self.get(name)
-    Setting.find_by_name(name) || Setting.create(Setting::DEFAULTS[name])
-  end
+    def get(name)
+      self.find_by_name(name) || self.create(DEFAULTS[name])
+    end
 
-  def self.update(params)
-    s = Setting.get(params[:setting])
-    s.update_attribute(:content, params[:content])
-    s.update_attribute(:boolean, (params[:boolean] == 'true'))
-    Setting.get('admin-pass').update_attributes(content: Digest::SHA256.hexdigest(params[:admin_pass])) if params[:setting] == 'admin'
+    def update(params)
+      s = get(params[:setting])
+      s.update_attribute(:content, params[:content])
+      s.update_attribute(:boolean, (params[:boolean] == 'true'))
+      admin_pass(params[:admin_pass]) if params[:setting] == 'admin'
+    end
+
+    private
+
+    def admin_pass(new_password)
+      get('admin-pass').update_attributes(content: Digest::SHA256.hexdigest(new_password))
+    end
   end
 end

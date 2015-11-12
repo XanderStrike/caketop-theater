@@ -23,4 +23,11 @@ RSpec.describe Movie, type: :model do
       expect(movie.views.count).to eq(count + 1)
     end
   end
+
+  describe '#filename' do
+    it 'returns the first encode file name as the movies filename' do
+      movie = create(:movie)
+      expect(movie.filename).to eq(movie.encodes.first.filename)
+    end
+  end
 end
