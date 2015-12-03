@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Whenever is awesome, thanks javan: http://github.com/javan/whenever
 
 # Use this file to set how often you want your scans to be.

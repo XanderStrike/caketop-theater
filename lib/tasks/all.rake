@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :scan do
   desc 'Perform all scans'
   task :all do

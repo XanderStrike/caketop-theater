@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class GenresController < ApplicationController
   def show
     @genre = Genre.where(id: params[:id]).first

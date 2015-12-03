@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 FactoryGirl.define do
   factory :page do
     sequence(:text) { |n| "# Page #{n} \n\n This is a test page!" }

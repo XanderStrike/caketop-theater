@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddFieldsToArtists < ActiveRecord::Migration
   def change
     add_column :artists, :url, :text

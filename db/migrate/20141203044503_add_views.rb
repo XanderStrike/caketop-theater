@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddViews < ActiveRecord::Migration
   def change
     create_table :views do |t|

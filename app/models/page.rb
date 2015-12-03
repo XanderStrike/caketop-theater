@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Page < ActiveRecord::Base
   scope :navbar, -> { where(navbar: true) }
   scope :footer, -> { where(footer: true) }

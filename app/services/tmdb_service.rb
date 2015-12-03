@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class TmdbService
   class TmdbError < StandardError
   end
