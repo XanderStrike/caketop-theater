@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap.min.js
 //= require markdown.js
+//= require jquery_hotkeys.js
+//= require instant-hotkeys.js

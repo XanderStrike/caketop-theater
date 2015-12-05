@@ -20,7 +20,7 @@
       <h2>Television</h2>
       <%= form_tag(shows_search_path, role: 'search') do %>
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search Television" name="q" id="tv-search">
+        <input type="text" class="hk-ctrl-t form-control" placeholder="Search Television" name="q" id="tv-search">
       </div>
       <% end %>
     </div>
@@ -28,7 +28,7 @@
       <h2>Films</h2>
       <%= form_tag(movies_search_path, role: 'search') do %>
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search Films" name="q" id="movie-search">
+        <input type="text" class="hk-ctrl-f form-control" placeholder="Search Films" name="q" id="movie-search">
       </div>
       <% end %>
     </div>
@@ -36,7 +36,7 @@
       <h2>Music</h2>
       <%= form_tag('', role: 'search') do %>
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search Music" name="q" id="music-search">
+        <input type="text" class="hk-ctrl-m form-control" placeholder="Search Music" name="q" id="music-search">
       </div>
       <% end %>
     </div>
@@ -68,4 +68,10 @@
   }
 
   updatePreview();
+
+  $(document).ready(function() {
+    hk = new InstantHotkeys();
+    hk.bindAll();
+    hk.showBindings();
+  });
 </script>
