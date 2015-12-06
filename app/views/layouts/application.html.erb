@@ -38,7 +38,7 @@
               <li>
                 <%= form_tag(movies_search_path, class: 'navbar-form', role: 'search') do %>
                 <div class="form-group">
-                  <input type="text" class="hk-ctrl-f form-control" placeholder="Search Films" name="q">
+                  <input type="text" class="hk-f form-control" placeholder="Search Films" name="q">
                 </div>
                 <% end %>
               </li>
@@ -50,7 +50,7 @@
               <li>
                 <%= form_tag(shows_search_path, class: 'navbar-form', role: 'search') do %>
                 <div class="form-group">
-                  <input type="text" class="hk-ctrl-f form-control" placeholder="Search TV Shows" name="q">
+                  <input type="text" class="hk-f form-control" placeholder="Search TV Shows" name="q">
                 </div>
                 <% end %>
               </li>
@@ -86,14 +86,11 @@
     </p>
   </div>
 
-<script>
-  $(document).ready(function() {
-    hk = new InstantHotkeys();
-    hk.bindAll();
-    hk.showBindings();
-  });
-</script>
-
-
+  <script>
+   $(document).ready(function() {
+     hk = new InstantHotkeys();
+     hk.bindAll();
+   });
+  </script>
 </body>
 </html>
