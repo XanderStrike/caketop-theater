@@ -61,16 +61,11 @@
 </div>
 
 <script>
- $('#comment_body').keyup(updatePreview);
+  $('#comment_body').keyup(updatePreview);
 
- function updatePreview() {
-   $('#preview').html(markdown.toHTML($('#comment_body').val()));
- }
+  function updatePreview() {
+    $('#preview').html(markdown.toHTML($('#comment_body').val()));
+  }
 
- updatePreview();
-
- $(document).ready(function() {
-   hk = new InstantHotkeys();
-   hk.bindAll();
- });
+  updatePreview();
 </script>
