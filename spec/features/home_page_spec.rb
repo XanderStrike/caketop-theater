@@ -17,7 +17,7 @@ feature 'home page' do
   scenario 'user pages through comments', js: true do
     page = HomePage.new
     page.submit_comment 'First Comment'
-    15.times { |_n| page.submit_comment }
+    15.times { create(:comment, movie_id: 0) }
     page.submit_comment 'Last Comment'
 
     page.comment_forward

@@ -10,9 +10,10 @@ feature 'home page' do
   end
 
   scenario 'user pages through comments', js: true do
-    page = MoviePage.new(create(:movie))
+    movie = create(:movie)
+    page = MoviePage.new(movie)
     page.submit_comment 'First Comment'
-    10.times { |_n| page.submit_comment }
+    10.times { create(:comment, movie: movie) }
     page.submit_comment 'Last Comment'
 
     page.comment_forward
