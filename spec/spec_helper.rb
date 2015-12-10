@@ -14,7 +14,7 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-RSpec.configure do |_config|
+RSpec.configure do |config|
   # The settings below are suggested to provide a good initial experience
   # with RSpec, but feel free to customize to your heart's content.
   #   # These two settings work together to allow you to limit a spec run
@@ -37,13 +37,13 @@ RSpec.configure do |_config|
   #   # Print the 10 slowest examples and example groups at the
   #   # end of the spec run, to help surface which specs are running
   #   # particularly slow.
-  #   config.profile_examples = 10
+  config.profile_examples = 10
   #
   #   # Run specs in random order to surface order dependencies. If you find an
   #   # order dependency and want to debug it, you can fix the order by providing
   #   # the seed, which is printed after each run.
   #   #     --seed 1234
-  #   config.order = :random
+  config.order = :random
   #
   #   # Seed global randomization in this process using the `--seed` CLI option.
   #   # Setting this allows you to use `--seed` to deterministically reproduce
@@ -54,12 +54,12 @@ RSpec.configure do |_config|
   #   # rspec-expectations config goes here. You can use an alternate
   #   # assertion/expectation library such as wrong or the stdlib/minitest
   #   # assertions if you prefer.
-  #   config.expect_with :rspec do |expectations|
-  #     # Enable only the newer, non-monkey-patching expect syntax.
-  #     # For more details, see:
-  #     #   - http://myronmars.to/n/dev-blog/2012/06/rspecs-new-expectation-syntax
-  #     expectations.syntax = :expect
-  #   end
+  config.expect_with :rspec do |expectations|
+    # Enable only the newer, non-monkey-patching expect syntax.
+    # For more details, see:
+    #   - http://myronmars.to/n/dev-blog/2012/06/rspecs-new-expectation-syntax
+    expectations.syntax = :expect
+  end
   #
   #   # rspec-mocks config goes here. You can use an alternate test double
   #   # library (such as bogus or mocha) by changing the `mock_with` option here.
