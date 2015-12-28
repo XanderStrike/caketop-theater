@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ChangeMovieFieldsTypes < ActiveRecord::Migration
   def change
     change_column :movies, :budget, :integer

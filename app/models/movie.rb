@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Movie < ActiveRecord::Base
   has_many :genres
 

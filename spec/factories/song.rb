@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 FactoryGirl.define do
   factory :song do
     sequence(:filename) { |n| "Track #{n}.mp3" }

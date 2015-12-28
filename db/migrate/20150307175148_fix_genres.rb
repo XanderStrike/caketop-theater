@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class FixGenres < ActiveRecord::Migration
   def up
     puts 'Saving current broken genres'

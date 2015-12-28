@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Episode
   def initialize(show, season, filename, audio, video)
     @show = show

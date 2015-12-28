@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MovieSearch
   attr_accessor :results
 

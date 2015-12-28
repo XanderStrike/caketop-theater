@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :scan do
   desc 'Scans for changes in the movie library folder.'
   task movies: :environment do

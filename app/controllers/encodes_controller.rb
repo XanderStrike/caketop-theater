@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class EncodesController < ApplicationController
   def find_movie
     @encode = Encode.find(params[:id])

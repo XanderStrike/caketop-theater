@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :convert do
   desc 'Converts movies that are not in good HTML5 formats'
   task movies: :environment do

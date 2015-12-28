@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MusicController < ApplicationController
   def index
     @artists = Artist.where('name like ?', "%#{params[:artist]}%").order('name asc')

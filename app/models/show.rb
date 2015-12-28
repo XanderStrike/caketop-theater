@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Show < ActiveRecord::Base
   has_many :genres, foreign_key: :movie_id
 

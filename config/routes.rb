@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 CaketopTheater::Application.routes.draw do
   resources :comments, only: [:index, :create]
   resources :pages
