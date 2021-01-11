@@ -131,7 +131,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    redcarpet (3.3.3)
+    redcarpet (3.5.1)
     ref (2.0.0)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
